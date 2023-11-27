@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
+import { Mail } from 'lucide-react';
 export default function SubscribeModalButton() {
   const FormSchema = z.object({
     username: z.string().min(2, {
@@ -38,7 +39,10 @@ export default function SubscribeModalButton() {
   return (
     <Dialog>
       <Button asChild className='text-lg p-6'>
-        <DialogTrigger>Subscribe Now</DialogTrigger>
+        <DialogTrigger className='flex gap-3 items-center'>
+          <Mail size={22} />
+          Subscribe Now
+        </DialogTrigger>
       </Button>
       <DialogContent>
         <DialogHeader>

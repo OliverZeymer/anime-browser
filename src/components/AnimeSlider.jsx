@@ -32,7 +32,7 @@ export default function AnimeSlider({ title, data }) {
   const settings = {
     speed: 500,
     slidesToScroll: 5,
-    slidesToShow: 8.17,
+    slidesToShow: 8.2,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
     infinite: false,
@@ -56,35 +56,37 @@ export default function AnimeSlider({ title, data }) {
         breakpoint: 2000,
         settings: {
           slidesToShow: 5.17,
-          slidesToScroll: 5,
+          slidesToScroll: 4,
         },
       },
       {
         breakpoint: 1650,
         settings: {
           slidesToShow: 4.17,
-          slidesToScroll: 4,
+          slidesToScroll: 3,
         },
       },
       {
         breakpoint: 1350,
         settings: {
-          slidesToShow: 3.17,
-          slidesToScroll: 3,
+          slidesToShow: 3.15,
+          slidesToScroll: 2,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2.17,
+          slidesToShow: 2.1,
           slidesToScroll: 2,
+          arrows: false,
         },
       },
       {
         breakpoint: 650,
         settings: {
           slidesToShow: 1.17,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],

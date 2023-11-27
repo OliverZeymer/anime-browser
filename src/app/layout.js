@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import TopLevelClient from '@/components/TopLevelClient';
 import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/toaster';
+import Footer from '@/components/Footer';
 
 const gilroy = localFont({
   src: [
@@ -47,6 +48,7 @@ export default function RootLayout({ children }) {
             <div className='flex-grow flex-1'>{children}</div>
           </main>
           <Toaster />
+          <Footer />
         </TopLevelClient>
       </body>
     </html>

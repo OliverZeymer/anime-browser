@@ -100,3 +100,10 @@ button.slick-disabled {
 .slick-prev:before {
   content: unset !important
 }
+
+.hamburger-react {
+  z-index: 60;
+}
+.hamburger-react div {
+  border-radius: 6px;
+}

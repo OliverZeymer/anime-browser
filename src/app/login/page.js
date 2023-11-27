@@ -3,8 +3,16 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className='min-h-screen flex items-center justify-center'>
-      <div className='mx-auto border-2 rounded-xl p-12 box-content flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
+    <div className='min-h-screen w-full flex items-center justify-center' 
+    style={{
+      backgroundImage: "url('/images/csm.jpg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}
+    >
+      <div className='absolute inset-0 bg-black opacity-80'></div>
+      <div className='mx-auto bg-background border-2 border-muted rounded-xl z-10 p-12 box-content flex w-full flex-col justify-center space-y-6 sm:w-[350px]'>
         <div className='flex flex-col space-y-2 text-center'>
           <h1 className='text-2xl font-semibold tracking-tight'>Create an account</h1>
           <p className='text-sm text-muted-foreground'>Enter your email below to create your account</p>

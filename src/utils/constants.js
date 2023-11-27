@@ -1,4 +1,4 @@
-import { Clock, Film, Home, MonitorPlay, Sparkles } from 'lucide-react';
+import { Clock, Facebook, Film, Home, Instagram, MonitorPlay, Sparkles, Twitter } from 'lucide-react';
 
 export const BASE_API = 'https://api.jikan.moe/v4';
 
@@ -27,5 +27,17 @@ export const Navigation = [
     name: 'New Releases',
     href: '/new-releases',
     icon: Sparkles,
+  },
+];
+export const Socials = [
+  {
+    name: Twitter,
+    href: 'https://www.twitter.com',
+    icon: Twitter,
+  },
+  {
+    name: 'instagram',
+    href: 'https://www.instagram.com',
+    icon: Instagram,
   },
 ];
