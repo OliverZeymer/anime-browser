@@ -1,10 +1,11 @@
 'use client';
-import { Github, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
+import DiscordIcon from '@/components/icons/DiscordIcon';
 
 export default function SignInForm({ className }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,8 +42,8 @@ export default function SignInForm({ className }) {
           <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
         </div>
       </div>
-      <Button variant='outline' type='button' disabled={isLoading}>
-        {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <Github className='mr-2 h-4 w-4' />} Github
+      <Button variant='outline' type='button' className='bg-[#5865F2] hover:bg-[#5865F2]/80' disabled={isLoading}>
+        {isLoading ? <Loader2 className='mr-2 h-4 w-4 animate-spin' /> : <DiscordIcon className='mr-2 h-4 w-4' />} Discord
       </Button>
     </div>
   );
