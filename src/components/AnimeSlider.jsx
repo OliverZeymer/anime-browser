@@ -51,7 +51,6 @@ export default function AnimeSlider({ title, data }) {
           slidesToScroll: 5,
         },
       },
-
       {
         breakpoint: 2000,
         settings: {

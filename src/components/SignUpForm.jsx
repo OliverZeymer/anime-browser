@@ -1,34 +1,26 @@
 'use client';
-import { useState, useContext } from 'react';
-import { useRouter } from 'next/navigation';
-import AuthContext from '@/contexts/AuthContext';
-import { setCookie } from 'react-use-cookie';
+import { useState } from 'react';
 import { validateForm } from '@/utils/validateForm';
-import { logIn } from '@/utils/logIn';
+import { createUser } from '@/utils/createUser';
 import Loader from './Loader';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useToast } from './ui/use-toast';
 
-// This gets handled by the [...nextauth] endpoint
-export default function SignInForm({ className }) {
+export default function SignUpForm({ className }) {
   const { toast } = useToast();
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
-  const { setAuth } = useContext(AuthContext);
   const [redEmailField, setRedEmailField] = useState(false);
   const [redPasswordField, setRedPasswordField] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // We keep track of whether in a login / or register state
-  const [isLogin] = useState(true);
-  const router = useRouter();
 
   async function submitHandler(e) {
     e.preventDefault();
     const isFormValid = validateForm(enteredEmail, enteredPassword, setRedEmailField, setRedPasswordField, toast);
     if (!isFormValid) return;
-    logIn(enteredEmail, enteredPassword, router, toast, setAuth, setCookie, setIsLoading);
+    createUser(enteredEmail, enteredPassword, toast, setIsLoading);
   }
 
   return (
@@ -62,7 +54,7 @@ export default function SignInForm({ className }) {
           />
         </div>
 
-        <Button type='submit'>{isLoading ? <Loader size='sm' /> : isLogin ? 'Login' : !isLogin ? 'Create Account' : 'Login'}</Button>
+        <Button type='submit'>{isLoading ? <Loader size='sm' /> : 'Create Account'}</Button>
       </form>
     </div>
   );
