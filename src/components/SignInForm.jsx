@@ -26,7 +26,7 @@ export default function SignInForm({ className }) {
 
   async function submitHandler(e) {
     e.preventDefault();
-    const isFormValid = validateForm(enteredEmail, enteredPassword, setRedEmailField, setRedPasswordField, toast);
+    const isFormValid = validateForm(enteredEmail, enteredPassword, setRedEmailField, setRedPasswordField, toast, false);
     if (!isFormValid) return;
     logIn(enteredEmail, enteredPassword, router, toast, setAuth, setCookie, setIsLoading);
   }

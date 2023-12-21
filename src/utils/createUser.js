@@ -1,4 +1,4 @@
-export async function createUser(email, password, toast, setIsLoading) {
+export async function createUser(email, password, username, discord, toast, setIsLoading) {
   try {
     setIsLoading(true);
     const response = await fetch('/api/auth/signup', {
@@ -6,7 +6,7 @@ export async function createUser(email, password, toast, setIsLoading) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, username, discord }),
     });
     const data = await response.json();
 
@@ -17,6 +17,7 @@ export async function createUser(email, password, toast, setIsLoading) {
     }
     return response;
   } catch (error) {
+    console.log(error);
     toast({ description: 'An error occurred while creating an account.', variant: 'destructive' });
     return null;
   } finally {

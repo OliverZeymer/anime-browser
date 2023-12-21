@@ -1,13 +1,19 @@
-import User from "@/models/user.model";
-import { connectToDB } from "@/utils/database";
+import User from '@/models/user.model';
+import { connectToDB } from '@/utils/database';
 
 export async function POST(req) {
   await connectToDB();
-  const { email, password } = await req.json();
+  const { email, password, username, discord } = await req.json();
   try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return new Response(JSON.stringify({ success: false, message: "Email already exists" }), {
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return new Response(JSON.stringify({ success: false, message: 'Email already exists' }), {
+        status: 409,
+      });
+    }
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return new Response(JSON.stringify({ success: false, message: 'Username already exists' }), {
         status: 409,
       });
     }
@@ -15,13 +21,16 @@ export async function POST(req) {
     const user = await User.create({
       email,
       password,
+      username,
+      discord,
     });
 
     return new Response(JSON.stringify({ success: true, data: user }), {
       status: 201,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ success: false, message: "Internal Server Error" }), {
+    console.log(error);
+    return new Response(JSON.stringify({ success: false, message: 'Internal Server Error' }), {
       status: 500,
     });
   }

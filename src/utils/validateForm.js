@@ -1,6 +1,6 @@
-export function validateForm(email, password, setRedEmailField, setRedPasswordField, toast) {
+export function validateForm(email, password, username, setRedEmailField, setRedPasswordField, setRedUsernameField, toast, isSignUp) {
   if (email.trim() === "" || password.trim() === "") {
-    toast.error("Please enter an email and password");
+    toast({ description: 'Please enter a password and an email', variant: 'destructive' });
     if (email.trim() === "") {
       setRedEmailField(true);
     }
@@ -11,14 +11,19 @@ export function validateForm(email, password, setRedEmailField, setRedPasswordFi
   }
 
   if (!email.includes("@") || !email.includes(".")) {
-    toast.error("Please enter a valid email");
+    toast({ description: 'Please enter a valid email', variant: 'destructive' });
     setRedEmailField(true);
     return;
   }
 
   if (password.length < 4) {
-    toast.error("Password must be at least 4 characters");
+    toast({ description: 'Password must be at least 4 characters', variant: 'destructive' });
     setRedPasswordField(true);
+    return;
+  }
+  if (isSignUp && username.trim() === "") {
+    toast({ description: 'Please enter a username', variant: 'destructive' });
+    setRedUsernameField(true);
     return;
   }
   return true;

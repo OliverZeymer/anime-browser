@@ -7,19 +7,20 @@ import { useToast } from './ui/use-toast';
 
 export default function ContextProvider({ children }) {
   const [auth, setAuth] = useState(false);
+  const [cookieCheckDone, setCookieCheckDone] = useState(false);
   const { toast } = useToast();
-  console.log(auth);
+
   async function checkToken() {
     const CookieToken = getCookie('token');
     if (CookieToken) {
       try {
-        const response = await axios.get('/api/auth/checkToken', {
+        const response = await axios.get('/api/auth/verifytoken', {
           headers: {
             Authorization: `Bearer ${CookieToken}`,
           },
         });
         if (response.data.success) {
-          setAuth(true);
+          setAuth(response.data.user);
         } else {
           setAuth(false);
           toast({
@@ -32,6 +33,8 @@ export default function ContextProvider({ children }) {
         toast({
           description: 'You have been logged out',
         });
+      } finally {
+        setCookieCheckDone(true);
       }
     }
   }
@@ -39,5 +42,5 @@ export default function ContextProvider({ children }) {
   useEffect(() => {
     checkToken();
   }, []);
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ auth, setAuth, cookieCheckDone }}>{children}</AuthContext.Provider>;
 }

@@ -6,6 +6,7 @@ import TopLevelClient from '@/components/TopLevelClient';
 import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/toaster';
 import Footer from '@/components/Footer';
+import QueryClientProviderComponent from '@/components/QueryClientProviderComponent';
 
 const gilroy = localFont({
   src: [
@@ -42,13 +43,15 @@ export default function RootLayout({ children }) {
     <html lang='en' className='h-full dark'>
       <body className={cn('relative h-full font-sans antialiased', gilroy.variable)}>
         <TopLevelClient>
-          <NextTopLoader color='#5A2E98' />
-          <Navbar />
-          <main className='relative flex flex-col min-h-screen'>
-            <div className='flex-grow flex-1'>{children}</div>
-          </main>
-          <Toaster />
-          <Footer />
+          <QueryClientProviderComponent>
+            <NextTopLoader color='#5A2E98' />
+            <Navbar />
+            <main className='relative flex flex-col min-h-screen'>
+              <div className='flex-grow flex-1'>{children}</div>
+            </main>
+            <Toaster />
+            <Footer />
+          </QueryClientProviderComponent>
         </TopLevelClient>
       </body>
     </html>

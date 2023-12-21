@@ -81,9 +81,9 @@ export default function AnimeSlider({ title, data }) {
         },
       },
       {
-        breakpoint: 650,
+        breakpoint: 670,
         settings: {
-          slidesToShow: 1.17,
+          slidesToShow: 1.05,
           slidesToScroll: 1,
           arrows: false,
         },

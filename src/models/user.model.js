@@ -1,34 +1,42 @@
-import { model, Schema, models } from "mongoose";
-import bcrypt from "bcrypt";
+import { model, Schema, models } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, "Please provide an email"],
+      required: [true, 'Please provide an email'],
       unique: true,
       lowercase: true,
     },
     username: {
       type: String,
       unique: true,
+      required: [true, 'Please provide a username'],
     },
     password: {
       type: String,
-      required: [true, "Please provide a password"],
+      required: [true, 'Please provide a password'],
       minlength: 6,
       select: false,
     },
     profilePicture: {
       type: String,
     },
+    description: {
+      type: String,
+    },
+    discord: {
+      type: String,
+      unique: true,
+    },
   },
   { timestamps: true }
 );
 
 // Hash password before saving to database
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
     next();
   }
 
@@ -43,6 +51,6 @@ userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = models.User || model("User", userSchema);
+const User = models.User || model('User', userSchema);
 
 export default User;
