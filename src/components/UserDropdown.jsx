@@ -20,13 +20,13 @@ export default function UserDropdown() {
     });
   }
   return (
-    <DropdownMenuContent>
-      <DropdownMenuLabel>
-        <p>{auth?.username}</p>
+    <DropdownMenuContent align='end'>
+      <DropdownMenuLabel className="text-base">
+        {auth?.username}
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <Link href={`/profile/${auth?._id}`} className='flex items-center gap-2 rounded-lg'>
+      <DropdownMenuItem asChild>
+        <Link href={`/profile/${auth?._id}`} className='flex items-center gap-2 rounded-lg cursor-pointer'>
           <User size={20} />
           <p>My Profile</p>
         </Link>

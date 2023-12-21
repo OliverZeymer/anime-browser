@@ -9,7 +9,9 @@ import Image from 'next/image';
 import { Input } from './ui/Input';
 import { Button } from './ui/Button';
 import { Textarea } from './ui/Textarea';
-export default function EditProfileForm({ data, setShowEditModal, refetch }) {
+import { DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Form } from './ui/form';
+export default function EditProfileForm({ data, refetch }) {
   const { auth, setAuth } = useContext(AuthContext);
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -45,20 +47,14 @@ export default function EditProfileForm({ data, setShowEditModal, refetch }) {
       });
     } finally {
       setIsLoading(false);
-      setShowEditModal(false);
       refetch();
       if (auth._id === data.user._id) setAuth({ ...auth, user: { ...auth, ...body } });
     }
   }
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col shadow-md gap-3 bg-primary-foreground p-8 xl:p-10 rounded-2xl overflow-auto'>
+    <Form onSubmit={handleSubmit} className="bg-">
       <div className='flex justify-between w-full items-center'>
-        <h1 className='text-2xl lg:text-3xl xl:text-4xl font-bold text-center text-white text-shadow'>Rediger Profil</h1>
-        {data?.user?.profilePicture ? (
-          <Image width={200} height={200} src={data.user?.profilePicture} alt={data?.user?.username} className={`rounded-full object-cover w-12 h-12 md:w-24 md:h-24`} />
-        ) : (
-          <p>logo</p>
-        )}
+        <DialogHeader className='text-2xl lg:text-3xl xl:text-4xl font-bold text-center text-white text-shadow'>Edit Profile</DialogHeader>
       </div>
       <div className='flex flex-col lg:flex-row items-center lg:gap-16 justify-center'>
         <div className='flex flex-col w-full gap-1'>
@@ -92,6 +88,6 @@ export default function EditProfileForm({ data, setShowEditModal, refetch }) {
       <Button className='w-fit mx-auto mt-6' type='submit'>
         {isLoading ? <Loader form /> : 'Apply Changes'}
       </Button>
-    </form>
+    </Form>
   );
 }

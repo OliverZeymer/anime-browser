@@ -11,6 +11,8 @@ import { AnimatePresence } from 'framer-motion';
 import BackgroundBlur from '@/components/BackgroundBlur';
 import EditProfileForm from '@/components/EditProfileForm';
 import ProfilePictureForm from '@/components/ProfilePictureUploader';
+
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import Image from 'next/image';
 export default function ProfilePage({ params }) {
   const id = params.id;
@@ -47,13 +49,7 @@ export default function ProfilePage({ params }) {
   // }, [location, isMyProfile]);
   return (
     <section className='section'>
-      <AnimatePresence>
-        {showEditModal && (
-          <BackgroundBlur isOpen={showEditModal} setIsOpen={setShowEditModal}>
-            <EditProfileForm data={data} setShowEditModal={setShowEditModal} refetch={refetch} />
-          </BackgroundBlur>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{showEditModal && <BackgroundBlur isOpen={showEditModal} setIsOpen={setShowEditModal}></BackgroundBlur>}</AnimatePresence>
       {isLoadingProfile || isLoading ? (
         <div className='w-full flex mx-auto'>
           <Loader />
@@ -63,8 +59,15 @@ export default function ProfilePage({ params }) {
       ) : (
         <>
           <article className='flex flex-col items-center justify-center gap-3 bg-primary-foreground md:w-fit overflow-hidden mx-auto p-6 rounded-xl shadow-xl relative'>
-            {(auth?.role === 'admin' || auth?.role === 'superadmin' || isMyProfile) && (
-              <Edit onClick={() => setShowEditModal(true)} className='absolute top-4 right-4 text-2xl hover:brightness-75 transition-colors cursor-pointer' />
+            {isMyProfile && (
+              <Dialog>
+                <DialogTrigger className='absolute top-4 right-4 text-2xl hover:brightness-75 transition-colors cursor-pointer'>
+                  <Edit />
+                </DialogTrigger>
+                <DialogContent className="bg-black">
+                  <EditProfileForm data={data} refetch={refetch} />
+                </DialogContent>
+              </Dialog>
             )}
             {isMyProfile ? (
               <ProfilePictureForm />

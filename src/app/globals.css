@@ -129,9 +129,7 @@ button.slick-disabled {
   background-color: var(--foreground);
   transition: all 0.2s ease-in-out;
 }
-::-webkit-scrollbar-thumb:hover {
-  border: 3px solid var(--background)
-}
+
 
 /* scrollbar for other browsers */
 * {

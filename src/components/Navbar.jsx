@@ -11,7 +11,7 @@ import UserDropdown from './UserDropdown';
 import Image from 'next/image';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
-
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
@@ -33,7 +33,10 @@ export default function Navbar() {
         </ul>
         <div className='flex items-center gap-10 ml-auto'>
           <Search />
-          <Settings />
+          <ThemeToggle />
+          <Link href='/settings'>
+            <Settings />
+          </Link>
           {cookieCheckDone ? (
             <div>
               {!auth ? (
@@ -42,7 +45,7 @@ export default function Navbar() {
                 </Button>
               ) : (
                 <DropdownMenu>
-                  <DropdownMenuTrigger>
+                  <DropdownMenuTrigger className='outline-none'>
                     {auth?.profilePicture ? (
                       <Image
                         width={128}
