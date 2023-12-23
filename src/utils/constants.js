@@ -9,8 +9,8 @@ export const Navigation = [
     icon: Home,
   },
   {
-    name: 'Shows',
-    href: '/shows',
+    name: 'Anime',
+    href: '/anime',
     icon: MonitorPlay,
   },
   {

@@ -14,6 +14,6 @@ export const getTopRated = async (id) => await fetch(`${BASE_API}/top/anime${id 
 
 export const getUpcoming = async (id) => await fetch(`${BASE_API}/seasons/upcoming${id && '?&page=' + id}`, { next: { revalidate: 3600 } });
 
-export const getAnimeByLimit = async (segment, limit) => await fetch(`${BASE_API}/${segment}?limit=${limit}`, { next: { revalidate: 3600 } });
+export const getAnimeByLimit = async (segment, limit) => await fetch(`${BASE_API}${segment !== "" ? `/${segment}` : "/anime"}?limit=${limit}`, { next: { revalidate: 3600 } });
 
 export const search = async (query, pageId) => await fetch(`${BASE_API}/anime?q=${query}&page=${pageId}`, { next: { revalidate: 3600 } });

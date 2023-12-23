@@ -21,9 +21,7 @@ export default function UserDropdown() {
   }
   return (
     <DropdownMenuContent align='end'>
-      <DropdownMenuLabel className="text-base">
-        {auth?.username}
-      </DropdownMenuLabel>
+      <DropdownMenuLabel className='text-base'>{auth?.username}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem asChild>
         <Link href={`/profile/${auth?._id}`} className='flex items-center gap-2 rounded-lg cursor-pointer'>
@@ -31,13 +29,13 @@ export default function UserDropdown() {
           <p>My Profile</p>
         </Link>
       </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Link href={`/profile/${auth?._id}?edit=true`} className='flex items-center gap-2 rounded-lg'>
+      <DropdownMenuItem asChild>
+        <Link href={`/profile/${auth?._id}?edit=true`} className='flex items-center gap-2 rounded-lg cursor-pointer'>
           <UserCog size={20} />
           <p>Edit Profile</p>
         </Link>
       </DropdownMenuItem>
-      <DropdownMenuItem>
+      <DropdownMenuItem asChild>
         <button onClick={logOut} className='flex items-center w-full gap-2'>
           <LogOut color='red' size={20} />
           <p>Sign Out</p>

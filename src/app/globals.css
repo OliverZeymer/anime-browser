@@ -149,3 +149,30 @@ button.slick-disabled {
 *::-webkit-scrollbar-track {
   background-color: var(--background)
 }
+
+.bg-rainbow {
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #3fdcf7 0deg,
+    #1890ff 51.43deg,
+    #6813cb 102.86deg,
+    #ff003d 154.29deg,
+    #ff8a00 205.71deg,
+    #ffd600 257.14deg,
+    #67be23 308.57deg,
+    #3fdcf7 1turn
+  );
+}
+
+.animate-rotate {
+  animation: spin 2.2s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

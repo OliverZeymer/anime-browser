@@ -12,9 +12,9 @@ export default async function Home() {
   return (
     <>
       <HeroSection />
-      {topRated && <AnimeSlider title='Top Rated' data={topRated?.data} />}
-      {airingData && <AnimeSlider title='Airing Now' data={airingData?.data} />}
-      {upcomingData && <AnimeSlider title='Upcoming' data={upcomingData?.data} />}
+      {topRated && <AnimeSlider href="/top" title='Top Rated' data={topRated?.data} />}
+      {airingData && <AnimeSlider href="/airing" title='Airing Now' data={airingData?.data} />}
+      {upcomingData && <AnimeSlider href="/upcoming" title='Upcoming' data={upcomingData?.data} />}
     </>
   );
 }

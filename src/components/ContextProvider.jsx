@@ -36,6 +36,9 @@ export default function ContextProvider({ children }) {
       } finally {
         setCookieCheckDone(true);
       }
+    } else {
+      setCookieCheckDone(true);
+      setAuth(false);
     }
   }
 

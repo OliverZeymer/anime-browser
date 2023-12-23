@@ -5,6 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Link from 'next/link';
 
 function PrevArrow(props) {
   const { onClick, className } = props;
@@ -28,11 +29,11 @@ function NextArrow(props) {
   );
 }
 
-export default function AnimeSlider({ title, data }) {
+export default function AnimeSlider({ title, data, href }) {
   const settings = {
     speed: 500,
     slidesToScroll: 5,
-    slidesToShow: 8.2,
+    slidesToShow: 8.14,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
     infinite: false,
@@ -94,11 +95,11 @@ export default function AnimeSlider({ title, data }) {
   return (
     <section className='pl-4 lg:pl-12 mt-16'>
       <div className='flex justify-between mb-10 pr-4 lg:pr-12'>
-        <h2 className='text-3xl font-bold text-white'>{title}</h2>
-        <button className='text-white text-lg font-medium flex items-center gap-2 hover:underline'>
+        <h2 className='text-3xl font-bold'>{title}</h2>
+        <Link href={href} className='text-lg font-medium flex items-center gap-2 hover:underline'>
           See all
           <ArrowRight size={18} className='inline-block text-primary' />
-        </button>
+        </Link>
       </div>
       <Slider {...settings} className='relative'>
         {data?.map((anime) => (

@@ -1,5 +1,5 @@
 'use client';
-import { Clapperboard, Star } from 'lucide-react';
+import { Bookmark, Clapperboard, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AnimeCard({ anime }) {
@@ -18,6 +18,7 @@ export default function AnimeCard({ anime }) {
       }}
       className='w-[300px] h-[450px] rounded-2xl relative px-5 py-2 cursor-pointer'>
       <Link href={`/anime/${anime?.mal_id}`} className='absolute top-0 left-0 w-full h-full z-20' />
+      {/* <Bookmark size={32} className='absolute top-5 right-5 z-20 bg-black/75 p-1 rounded-full' /> */}
       <div className='flex flex-col justify-end h-full relative z-10'>
         <h3 className='text-white font-semibold line-clamp-1 mb-1'>{animeTitle}</h3>
         <div className='flex items-center gap-1'>

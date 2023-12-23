@@ -17,9 +17,9 @@ export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
   return (
     <>
-      <nav className='hidden lg:flex absolute w-full py-4 lg:py-6 z-20 items-center px-4 lg:px-12'>
-        <Link className='relative font-extrabold text-2xl bg-gradient-to-tr h-12 w-12 from-purple-500 to-purple-900 flex items-center justify-center p-1 rounded-full aspect-square' href='/'>
-          AB
+      <nav className='hidden lg:flex absolute w-full py-4 select-none lg:py-6 z-20 items-center px-4 lg:px-12'>
+        <Link href='/'>
+          <Image src='/images/logo.png' width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
         <ul className='flex gap-6 ml-16'>
           {Navigation.map((navItem) => (
@@ -32,15 +32,15 @@ export default function Navbar() {
           ))}
         </ul>
         <div className='flex items-center gap-10 ml-auto'>
-          <Search />
+          <Search stroke='white' />
           <ThemeToggle />
           <Link href='/settings'>
-            <Settings />
+            <Settings stroke='white' />
           </Link>
           {cookieCheckDone ? (
             <div>
               {!auth ? (
-                <Button asChild>
+                <Button className='text-black bg-white' asChild>
                   <Link href='/login'>Sign In</Link>
                 </Button>
               ) : (

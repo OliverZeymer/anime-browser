@@ -1,67 +1,78 @@
-import { Check, Copy, Facebook, Linkedin, Phone } from 'lucide-react';
-import { useContext, useState } from 'react';
+'use client';
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import { useToast } from './ui/use-toast';
 import DiscordIcon from './icons/DiscordIcon';
-export default function ProfileInfo({ data }) {
-  const [copied, setCopied] = useState(false);
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Image from 'next/image';
+import ProfilePictureForm from '@/components/ProfilePictureUploader';
+import EditProfileForm from '@/components/EditProfileForm';
+import { Edit, User } from 'lucide-react';
+
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { useSearchParams } from 'next/navigation';
+export default function ProfileInfo({ data, id, refetch }) {
+  const searchParams = useSearchParams();
   const { toast } = useToast();
   const { auth } = useContext(AuthContext);
+  const [isMyProfile, setIsMyProfile] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const editParam = searchParams.get('edit');
+
+  useEffect(() => {
+    if (auth?._id === id) {
+      setIsMyProfile(true);
+    }
+  }, [auth, id]);
+  useEffect(() => {
+    if (editParam === 'true' && isMyProfile) {
+      setShowEditModal(true);
+    }
+  }, [editParam, isMyProfile]);
   return (
-    <>
-      <h1 className='text-black dark:text-white text-center text-xl font-bold leading-[48px] md:text-4xl md:leading-[64px] lg:text-left lg:text-5xl lg:leading-[74px] xl:text-6xl xl:leading-[86px]'>
-        {data.username}
-      </h1>
-      <div className='cursor-pointer flex items-center'>
-        <a href={`mailto:${data?.email}`} className='text-base lg:text-xl xl:text-2xl font-semibold ml-2'>
-          {data?.email ? data?.email : 'You haven\'t added an email yet'}
-        </a>
-        {!copied ? (
-          <Copy
-            title='Copy Email'
-            className='ml-2'
-            size={24}
-            onClick={(e) => {
-              e.stopPropagation();
-              if (data?.email) {
-                navigator.clipboard.writeText(data?.email);
-                setCopied(true);
-                toast({ description: 'Email copied', variant: 'success' });
-              }
-            }}
-          />
-        ) : (
-          <Check
-            onClick={(e) => {
-              e.stopPropagation();
-              setCopied(false);
-            }}
-            title='Email copied'
-            className='ml-2'
-            size={24}
-          />
-        )}
-      </div>
-      <div className='text-2xl font-semibold'>
-        {data?.phone && (
+    <article className='bg-primary-foreground md:w-fit overflow-hidden mx-auto p-6 rounded-xl shadow-xl relative'>
+      <div className='flex items-center space-x-4 justify-center'>
+        {isMyProfile ? (
           <>
-            <a className='flex items-center text-lg lg:text-xl xl:text-2xl' href={`tel:${data?.phone}`}>
-              <Phone className='mr-2' /> {data?.phone}
-            </a>
+            <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
+              <DialogTrigger className='absolute top-4 right-4 text-2xl hover:brightness-75 transition-colors cursor-pointer'>
+                <Edit size={16} />
+              </DialogTrigger>
+              <DialogContent className='bg-black'>
+                <EditProfileForm data={data} refetch={refetch} />
+              </DialogContent>
+            </Dialog>
+            <ProfilePictureForm />
           </>
+        ) : data?.user?.image ? (
+          <Image width={200} height={200} src={data?.user?.image} alt={data?.user?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
+        ) : (
+          <User className='w-24 h-24' />
         )}
-      </div>
-      {data?.socials && (
-        <div className='flex gap-2 mt-2'>
-          {data?.socials?.facebook && (
-            <Tooltip title='Discord Profile' position='bottom'>
-              <a href={data?.socials?.facebook} target='_blank' rel='noopener noreferrer'>
-                <DiscordIcon className="w-8" />
-              </a>
-            </Tooltip>
+        <div>
+          <h1 className=''>{data.username}</h1>
+          <div className='cursor-pointer flex items-center'>
+            <a href={`mailto:${data?.email}`} className=''>
+              {data?.email ? data?.email : "You haven't added an email yet"}
+            </a>
+          </div>
+          {data?.discord && (
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <div className='flex gap-2 items-center'>
+                    <DiscordIcon className='w-5 h-5' />
+                    <p>{data?.discord}</p>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Discord Profile</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
-      )}
-    </>
+      </div>
+    </article>
   );
 }

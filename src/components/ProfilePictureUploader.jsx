@@ -57,7 +57,7 @@ export default function ProfilePictureForm() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className='mx-auto mt-6 flex cursor-pointer flex-col items-center justify-center gap-2 rounded-full'>
+    <form onSubmit={handleFormSubmit} className='mx-auto flex cursor-pointer flex-col w-24 h-24 items-center justify-center gap-2 rounded-full'>
       <input accept='image/*' ref={inputRef} className='hidden' type='file' onChange={handleFileChange} />
       <div onMouseEnter={() => setImageHovered(true)} onMouseLeave={() => setImageHovered(false)} onClick={() => inputRef.current.click()} className='relative'>
         {!selectedFile && !auth.profilePicture ? (

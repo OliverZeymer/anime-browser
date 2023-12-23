@@ -1,7 +1,7 @@
 export async function createUser(email, password, username, discord, toast, setIsLoading) {
   try {
     setIsLoading(true);
-    const response = await fetch('/api/auth/signup', {
+    const response = await fetch('/api/user/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
