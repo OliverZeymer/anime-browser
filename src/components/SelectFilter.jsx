@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Label } from './ui/label';
 
 export default function SelectFilter({ param, options, title }) {
@@ -23,22 +23,23 @@ export default function SelectFilter({ param, options, title }) {
 
     router.push(`${pathname}${query}`);
   };
-  console.log(options);
 
   return (
     <Select defaultValue={param.value} onValueChange={onSelect}>
-      <Label>{title}</Label>
+      <div className='flex flex-col space-y-12'>
+        <Label>{title}</Label>
 
-      <SelectTrigger className='w-[280px] focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'>
-        <SelectValue placeholder={title} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((opt) => (
-          <SelectItem className='capitalize' key={opt.value} value={opt.value}>
-            {opt.name}
-          </SelectItem>
-        ))}
-      </SelectContent>
+        <SelectTrigger className='w-[280px] focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'>
+          <SelectValue placeholder={title} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((opt) => (
+            <SelectItem className='capitalize' key={opt.value} value={opt.value}>
+              {opt.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </div>
     </Select>
   );
 }

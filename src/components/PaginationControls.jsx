@@ -1,15 +1,23 @@
 'use client';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis } from './ui/pagination';
 import Link from 'next/link';
 
 export default function PaginationControls({ pagination }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   if (!pagination || pagination.last_visible_page <= 1) {
     // Don't render pagination controls if there's only one page or no pagination information.
     return null;
   }
 
   const generatePaginationLink = (page) => {
-    const href = `?page=${page}`;
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("page", page);
+    const search = current.toString();
+    const query = search ? `?${search}` : '';
+    const href = `${pathname}${query}`;
     return (
       <PaginationItem key={page}>
         <PaginationLink isActive={page === pagination.current_page} href={href}>

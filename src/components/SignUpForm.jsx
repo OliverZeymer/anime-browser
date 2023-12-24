@@ -84,7 +84,7 @@ export default function SignUpForm({ className }) {
           />
         </div>
 
-        <Button type='submit'>{isLoading ? <Loader size='sm' /> : 'Create Account'}</Button>
+        <Button type='submit'>{isLoading ? <Loader className="text-primary-foreground" /> : 'Create Account'}</Button>
       </form>
     </div>
   );

@@ -36,7 +36,7 @@ export default function UserDropdown() {
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem asChild>
-        <button onClick={logOut} className='flex items-center w-full gap-2'>
+        <button onClick={logOut} className='flex items-center w-full gap-2 rounded-lg cursor-pointer'>
           <LogOut color='red' size={20} />
           <p>Sign Out</p>
         </button>

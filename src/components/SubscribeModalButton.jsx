@@ -12,7 +12,8 @@ import { toast } from '@/components/ui/use-toast';
 import { Checkbox } from './ui/checkbox';
 import { Label } from './ui/label';
 import { Mail } from 'lucide-react';
-export default function SubscribeModalButton() {
+import { cn } from '@/lib/utils';
+export default function SubscribeModalButton({ className }) {
   const FormSchema = z.object({
     username: z.string().min(2, {
       message: 'Username must be at least 2 characters.',
@@ -38,8 +39,8 @@ export default function SubscribeModalButton() {
   });
   return (
     <Dialog>
-      <Button asChild className='text-lg p-6'>
-        <DialogTrigger className='flex gap-3 items-center'>
+      <Button asChild className={cn('text-lg p-6', className)}>
+        <DialogTrigger className='flex gap-3 items-center '>
           <Mail size={22} />
           Subscribe
         </DialogTrigger>

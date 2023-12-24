@@ -52,9 +52,9 @@ export default function ProfileInfo({ data, id, refetch }) {
         <div>
           <h1 className=''>{data.username}</h1>
           <div className='cursor-pointer flex items-center'>
-            <a href={`mailto:${data?.email}`} className=''>
-              {data?.email ? data?.email : "You haven't added an email yet"}
-            </a>
+            <p>
+              {data?.email}
+            </p>
           </div>
           {data?.discord && (
             <TooltipProvider delayDuration={0}>

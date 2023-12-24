@@ -12,37 +12,45 @@ import Image from 'next/image';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import ThemeToggle from './ThemeToggle';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import SignUpModalButton from './SignUpModalButton';
 
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
+  const pathname = usePathname();
   return (
     <>
-      <nav className='hidden lg:flex absolute w-full py-4 select-none lg:py-6 z-20 items-center px-4 lg:px-12'>
+      <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-primary', pathname !== '/' && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
           <Image src='/images/logo.png' width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
         <ul className='flex gap-6 ml-16'>
           {Navigation.map((navItem) => (
             <li key={navItem.name}>
-              <NavLink href={navItem.href} activeClassName='text-white' className='flex gap-2 font-semibold text-neutral-500 hover:text-white transition-colors'>
-                <navItem.icon />
+              <NavLink
+                navItem={navItem}
+                activeClassName={pathname === '/' ? 'text-white' : 'text-primary'}
+                className={cn('flex gap-2 font-semibold text-neutral-500 transition-colors', pathname === '/' || 'login' ? 'hover:text-white' : 'hover:text-primary')}>
                 {navItem.name}
               </NavLink>
             </li>
           ))}
         </ul>
-        <div className='flex items-center gap-10 ml-auto'>
-          <Search stroke='white' />
+        <div className={cn('flex items-center gap-10 ml-auto', pathname === '/' ? 'text-white' : 'text-primary')}>
+          <Button variant='ghost' className='p-1 h-auto'>
+            <Search />
+          </Button>
           <ThemeToggle />
-          <Link href='/settings'>
-            <Settings stroke='white' />
-          </Link>
+          <Button variant='ghost' className='p-1 h-auto'>
+            <Link href='/settings'>
+              <Settings />
+            </Link>
+          </Button>
           {cookieCheckDone ? (
             <div>
               {!auth ? (
-                <Button className='text-black bg-white' asChild>
-                  <Link href='/login'>Sign In</Link>
-                </Button>
+                <SignUpModalButton />
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger className='outline-none'>

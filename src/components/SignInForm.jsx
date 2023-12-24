@@ -62,7 +62,7 @@ export default function SignInForm({ className }) {
           />
         </div>
 
-        <Button type='submit'>{isLoading ? <Loader size='sm' /> : isLogin ? 'Login' : !isLogin ? 'Create Account' : 'Login'}</Button>
+        <Button type='submit'>{isLoading ? <Loader className='text-primary-foreground' /> : isLogin ? 'Login' : !isLogin ? 'Create Account' : 'Login'}</Button>
       </form>
     </div>
   );

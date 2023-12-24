@@ -1,5 +1,5 @@
 'use client';
-import { Bookmark, Clapperboard, Star } from 'lucide-react';
+import { Bookmark, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AnimeCard({ anime }) {
@@ -23,13 +23,13 @@ export default function AnimeCard({ anime }) {
         <h3 className='text-white font-semibold line-clamp-1 mb-1'>{animeTitle}</h3>
         <div className='flex items-center gap-1'>
           <Star size={15} color='#ffcd19' fill='#ffcd19' />
-          <span className='font-medium text-xs tracking-wider'>{anime?.score}</span>
+          <span className='font-semibold text-xs tracking-wider text-white'>{anime?.score}</span>
           <div className='w-[1px] h-full bg-neutral-400 mx-1' />
           <div className='flex items-center text-neutral-400'>
             {anime?.type === 'TV' || 'OVA' ? (
               <>
                 <span className='font-medium text-xs'>{anime?.episodes}</span>
-                <Clapperboard size={12} className='ml-1' />
+                <Play size={12} className='ml-1' />
               </>
             ) : (
               <span className='font-medium text-xs'>{anime?.type}</span>

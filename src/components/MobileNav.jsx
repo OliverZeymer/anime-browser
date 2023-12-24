@@ -62,12 +62,12 @@ export default function MobileNav() {
                 {Navigation.map((item, index) => (
                   <li key={index}>
                     <NavLink
-                      className=''
-                      activeClassName='text-gold border-b-4 border-primary'
+                      navItem={item}
+                      className='flex items-center gap-2 justify-center'
+                      activeClassName='border-b-4 border-primary'
                       onClick={() => {
                         setIsMobileMenuOpen(false);
-                      }}
-                      href={item.href}>
+                      }}>
                       {item.name}
                     </NavLink>
                   </li>

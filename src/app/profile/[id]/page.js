@@ -32,7 +32,7 @@ export default function ProfilePage({ params }) {
     <section className='section'>
       {isLoadingProfile || isLoading ? (
         <div className='w-full flex mx-auto'>
-          <Loader />
+          <Loader size="lg" />
         </div>
       ) : error ? (
         <ErrorCard message={error?.message ? error?.message : 'Der skete en fejl. Prøv igen senere eller skriv til en administrator'} />

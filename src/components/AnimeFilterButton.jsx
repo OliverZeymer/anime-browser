@@ -1,0 +1,54 @@
+'use client';
+import SelectFilter from '@/components/SelectFilter';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogTrigger, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { Sliders } from 'lucide-react';
+
+export default function AnimeFilterButton({ order, status }) {
+  const params = [
+    {
+      title: 'Sort by',
+      param: {
+        name: 'order',
+        value: order,
+      },
+      options: [
+        { name: 'Popularity', value: 'members' },
+        { name: 'Score', value: 'score' },
+        { name: 'Episodes', value: 'episodes' },
+      ],
+    },
+    {
+      title: 'Status',
+      param: {
+        name: 'status',
+        value: status,
+      },
+      options: [
+        { name: 'All', value: 'all' },
+        { name: 'Airing', value: 'airing' },
+        { name: 'Upcoming', value: 'upcoming' },
+        { name: 'Complete', value: 'complete' },
+      ],
+    },
+  ];
+  return (
+    <Dialog>
+      <Button asChild variant='ghost' type='button' className='pl-3 pr-4 py-2 h-auto border-l border-neutral-700 rounded-r-full'>
+        <DialogTrigger>
+          <Sliders size={24} />
+        </DialogTrigger>
+      </Button>
+      <DialogContent className="w-fit">
+        <DialogHeader>
+          <h2 className='text-lg font-semibold leading-none tracking-tight'>Filters</h2>
+        </DialogHeader>
+        <div className='flex flex-col space-y-4'>
+          {params.map((param) => (
+            <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

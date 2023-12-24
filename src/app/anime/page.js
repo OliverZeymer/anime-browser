@@ -1,92 +1,64 @@
 'use client';
+// Importing necessary dependencies and components
+import { useQuery } from 'react-query';
 import AnimeCardList from '@/components/AnimeCardList';
 import PaginationControls from '@/components/PaginationControls';
-import SelectFilter from '@/components/SelectFilter';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogTrigger, DialogContent } from '@/components/ui/dialog';
+import AnimeSearchBar from '@/components/AnimeSearchBar';
 import { BASE_API } from '@/utils/constants';
 
-import { Sliders } from 'lucide-react';
-import { useQuery } from 'react-query';
+// Default limit for the number of items to be displayed
+const defaultLimit = 10;
 
-export default function AnimePage({ searchParams }) {
-  let page = searchParams['page'] ?? '1';
-  let order = searchParams['order'] ?? 'members';
-  let status = searchParams['status'] ?? 'all';
-  let search = searchParams['search'] ?? '';
-  let limit = 10;
-  if (window.innerWidth >= 3248 && window.innerWidth > 2923) {
-    limit = 20;
-  } else if (window.innerWidth <= 2923 && window.innerWidth > 2599) {
-    limit = 24;
-  } else if (window.innerWidth <= 2599 && window.innerWidth > 2275) {
-    limit = 21;
-  } else if (window.innerWidth <= 2275 && window.innerWidth > 1951) {
-    limit = 24;
-  } else if (window.innerWidth <= 1951 && window.innerWidth > 1627) {
-    limit = 25;
-  } else if (window.innerWidth <= 1627 && window.innerWidth > 1303) {
-    limit = 24;
-  } else {
-    limit = 10;
-  }
-
-  const params = [
-    {
-      title: 'Sort by',
-      param: {
-        name: 'order',
-        value: order,
-      },
-      options: [
-        { name: 'Popularity', value: 'members' },
-        { name: 'Score', value: 'score' },
-        { name: 'Episodes', value: 'episodes' },
-      ],
-    },
-    {
-      title: 'Status',
-      param: {
-        name: 'status',
-        value: status,
-      },
-      options: [
-        { name: 'All', value: 'all' },
-        { name: 'Airing', value: 'airing' },
-        { name: 'Upcoming', value: 'upcoming' },
-        { name: 'Complete', value: 'complete' },
-      ],
-    },
+// Function to calculate the limit based on window width
+const calculateLimit = () => {
+  const mediaQueries = [
+    { minWidth: 3248, limit: 20 },
+    { minWidth: 2924, limit: 20 },
+    { minWidth: 2599, maxWidth: 2923, limit: 24 },
+    { minWidth: 2275, maxWidth: 2598, limit: 21 },
+    { minWidth: 1951, maxWidth: 2274, limit: 24 },
+    { minWidth: 1627, maxWidth: 1950, limit: 25 },
+    { minWidth: 1303, maxWidth: 1626, limit: 24 },
   ];
-  let API_URL = `${BASE_API}/anime?order_by=${order}&sort=desc&limit=${limit}${status && status !== null && status !== 'all' ? `&status=${status}` : ''}&page=${page}&sfw${
-    search && search !== null ? `&q=${search}` : ''
-  }`;
+  // Find the first media query that matches the current window width
+  const matchedQuery = mediaQueries.find((query) => {
+    const mediaQuery = window.matchMedia(`(min-width: ${query.minWidth}px)${query.maxWidth ? ` and (max-width: ${query.maxWidth}px)` : ''}`);
+    return mediaQuery.matches;
+  });
 
+  return matchedQuery ? matchedQuery.limit : defaultLimit;
+};
+export default function AnimePage({ searchParams }) {
+  // Destructuring searchParams with default values
+  const { page = '1', order = 'members', status = 'all', search = '' } = searchParams;
+
+  // Calculating the limit based on window width
+  const limit = calculateLimit();
+
+  // Building individual parts of the API_URL
+  const orderParam = `order_by=${order}`;
+  const sortParam = 'sort=desc';
+  const limitParam = `limit=${limit}`;
+  const statusParam = status && status !== 'all' ? `&status=${status}` : '';
+  const pageParam = `&page=${page}`;
+  const sfwParam = 'sfw';
+  const searchParam = search ? `&q=${search}` : '';
+
+  // Constructing API_URL by joining the individual parts
+  const API_URL = `${BASE_API}/anime?${orderParam}&${sortParam}&${limitParam}${statusParam}${pageParam}&${sfwParam}${searchParam}`;
+
+  // Using react-query hook for fetching data
   const { data, isLoading, error, refetch } = useQuery(['anime', page, order, status, search], async () => {
-    const data = await fetch(API_URL, { next: { revalidate: 3600 } }).then((res) => res.json());
+    const response = await fetch(API_URL, { next: { revalidate: 3600 } });
+    const data = await response.json();
     return data;
   });
 
-  if (!isLoading) {
-    console.log(data);
-  }
   return (
     <div className='px-4 pt-32'>
-      <Dialog>
-        <DialogTrigger>
-          <Button variant='ghost' className='px-2 h-12 w-12'>
-            <Sliders size={32} />
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <div className='flex flex-col space-y-2'>
-            {params.map((param) => (
-              <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
+      <h1 className='text-6xl font-bold leading-[1.15] mb-6 text-center'>Browse 24.000+ Anime</h1>
 
+      <AnimeSearchBar order={order} status={status} search={search} />
       <AnimeCardList data={data?.data} isLoading={isLoading} error={error} refetch={refetch} limit={limit} />
       <PaginationControls pagination={data?.pagination} />
     </div>
