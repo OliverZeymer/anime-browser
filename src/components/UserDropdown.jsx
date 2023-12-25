@@ -10,7 +10,6 @@ import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuS
 export default function UserDropdown() {
   const { auth, setAuth } = useContext(AuthContext);
   const { toast } = useToast();
-  console.log(auth);
 
   function logOut() {
     setCookie('token', '', 0);

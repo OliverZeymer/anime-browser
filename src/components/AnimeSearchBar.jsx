@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from './ui/button';
 import { useState } from 'react';
 
-export default function AnimeSearchBar({ order, status, search }) {
+export default function AnimeSearchBar({ order, status, search, type }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -53,7 +53,7 @@ export default function AnimeSearchBar({ order, status, search }) {
           </Button>
         )}
       </div>
-      <AnimeFilterButton order={order} status={status} />
+      <AnimeFilterButton order={order} status={status} type={type} />
     </form>
   );
 }

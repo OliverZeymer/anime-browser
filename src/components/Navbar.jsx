@@ -23,7 +23,7 @@ export default function Navbar() {
     <>
       <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-primary', pathname !== '/' && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
-          <Image src='/images/logo.png' width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
+          <Image src='/images/logo.png' alt="Anime Browser Logo" width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
         <ul className='flex gap-6 ml-16'>
           {Navigation.map((navItem) => (

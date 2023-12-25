@@ -41,7 +41,7 @@ const gilroy = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className='h-full dark'>
+    <html lang='en' className='h-full dark' style={{ colorScheme: 'dark' }}>
       <body className={cn('relative h-full font-sans antialiased', gilroy.variable)}>
         <TopLevelClient>
           <QueryClientProviderComponent>

@@ -1,7 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis } from './ui/pagination';
-import Link from 'next/link';
 
 export default function PaginationControls({ pagination }) {
   const router = useRouter();

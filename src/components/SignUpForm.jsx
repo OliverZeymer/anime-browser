@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { useToast } from './ui/use-toast';
-import ProfilePictureForm from './ProfilePictureUploader';
 
 export default function SignUpForm({ className }) {
   const { toast } = useToast();

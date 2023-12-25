@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Navigation, Socials } from '@/utils/constants';
 import { Fade as Hamburger } from 'hamburger-react';
-import Image from 'next/image';
 import NavLink from './NavLink';
 
 export default function MobileNav() {

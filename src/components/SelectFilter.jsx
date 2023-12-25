@@ -26,10 +26,10 @@ export default function SelectFilter({ param, options, title }) {
 
   return (
     <Select defaultValue={param.value} onValueChange={onSelect}>
-      <div className='flex flex-col space-y-12'>
+      <div className='flex flex-col space-y-2'>
         <Label>{title}</Label>
 
-        <SelectTrigger className='w-[280px] focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'>
+        <SelectTrigger className='w-[200px] focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'>
           <SelectValue placeholder={title} />
         </SelectTrigger>
         <SelectContent>

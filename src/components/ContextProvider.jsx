@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
-import { getCookie } from 'react-use-cookie';
+import { getCookie, setCookie } from 'react-use-cookie';
 import axios from 'axios';
 import { useToast } from './ui/use-toast';
 
@@ -22,23 +22,22 @@ export default function ContextProvider({ children }) {
         if (response.data.success) {
           setAuth(response.data.user);
         } else {
-          setAuth(false);
+          setCookie('token', '', { days: 0 });
           toast({
             description: 'You have been logged out',
           });
         }
       } catch (error) {
         console.log(error);
-        setAuth(false);
         toast({
           description: 'You have been logged out',
         });
+        setCookie('token', '', { days: 0 });
       } finally {
         setCookieCheckDone(true);
       }
     } else {
       setCookieCheckDone(true);
-      setAuth(false);
     }
   }
 

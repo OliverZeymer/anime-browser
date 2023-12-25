@@ -8,6 +8,10 @@ export default function AnimeCard({ anime }) {
     .map((genre) => genre.name)
     .join(' & ');
   const animeTitle = anime?.title_english || anime?.title;
+  const getRatingColor = (score) => {
+    const color = score >= 9 ? 'text-[#974EDD]' : score >= 8 ? 'text-[#22C55E]' : score >= 6.5 ? 'text-white' : score > 0 ? 'text-[#dc2626]' : 'text-white';
+    return color;
+  };
   return (
     <li
       style={{
@@ -23,7 +27,7 @@ export default function AnimeCard({ anime }) {
         <h3 className='text-white font-semibold line-clamp-1 mb-1'>{animeTitle}</h3>
         <div className='flex items-center gap-1'>
           <Star size={15} color='#ffcd19' fill='#ffcd19' />
-          <span className='font-semibold text-xs tracking-wider text-white'>{anime?.score}</span>
+          <span className={`font-semibold text-xs tracking-wider ${getRatingColor(anime.score)}`}>{anime?.score}</span>
           <div className='w-[1px] h-full bg-neutral-400 mx-1' />
           <div className='flex items-center text-neutral-400'>
             {anime?.type === 'TV' || 'OVA' ? (
