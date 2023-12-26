@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from './ui/button';
 import { useState } from 'react';
 
-export default function AnimeSearchBar({ order, status, search, type }) {
+export default function AnimeSearchBar({ order, status, search, type, genres }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -38,7 +38,7 @@ export default function AnimeSearchBar({ order, status, search, type }) {
           }}
           value={searchValue}
           placeholder='Search'
-          className='rounded-none text-base h-10 w-96 pl-12 bg-background rounded-l-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
+          className='rounded-none text-base h-10 w-96 pl-12 bg-white dark:bg-black/30 rounded-l-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
         />
         {searchValue && (
           <Button
@@ -53,7 +53,7 @@ export default function AnimeSearchBar({ order, status, search, type }) {
           </Button>
         )}
       </div>
-      <AnimeFilterButton order={order} status={status} type={type} />
+      <AnimeFilterButton order={order} status={status} type={type} genres={genres} />
     </form>
   );
 }

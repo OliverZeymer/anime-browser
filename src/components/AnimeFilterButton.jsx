@@ -5,7 +5,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader } from '@/components
 import { Sliders } from 'lucide-react';
 import { AnimeGenreSelect } from './AnimeGenreSelect';
 
-export default function AnimeFilterButton({ order, status, type }) {
+export default function AnimeFilterButton({ order, status, type, genres }) {
   const params = [
     {
       title: 'Sort by',
@@ -64,7 +64,7 @@ export default function AnimeFilterButton({ order, status, type }) {
           {params.map((param) => (
             <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
           ))}
-        <AnimeGenreSelect />
+        <AnimeGenreSelect genresParam={genres} />
         </div>
       </DialogContent>
     </Dialog>

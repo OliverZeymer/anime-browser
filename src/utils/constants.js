@@ -4,19 +4,19 @@ export const BASE_API = 'https://api.jikan.moe/v4';
 
 export const Navigation = [
   {
-    label: 'Home',
+    name: 'Home',
     href: '/',
     params: {},
     icon: Home,
   },
   {
-    label: 'Anime',
+    name: 'Anime',
     href: '/anime',
     params: {},
     icon: MonitorPlay,
   },
   {
-    label: 'Movies',
+    name: 'Movies',
     href: '/anime',
     params: {
       type: 'movie',
@@ -24,7 +24,7 @@ export const Navigation = [
     icon: Film,
   },
   {
-    label: 'Upcoming',
+    name: 'Upcoming',
     href: '/anime',
     params: {
       status: 'upcoming',
@@ -32,7 +32,7 @@ export const Navigation = [
     icon: Clock,
   },
   {
-    label: 'New Releases',
+    name: 'New Releases',
     href: '/anime',
     params: {
       status: 'airing',
