@@ -6,10 +6,10 @@ import HeroCurrentlyShowing from './HeroCurrentlyShowing';
 import HeroProgressBar from './HeroProgressBar';
 export default function HeroSection() {
   return (
-    <section className='min-h-[80vh] flex flex-col relative w-full'>
+    <section className='min-h-[100vh] lg:min-h-[80vh] flex flex-col relative w-full'>
       <HeroImageSlider />
       <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-neutral-900 to-purple-500' style={{ mixBlendMode: 'multiply' }} />
-      <div className='flex flex-col flex-grow flex-1 justify-center h-full px-4 lg:px-12 z-10 relative max-w-4xl'>
+      <div className='flex flex-col flex-grow flex-1 justify-center h-full px-4 lg:px-12 z-10 relative max-w-4xl mt-16 lg:mt-0'>
         <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15]'>Browse Unlimited Anime Shows, Movies, New Releases and More Content.</h1>
         <p className='text-sm md:text-base lg:text-lg text-white mt-4 font-medium'>
           Enjoy discovering exclusive popular Anime Movies and Shows.

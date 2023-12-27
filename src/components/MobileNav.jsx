@@ -58,7 +58,7 @@ export default function MobileNav() {
       </div>
       <div className='flex items-center justify-end gap-4'>
         {cookieCheckDone ? (
-          <div className='w-12 h-12'>
+          <div>
             {!auth ? (
               <SignUpModalButton />
             ) : (
