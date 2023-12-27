@@ -42,11 +42,17 @@ export default function AnimePage({ searchParams }) {
   const genreParam = genres ? `&genres=${genres}` : '';
   const API_URL = `${BASE_API}/anime?${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
 
-  const { data, isLoading, error, refetch } = useQuery(['anime', API_URL], async () => {
-    const response = await fetch(API_URL, { next: { revalidate: 3600 } });
-    const data = await response.json();
-    return data;
-  });
+  const { data, isLoading, error, refetch } = useQuery(
+    ['anime', API_URL],
+    async () => {
+      const response = await fetch(API_URL, { next: { revalidate: 3600 } });
+      const data = await response.json();
+      return data;
+    },
+    {
+      staleTime: 0,
+    }
+  );
 
   useEffect(() => {
     function getGenreLabel(genre) {
