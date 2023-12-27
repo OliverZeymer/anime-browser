@@ -11,7 +11,7 @@ export default function CharacterBanner({ character }) {
         alt={character.name}
         width={700}
         height={700}
-        className='absolute inset-0 -z-10 blur-md object-cover w-full h-[300px] lg:h-[400px]'
+        className='absolute inset-0 select-none -z-10 blur-md object-cover w-full h-[300px] lg:h-[400px]'
       />
       <div className='z-10 mt-12 lg:mt-[120px] flex flex-col items-center justify-center gap-6'>
         <h1 className='text-5xl font-bold text-white'>{character.name}</h1>

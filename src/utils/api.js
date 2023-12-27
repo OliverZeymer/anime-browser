@@ -8,6 +8,8 @@ export const getAnimeById = async (id) => await fetch(`${BASE_API}/anime${id && 
 
 export const getAnimeReviews = async (id) => await fetch(`${BASE_API}/anime/${id}/reviews`, { next: { revalidate: 3600 } });
 
+export const getThisSeason = async (page) => await fetch(`${BASE_API}/seasons/now${page && `?page=${page}`}`, { next: { revalidate: 3600 } });
+
 export const getAnimeRecommendations = async (id) => await fetch(`${BASE_API}/anime/${id}/recommendations`, { next: { revalidate: 3600 } });
 
 export const getAnimeCharacters = async (id) => await fetch(`${BASE_API}/anime/${id}/characters`, { next: { revalidate: 3600 } });

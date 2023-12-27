@@ -4,9 +4,9 @@ import AnimeRecommendations from '@/components/AnimeRecommendations';
 import AnimeReviewList from '@/components/AnimeReviewList';
 import AnimeStats from '@/components/AnimeStats';
 import AnimeSynopsis from '@/components/AnimeSynopsis';
+import ClickableImage from '@/components/ClickableImage';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAnimeById, getAnimeRecommendations } from '@/utils/api';
-import Image from 'next/image';
+import { getAnimeById } from '@/utils/api';
 
 export default async function AnimePage({ params }) {
   const animeResponse = await getAnimeById(params.id);
@@ -18,13 +18,7 @@ export default async function AnimePage({ params }) {
       <AnimeBanner anime={anime} />
       <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
         <aside className='flex flex-col gap-2 w-full items-center md:items-start md:min-w-[300px] md:w-[300px]'>
-          <Image
-            src={anime.images.webp.large_image_url}
-            alt={anime.title_english}
-            width={450}
-            height={700}
-            className='w-full xs:w-3/4 sm:w-1/2 md:w-[300px] md:h-[450px] rounded-2xl relative object-cover'
-          />
+          <ClickableImage src={anime.images.webp.large_image_url} alt={anime.title_english} width={450} height={700} />
           <AnimeStats anime={anime} />
         </aside>
         <div className='flex flex-col gap-6 w-fit'>

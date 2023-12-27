@@ -14,8 +14,9 @@ export default function NavLink({ navItem, children, onClick, activeClassName, c
     delete navParams.order;
     delete navParams.search;
     delete navParams.genres;
-    if (navParams.status === 'all' || navParams.status === 'complete') delete navParams.status;
+    delete navParams.status;
     if (navParams.type === 'movie') delete navParams.status;
+    if (navParams.type !== 'movie') delete navParams.type;
 
     // Check if the remaining params match
     return JSON.stringify(navParams) === JSON.stringify(navItem.params);

@@ -33,9 +33,8 @@ export const Navigation = [
   },
   {
     name: 'New Releases',
-    href: '/anime',
+    href: '/anime/new',
     params: {
-      status: 'airing',
     },
     icon: Sparkles,
   },

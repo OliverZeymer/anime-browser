@@ -10,7 +10,7 @@ export default function AnimeBanner({ anime }) {
         alt={anime.title_english}
         width={700}
         height={700}
-        className='absolute inset-0 -z-10 blur-md object-cover w-full h-[300px] lg:h-[400px]'
+        className='absolute inset-0 -z-10 blur-md object-cover w-full h-[300px] lg:h-[400px] select-none'
       />
       <div className='z-10 mt-12 lg:mt-[120px] flex flex-col items-center justify-center gap-6'>
         <h1 className='text-2xl text-center sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white'>{anime.title_english ? anime.title_english : anime.title}</h1>

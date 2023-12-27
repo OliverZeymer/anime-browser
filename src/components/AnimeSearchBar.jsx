@@ -28,7 +28,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
     const param = current.toString();
     const query = param ? `?${param}` : '';
 
-    router.push(`${pathname}${query}`);
+    router.push(`/anime${query}`);
   };
   return (
     <form onSubmit={onSubmit} className='bg-primary-foreground mx-auto w-fit flex items-center border border-neutral-700 rounded-full'>

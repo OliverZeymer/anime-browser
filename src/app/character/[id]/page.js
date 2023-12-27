@@ -3,6 +3,7 @@ import CharacterBanner from '@/components/CharacterBanner';
 import { getAnimeCharacterById } from '@/utils/api';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
+import ClickableImage from '@/components/ClickableImage';
 
 export default async function CharacterPage({ params }) {
   const id = params.id;
@@ -14,7 +15,8 @@ export default async function CharacterPage({ params }) {
       <CharacterBanner character={character} />
       <div className='mt-12 px-4 flex flex-col sm:flex-row gap-6'>
         <aside className='flex flex-col gap-2 w-full items-center sm:items-start sm:min-w-[300px] sm:w-[300px]'>
-          <Image src={character.images.webp.image_url} alt={character.name} width={300} height={450} className='w-[300px] h-[450px] rounded-2xl relative object-cover' />
+          <ClickableImage className="rounded" src={character.images.webp.image_url} alt={character.title_english} width={300} height={450} />
+          
           <h1 className='text-xl font-bold'>{character.name}</h1>
           <h2 className='text-lg font-bold mt-2'>{character.name_kanji}</h2>
           {character.nicknames.length > 0 && (

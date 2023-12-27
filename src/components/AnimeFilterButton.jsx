@@ -5,12 +5,26 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Sliders } from 'lucide-react';
 
 import AnimeFilterPopup from './AnimeFilterPopup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function AnimeFilterButton({ order, status, type, genres }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentParams = Object.fromEntries(searchParams);
+  const paramsWithoutPage = Object.keys(currentParams).filter((key) => key !== 'page');
+  console.log(currentParams);
+  useEffect(() => {
+    if (pathname === '/anime/new' && paramsWithoutPage.length > 0) {
+      const newUrl = `/anime?${searchParams.toString()}`;
+
+      router.push(newUrl);
+    }
+  }, [paramsWithoutPage]);
   return (
-    <Dialog open={open} onOpenChange={setOpen} >
+    <Dialog open={open} onOpenChange={setOpen}>
       <Button asChild variant='ghost' type='button' className='pl-3 pr-4 py-2 h-auto border-l border-neutral-700 rounded-r-full'>
         <DialogTrigger>
           <Sliders size={24} />
