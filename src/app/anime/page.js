@@ -90,7 +90,7 @@ export default function AnimePage({ searchParams }) {
 
   useEffect(() => {
     setHeading(getHeading());
-  }, [searchParams, data]);
+  }, [searchParams, data, getHeading]);
 
   return (
     <div className='px-4 pt-32'>
