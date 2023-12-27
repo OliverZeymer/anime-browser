@@ -24,7 +24,7 @@ export default function NavLink({ navItem, children, onClick, activeClassName, c
   function doesPathnamesMatch() {
     if (pathname === navItem.href && paramsMatch()) {
       return true;
-    } else if ('/' + pathname.split('/')[1] === navItem.href && paramsMatch()) {
+    } else if ('/' + pathname.split('/')[1] === navItem.href && pathname.split('/')[2] !== 'new' && paramsMatch()) {
       return true;
     } else {
       return false;
