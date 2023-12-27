@@ -2,12 +2,10 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Loader from '@/components/Loader';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import ProfileInfo from '@/components/ProfileInfo';
 import ErrorCard from '@/components/ErrorCard';
-import { AnimatePresence } from 'framer-motion';
-import BackgroundBlur from '@/components/BackgroundBlur';
 
 export default function ProfilePage({ params }) {
   const id = params.id;

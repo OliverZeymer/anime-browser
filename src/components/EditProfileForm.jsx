@@ -5,9 +5,9 @@ import axios from 'axios';
 import AuthContext from '@/contexts/AuthContext';
 import { useContext } from 'react';
 import { useToast } from './ui/use-toast';
-import { Input } from './ui/Input';
-import { Button } from './ui/Button';
-import { Textarea } from './ui/Textarea';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
+import { Textarea } from './ui/textarea';
 import { DialogHeader} from '@/components/ui/dialog';
 import { Form } from './ui/form';
 export default function EditProfileForm({ data, refetch }) {
