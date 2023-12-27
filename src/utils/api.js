@@ -2,6 +2,8 @@ import { BASE_API } from './constants';
 
 export const getAnime = async () => await fetch(`${BASE_API}/anime`, { next: { revalidate: 3600 } });
 
+export const getFileterdAnime = async (params) => await fetch(`${BASE_API}/anime?${params}`, { next: { revalidate: 3600 } });
+
 export const getAnimeById = async (id) => await fetch(`${BASE_API}/anime${id && '/' + id}/full`, { next: { revalidate: 3600 } });
 
 export const getAnimeReviews = async (id) => await fetch(`${BASE_API}/anime/${id}/reviews`, { next: { revalidate: 3600 } });
@@ -11,6 +13,7 @@ export const getAnimeRecommendations = async (id) => await fetch(`${BASE_API}/an
 export const getAnimeCharacters = async (id) => await fetch(`${BASE_API}/anime/${id}/characters`, { next: { revalidate: 3600 } });
 
 export const getAnimeCharacterById = async (id) => await fetch(`${BASE_API}/characters/${id}/full`, { next: { revalidate: 3600 } });
+
 
 export const getGenre = async (id, pageId) => await fetch(`${BASE_API}/anime?genres=${id}&page=${pageId}`, { next: { revalidate: 3600 } });
 

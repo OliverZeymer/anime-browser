@@ -1,18 +1,11 @@
-'use client';
-// Importing necessary dependencies and components
-import { useQuery } from 'react-query';
 import AnimeCardList from '@/components/AnimeCardList';
 import PaginationControls from '@/components/PaginationControls';
 import AnimeSearchBar from '@/components/AnimeSearchBar';
-import { BASE_API } from '@/utils/constants';
-import { animeGenres } from '@/utils/constants';
-import { getGenre } from '@/utils/api';
-import { useEffect, useState } from 'react';
 
-export default function AnimePage({ searchParams }) {
-  const [heading, setHeading] = useState('Browing all Anime');
-  const defaultLimit = 10;
+import { getFileterdAnime } from '@/utils/api';
+import AnimeDynamicHeading from '@/components/AnimeDynamicHeading';
 
+export default async function AnimePage({ searchParams }) {
   // const calculateLimit = () => {
   //   if (typeof window !== 'undefined') {
   //     const windowWidth = window.innerWidth;
@@ -30,7 +23,7 @@ export default function AnimePage({ searchParams }) {
   // };
   const limit = 24;
 
-  const { page = '1', order = 'members', status = 'all', search = '', type = 'all', genres = [] } = searchParams;
+  const { page = '1', order = 'members', status = 'all', search = '', type = 'all', genres = '' } = searchParams;
 
   const orderParam = `order_by=${order}`;
   const sortParam = '&sort=desc';
@@ -40,69 +33,16 @@ export default function AnimePage({ searchParams }) {
   const searchParam = search ? `&q=${search}` : '';
   const typeParam = type !== 'all' ? `&type=${type}` : '';
   const genreParam = genres ? `&genres=${genres}` : '';
-  const API_URL = `${BASE_API}/anime?${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
+  const params = `${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
+  const animeResponse = await getFileterdAnime(params);
+  const data =  await animeResponse.json();
 
-  const { data, isLoading, error, refetch } = useQuery(
-    ['anime', page, order, status, search, type, genres],
-    async () => {
-      const response = await fetch(API_URL, { next: { revalidate: 3600 } });
-      const data = await response.json();
-      return data;
-    },
-    {
-      staleTime: 0,
-    }
-  );
-
-  // useEffect(() => {
-  //   function getGenreLabel(genre) {
-  //     //find the genre with the same value as the genre param from animegenres array
-  //     const genreLabel = animeGenres.find((animeGenre) => animeGenre.value == genre);
-  //     return genreLabel.label;
-  //   }
-  //   function getHeading() {
-  //     const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
-  //     const searchString = search ? `matching "${search}"` : '';
-  //     console.log(type);
-
-  //     // add the word and if there are more than one genre
-  //     let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
-  //     let statusString = status && status !== 'all' ? `${status}` : '';
-  //     let typeString = '';
-
-  //     if (type) {
-  //       switch (type) {
-  //         case 'tv':
-  //         case 'all':
-  //         case '':
-  //           typeString = 'Anime';
-  //           break;
-  //         case 'ova':
-  //           typeString = 'OVAs';
-  //           break;
-  //         case 'ona':
-  //           typeString = 'ONAs';
-  //           break;
-  //         case 'movie':
-  //           typeString = 'Movies';
-  //           break;
-  //         default:
-  //           //make the first letter uppercase
-  //           typeString = type.charAt(0).toUpperCase() + type.slice(1) + 's';
-  //       }
-  //     }
-
-  //     return `Browsing ${amountOfResults} ${statusString}  ${genresString} ${typeString} ${searchString}`;
-  //   }
-
-  //   setHeading(getHeading());
-  // }, [searchParams, data]);
 
   return (
     <div className='px-4 pt-32'>
-      <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6 text-center'>Browse Anime</h1>
+      <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
       <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
-      <AnimeCardList data={data?.data} isLoading={isLoading} error={error} refetch={refetch} limit={limit} />
+      <AnimeCardList data={data?.data} limit={limit} />
       <PaginationControls pagination={data?.pagination} />
     </div>
   );

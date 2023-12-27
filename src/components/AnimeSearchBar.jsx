@@ -1,3 +1,4 @@
+'use client';
 import { SearchIcon, X } from 'lucide-react';
 import AnimeFilterButton from './AnimeFilterButton';
 import { Input } from './ui/input';
