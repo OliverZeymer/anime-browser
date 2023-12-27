@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function NavLink({ navItem, children, activeClassName, className }) {
+export default function NavLink({ navItem, children, onClick, activeClassName, className }) {
   const pathname = usePathname();
   const params = useSearchParams();
   // Function to check if the params match, excluding "page"
@@ -32,6 +32,7 @@ export default function NavLink({ navItem, children, activeClassName, className 
   return (
     <Link
       className={cn(className, doesPathnamesMatch() && activeClassName)}
+      onClick={onClick}
       href={
         navItem.params
           ? {

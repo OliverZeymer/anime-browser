@@ -39,7 +39,7 @@ export default function SubscribeModalButton({ className }) {
   });
   return (
     <Dialog>
-      <Button asChild className={cn('text-lg p-6', className)}>
+      <Button asChild className={cn('text-lg lg:p-6', className)}>
         <DialogTrigger className='flex gap-3 items-center '>
           <Mail size={22} />
           Subscribe

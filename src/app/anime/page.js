@@ -6,21 +6,6 @@ import { getFileterdAnime } from '@/utils/api';
 import AnimeDynamicHeading from '@/components/AnimeDynamicHeading';
 
 export default async function AnimePage({ searchParams }) {
-  // const calculateLimit = () => {
-  //   if (typeof window !== 'undefined') {
-  //     const windowWidth = window.innerWidth;
-
-  //     if (windowWidth >= 3248) return 20;
-  //     if (windowWidth > 2923) return 20;
-  //     if (windowWidth <= 2923 && windowWidth > 2599) return 24;
-  //     if (windowWidth <= 2599 && windowWidth > 2275) return 21;
-  //     if (windowWidth <= 2275 && windowWidth > 1951) return 24;
-  //     if (windowWidth <= 1951 && windowWidth > 1627) return 25;
-  //     if (windowWidth <= 1627 && windowWidth > 1303) return 24;
-  //   }
-
-  //   return defaultLimit;
-  // };
   const limit = 24;
 
   const { page = '1', order = 'members', status = 'all', search = '', type = 'all', genres = '' } = searchParams;

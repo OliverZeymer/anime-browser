@@ -5,7 +5,7 @@ import { Play, Star } from 'lucide-react';
 export default function AnimeStats({ anime }) {
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   return (
-    <ul className='flex flex-col gap-2 max-w-[300px]'>
+    <ul className='flex flex-col gap-2 w-full items-center md:items-start mt-2 md:max-w-[300px]'>
       <h3 className='text-xl font-semibold'>{anime.title_english ? anime.title_english : anime.title}</h3>
       {anime.genres && (
         <li className='flex pb-1'>

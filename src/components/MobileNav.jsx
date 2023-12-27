@@ -5,9 +5,22 @@ import Link from 'next/link';
 import { Navigation, Socials } from '@/utils/constants';
 import { Fade as Hamburger } from 'hamburger-react';
 import NavLink from './NavLink';
+import SignUpModalButton from './SignUpModalButton';
+import Image from 'next/image';
+import { Search, Settings } from 'lucide-react';
+import { useContext } from 'react';
+import AuthContext from '@/contexts/AuthContext';
+import UserDropdown from './UserDropdown';
+import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Skeleton } from '@/components/ui/skeleton';
+import ThemeToggle from './ThemeToggle';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
 
 export default function MobileNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { auth, cookieCheckDone } = useContext(AuthContext);
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (!event.target.closest('.mobile-menu')) {
@@ -34,15 +47,43 @@ export default function MobileNav() {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}>
-          <h1 className='gradient_text text-2xl sm:text-3xl font-bold font-kurale text-primary'>Anime Browser</h1>
+          <Image
+            src='/images/logo.png'
+            alt='Anime Browser Logo'
+            width={128}
+            height={128}
+            className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square'
+          />
         </Link>
       </div>
       <div className='flex items-center justify-end gap-4'>
-        {Socials.map((social) => (
-          <Link target='_blank' key={social.label} href={social.href} className='hidden sm:block p-2 bg-dark/10 transition-colors hover:bg-dark/20 rounded-full backdrop-blur shadow'>
-            <social.icon />
-          </Link>
-        ))}
+        {cookieCheckDone ? (
+          <div className='w-12 h-12'>
+            {!auth ? (
+              <SignUpModalButton />
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger className='outline-none'>
+                  {auth?.profilePicture ? (
+                    <Image
+                      width={128}
+                      height={128}
+                      className={auth?.profilePicture ? 'rounded-full w-12 h-12 object-cover' : 'rounded-full border border-gray-400 w-12 h-12 object-cover'}
+                      src={auth?.profilePicture}
+                      alt='user-profile'
+                    />
+                  ) : (
+                    <div className='rounded-full border border-gray-600 w-12 h-12' />
+                  )}
+                </DropdownMenuTrigger>
+                <UserDropdown />
+              </DropdownMenu>
+            )}
+          </div>
+        ) : (
+          <Skeleton className='w-10 h-10 rounded-full' />
+        )}
+
         <Hamburger toggled={isMobileMenuOpen} toggle={setIsMobileMenuOpen} />
       </div>
       <AnimatePresence>
@@ -73,11 +114,15 @@ export default function MobileNav() {
                 ))}
               </ul>
               <div className='mt-auto flex w-full gap-4 justify-end my-5'>
-                {Socials.map((social) => (
-                  <Link target='_blank' key={social.name} href={social.href} className='p-2 bg-dark/10 transition-colors hover:bg-dark/20 rounded-full backdrop-blur shadow'>
-                    <social.icon />
+                <Button variant='ghost' className='p-1 h-auto'>
+                  <Search />
+                  </Button>
+                <ThemeToggle />
+                <Button variant='ghost' className='p-1 h-auto'>
+                  <Link href='/settings'>
+                    <Settings />
                   </Link>
-                ))}
+                </Button>
               </div>
             </div>
           </motion.div>

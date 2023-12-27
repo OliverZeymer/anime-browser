@@ -37,7 +37,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <div className={cn('flex items-center gap-10 ml-auto', pathname === '/' ? 'text-white' : 'text-primary')}>
+        <div className={cn('flex items-center gap-6 ml-auto', pathname === '/' ? 'text-white' : 'text-primary')}>
           <Button variant='ghost' className='p-1 h-auto'>
             <Search />
           </Button>

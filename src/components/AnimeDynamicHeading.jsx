@@ -14,9 +14,25 @@ export default function AnimeDynamicHeading({data, order, status, search, type, 
       console.log(type);
 
       let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
-      let statusString = status && status !== 'all' ? `${status}` : '';
+      let statusString =  '';
       let typeString = '';
 
+      if (status) {
+        switch (status) {
+          case 'airing':
+            statusString = 'ongoing';
+            break;
+          case 'upcoming':
+            statusString = 'upcoming';
+            break;
+          case 'complete':
+            statusString = 'finished';
+            break;
+          default:
+            statusString = '';
+        }
+      }
+      
       if (type) {
         switch (type) {
           case 'tv':

@@ -6,11 +6,13 @@ module.exports = {
     container: {
       center: true,
       padding: '2rem',
+    },
+
+    extend: {
       screens: {
+        xs: '450px',
         '2xl': '1400px',
       },
-    },
-    extend: {
       fontFamily: {
         sans: ['var(--font-gilroy)'],
       },

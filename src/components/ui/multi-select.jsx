@@ -32,7 +32,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
                 {selected.map((item) => (
                   <Badge variant='secondary' key={item.label} className='mr-1 px-1.5 bg-primary text-primary-foreground hover:bg-white capitalize' onClick={() => handleUnselect(item)}>
                     {item.label}
-                    <button
+                    <div
                       className='ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2'
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
@@ -45,7 +45,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
                         handleUnselect(item);
                       }}>
                       <X className='h-3 w-3 text-primary-foreground' />
-                    </button>
+                    </div>
                   </Badge>
                 ))}
               </div>

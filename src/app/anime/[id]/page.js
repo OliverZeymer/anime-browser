@@ -1,9 +1,11 @@
 import AnimeBanner from '@/components/AnimeBanner';
 import AnimeCharacters from '@/components/AnimeCharacters';
+import AnimeRecommendations from '@/components/AnimeRecommendations';
+import AnimeReviewList from '@/components/AnimeReviewList';
 import AnimeStats from '@/components/AnimeStats';
 import AnimeSynopsis from '@/components/AnimeSynopsis';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAnimeById } from '@/utils/api';
+import { getAnimeById, getAnimeRecommendations } from '@/utils/api';
 import Image from 'next/image';
 
 export default async function AnimePage({ params }) {
@@ -14,9 +16,15 @@ export default async function AnimePage({ params }) {
   return (
     <section>
       <AnimeBanner anime={anime} />
-      <div className='mt-12 px-4 flex flex-col sm:flex-row gap-6'>
-        <aside className='flex flex-col gap-2 w-full items-center sm:items-start sm:min-w-[300px] sm:w-[300px]'>
-          <Image src={anime.images.webp.large_image_url} alt={anime.title_english} width={300} height={450} className='w-[300px] h-[450px] rounded-2xl relative object-cover' />
+      <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
+        <aside className='flex flex-col gap-2 w-full items-center md:items-start md:min-w-[300px] md:w-[300px]'>
+          <Image
+            src={anime.images.webp.large_image_url}
+            alt={anime.title_english}
+            width={450}
+            height={700}
+            className='w-full xs:w-3/4 sm:w-1/2 md:w-[300px] md:h-[450px] rounded-2xl relative object-cover'
+          />
           <AnimeStats anime={anime} />
         </aside>
         <div className='flex flex-col gap-6 w-fit'>
@@ -30,10 +38,10 @@ export default async function AnimePage({ params }) {
           <TabsTrigger value='reviews'>Reviews</TabsTrigger>
         </TabsList>
         <TabsContent value='recommended'>
-          <div>Recommended</div>
+          <AnimeRecommendations id={params.id} />
         </TabsContent>
         <TabsContent value='reviews'>
-          <div>Reviews</div>
+          <AnimeReviewList id={params.id} />
         </TabsContent>
       </Tabs>
     </section>

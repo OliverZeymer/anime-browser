@@ -43,7 +43,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
           }}
           value={searchValue}
           placeholder='Search'
-          className='rounded-none text-base h-10 w-96 pl-12 bg-white dark:bg-black/30 rounded-l-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
+          className='rounded-none text-base h-10 w-full xs:w-96 pl-12 bg-white dark:bg-black/30 rounded-l-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
         />
         {searchValue && (
           <Button
