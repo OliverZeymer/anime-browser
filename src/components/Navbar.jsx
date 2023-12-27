@@ -25,7 +25,7 @@ export default function Navbar() {
         <Link href='/'>
           <Image src='/images/logo.png' alt="Anime Browser Logo" width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
-        <ul className='flex gap-6 ml-16'>
+        <ul className='flex gap-6 ml-12'>
           {Navigation.map((navItem) => (
             <li key={navItem.name}>
               <NavLink

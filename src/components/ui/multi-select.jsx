@@ -8,8 +8,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Badge } from '@/components/ui/badge';
 
 function MultiSelect({ options, selected, onChange, className, ...props }) {
-  console.log(selected);
+
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('');
   const containerRef = useRef(null);
 
   const handleUnselect = (item) => {
@@ -63,6 +64,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
               {options.map((option) => (
                 <CommandItem
                   key={option.value}
+                  value={option.label}
                   className='cursor-pointer capitalize'
                   onSelect={() => {
                     onChange(selected.includes(option) ? selected.filter((item) => item !== option) : [...selected, option]);

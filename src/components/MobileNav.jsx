@@ -39,7 +39,7 @@ export default function MobileNav() {
       </div>
       <div className='flex items-center justify-end gap-4'>
         {Socials.map((social) => (
-          <Link target='_blank' key={social.name} href={social.href} className='hidden sm:block p-2 bg-dark/10 transition-colors hover:bg-dark/20 rounded-full backdrop-blur shadow'>
+          <Link target='_blank' key={social.label} href={social.href} className='hidden sm:block p-2 bg-dark/10 transition-colors hover:bg-dark/20 rounded-full backdrop-blur shadow'>
             <social.icon />
           </Link>
         ))}

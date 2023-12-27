@@ -42,7 +42,7 @@ export const Navigation = [
 ];
 export const Socials = [
   {
-    label: Twitter,
+    label: 'twitter',
     href: 'https://www.twitter.com',
     icon: Twitter,
   },

@@ -20,6 +20,10 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
       current.set('search', searchValue);
     }
 
+    if (current.has('page')) {
+      current.delete('page');
+    }
+
     const param = current.toString();
     const query = param ? `?${param}` : '';
 
