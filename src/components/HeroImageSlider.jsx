@@ -14,7 +14,13 @@ export default function HeroImageSlider() {
           <div
             className='absolute inset-0 transition-opacity duration-1000'
             style={{
-              backgroundImage: `url(/images/${image})`,
+              backgroundImage: `
+              linear-gradient(
+              to bottom,
+            rgba(0, 0, 0, 0.8) 0%, /* Dark color at the top */
+            rgba(51, 0, 99, 0.5) 100% /* Purple color at the bottom */
+              ),
+              url(/images/${image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
