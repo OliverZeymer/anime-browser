@@ -54,53 +54,53 @@ export default function AnimePage({ searchParams }) {
     }
   );
 
-  useEffect(() => {
-    function getGenreLabel(genre) {
-      //find the genre with the same value as the genre param from animegenres array
-      const genreLabel = animeGenres.find((animeGenre) => animeGenre.value == genre);
-      return genreLabel.label;
-    }
-    function getHeading() {
-      const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
-      const searchString = search ? `matching "${search}"` : '';
-      console.log(type);
+  // useEffect(() => {
+  //   function getGenreLabel(genre) {
+  //     //find the genre with the same value as the genre param from animegenres array
+  //     const genreLabel = animeGenres.find((animeGenre) => animeGenre.value == genre);
+  //     return genreLabel.label;
+  //   }
+  //   function getHeading() {
+  //     const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
+  //     const searchString = search ? `matching "${search}"` : '';
+  //     console.log(type);
 
-      // add the word and if there are more than one genre
-      let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
-      let statusString = status && status !== 'all' ? `${status}` : '';
-      let typeString = '';
+  //     // add the word and if there are more than one genre
+  //     let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
+  //     let statusString = status && status !== 'all' ? `${status}` : '';
+  //     let typeString = '';
 
-      if (type) {
-        switch (type) {
-          case 'tv':
-          case 'all':
-          case '':
-            typeString = 'Anime';
-            break;
-          case 'ova':
-            typeString = 'OVAs';
-            break;
-          case 'ona':
-            typeString = 'ONAs';
-            break;
-          case 'movie':
-            typeString = 'Movies';
-            break;
-          default:
-            //make the first letter uppercase
-            typeString = type.charAt(0).toUpperCase() + type.slice(1) + 's';
-        }
-      }
+  //     if (type) {
+  //       switch (type) {
+  //         case 'tv':
+  //         case 'all':
+  //         case '':
+  //           typeString = 'Anime';
+  //           break;
+  //         case 'ova':
+  //           typeString = 'OVAs';
+  //           break;
+  //         case 'ona':
+  //           typeString = 'ONAs';
+  //           break;
+  //         case 'movie':
+  //           typeString = 'Movies';
+  //           break;
+  //         default:
+  //           //make the first letter uppercase
+  //           typeString = type.charAt(0).toUpperCase() + type.slice(1) + 's';
+  //       }
+  //     }
 
-      return `Browsing ${amountOfResults} ${statusString}  ${genresString} ${typeString} ${searchString}`;
-    }
+  //     return `Browsing ${amountOfResults} ${statusString}  ${genresString} ${typeString} ${searchString}`;
+  //   }
 
-    setHeading(getHeading());
-  }, [searchParams, data]);
+  //   setHeading(getHeading());
+  // }, [searchParams, data]);
 
   return (
     <div className='px-4 pt-32'>
-      <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6 text-center'>{heading}</h1>
+      <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6 text-center'>Browse Anime</h1>
       <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
       <AnimeCardList data={data?.data} isLoading={isLoading} error={error} refetch={refetch} limit={limit} />
       <PaginationControls pagination={data?.pagination} />
