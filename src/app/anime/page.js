@@ -48,49 +48,49 @@ export default function AnimePage({ searchParams }) {
     return data;
   });
 
-  function getGenreLabel(genre) {
-    //find the genre with the same value as the genre param from animegenres array
-    const genreLabel = animeGenres.find((animeGenre) => animeGenre.value == genre);
-    return genreLabel.label;
-  }
-  function getHeading() {
-    const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
-    const searchString = search ? `matching "${search}"` : '';
-    console.log(type);
+  useEffect(() => {
+    function getGenreLabel(genre) {
+      //find the genre with the same value as the genre param from animegenres array
+      const genreLabel = animeGenres.find((animeGenre) => animeGenre.value == genre);
+      return genreLabel.label;
+    }
+    function getHeading() {
+      const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
+      const searchString = search ? `matching "${search}"` : '';
+      console.log(type);
 
-    // add the word and if there are more than one genre 
-    let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
-    let statusString = status && status !== 'all' ? `${status}` : '';
-    let typeString = '';
+      // add the word and if there are more than one genre
+      let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
+      let statusString = status && status !== 'all' ? `${status}` : '';
+      let typeString = '';
 
-    if (type) {
-      switch (type) {
-        case 'tv':
-        case 'all':
-        case '':
-          typeString = 'Anime';
-          break;
-        case 'ova':
-          typeString = 'OVAs';
-          break;
-        case 'ona':
-          typeString = 'ONAs';
-          break;
-        case 'movie':
-          typeString = 'Movies';
-          break;
-        default:
-          //make the first letter uppercase
-          typeString = type.charAt(0).toUpperCase() + type.slice(1) + 's';
+      if (type) {
+        switch (type) {
+          case 'tv':
+          case 'all':
+          case '':
+            typeString = 'Anime';
+            break;
+          case 'ova':
+            typeString = 'OVAs';
+            break;
+          case 'ona':
+            typeString = 'ONAs';
+            break;
+          case 'movie':
+            typeString = 'Movies';
+            break;
+          default:
+            //make the first letter uppercase
+            typeString = type.charAt(0).toUpperCase() + type.slice(1) + 's';
+        }
       }
+
+      return `Browsing ${amountOfResults} ${statusString}  ${genresString} ${typeString} ${searchString}`;
     }
 
-    return `Browsing ${amountOfResults} ${statusString}  ${genresString} ${typeString} ${searchString}`;
-  }
-
-  useEffect(() => {
     setHeading(getHeading());
-  }, [searchParams, data, getHeading]);
+  }, [searchParams, data]);
 
   return (
     <div className='px-4 pt-32'>
