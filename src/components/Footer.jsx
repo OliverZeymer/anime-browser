@@ -18,7 +18,7 @@ export default function Footer() {
             <p className='font-normal text-sm text-muted-foreground'>Copyright &copy; 2023 - 2023 Anime Browser. All rights reserved.</p>
             <div className='flex gap-4'>
               {Socials.map((social) => (
-                <social.icon className='w-6 h-6 object-contain cursor-pointer' />
+                <social.icon key={social.label} className='w-6 h-6 object-contain cursor-pointer' />
               ))}
             </div>
           </div>

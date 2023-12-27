@@ -12,8 +12,8 @@ export default function AnimeStats({ anime }) {
           <div className='flex items-center gap-2 justify-center'>
             <div className='font-semibold flex-wrap flex gap-1 items-center'>
               {anime.genres.map((genre) => (
-                <Link className='inline-flex items-center mt-2' href={`/anime?genres=${genre.mal_id}`}>
-                  <Badge key={genre.mal_id}>{genre.name}</Badge>
+                <Link key={genre.mal_id} className='inline-flex items-center mt-2' href={`/anime?genres=${genre.mal_id}`}>
+                  <Badge>{genre.name}</Badge>
                 </Link>
               ))}
             </div>
@@ -71,7 +71,7 @@ export default function AnimeStats({ anime }) {
             <div className='font-semibold flex gap-1 items-center justify-center'>
               <div className={`font-semibold flex gap-1 items-center justify-center`}>
                 {anime.studios.map((studio, index) => (
-                  <Link href={`/studio/${studio.mal_id}`}>
+                  <Link key={studio.mal_id} href={`/studio/${studio.mal_id}`}>
                     {studio.name}
                     {anime.studios.length !== index + 1 && ','}
                   </Link>
