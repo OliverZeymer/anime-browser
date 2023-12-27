@@ -43,7 +43,7 @@ export default function AnimePage({ searchParams }) {
   const API_URL = `${BASE_API}/anime?${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
 
   const { data, isLoading, error, refetch } = useQuery(
-    ['anime', API_URL],
+    ['anime', page, order, status, search, type, genres],
     async () => {
       const response = await fetch(API_URL, { next: { revalidate: 3600 } });
       const data = await response.json();
