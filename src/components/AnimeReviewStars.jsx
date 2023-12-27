@@ -10,7 +10,7 @@ export default function AnimeReviewStars({ rating }) {
       {[...Array(10)].map((_, i) => {
         const ratingValue = i + 0;
         console.log(ratingValue)
-        return <Star fill={ratingValue < rating ? '#5A2E98' : 'none'} color={ratingValue < rating ? '#5A2E98' : '#737373'} />;
+        return <Star key={i +1} fill={ratingValue < rating ? '#5A2E98' : 'none'} color={ratingValue < rating ? '#5A2E98' : '#737373'} />;
       })}
     </div>
     <p className='text-neutral-400 text-sm'>{rating}/10</p>
