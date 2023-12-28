@@ -16,7 +16,7 @@ export default function AnimeReview({ review }) {
           <div className='flex flex-col justify-between'>
             <p className='text-lg'>{review.user.username}</p>
             {review.tags.map((tag) => (
-              <Badge key={tag} className='text-sm'>
+              <Badge key={tag} className='text-sm w-fit'>
                 {tag}
               </Badge>
             ))}
