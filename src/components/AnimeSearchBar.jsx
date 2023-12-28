@@ -33,7 +33,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
   return (
     <form onSubmit={onSubmit} className='bg-primary-foreground mx-auto w-fit flex items-center border border-neutral-700 rounded-full'>
       <div className='relative'>
-        <Button ariaLabel='search' variant='ghost' type='submit' className='absolute left-3 p-1 h-fit top-1/2 -translate-y-1/2'>
+        <Button aria-label='search' variant='ghost' type='submit' className='absolute left-3 p-1 h-fit top-1/2 -translate-y-1/2'>
           <SearchIcon size={20} />
         </Button>
         <Input
@@ -47,7 +47,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
         />
         {searchValue && (
           <Button
-            ariaLabel='reset search'
+            aria-label='reset search'
             variant='ghost'
             type='button'
             onClick={() => {

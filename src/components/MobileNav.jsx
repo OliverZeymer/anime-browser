@@ -106,11 +106,11 @@ export default function MobileNav() {
                 ))}
               </ul>
               <div className='mt-auto flex w-full gap-4 justify-end my-5'>
-                <Button ariaLabel='open search' variant='ghost' className='p-1 h-auto'>
+                <Button aria-label='open search' variant='ghost' className='p-1 h-auto'>
                   <Search />
                 </Button>
                 <ThemeToggle />
-                <Button ariaLabel='go to settings' variant='ghost' className='p-1 h-auto'>
+                <Button aria-label='go to settings' variant='ghost' className='p-1 h-auto'>
                   <Link href='/settings'>
                     <Settings />
                   </Link>

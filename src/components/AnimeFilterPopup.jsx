@@ -61,7 +61,7 @@ export default function AnimeFilterPopup({ order, status, type, genres, open, se
         ))}
         <AnimeGenreSelect genresParam={genres} />
         <Button
-          ariaLabel='apply filters'
+          aria-label='apply filters'
           onClick={() => {
             setOpen(false);
           }}
@@ -71,7 +71,7 @@ export default function AnimeFilterPopup({ order, status, type, genres, open, se
           Apply
         </Button>
         <Button
-          ariaLabel='reset filters'
+          aria-label='reset filters'
           onClick={() => {
             router.push('/anime');
             setOpen(false);

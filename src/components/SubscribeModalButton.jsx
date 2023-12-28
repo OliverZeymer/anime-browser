@@ -39,7 +39,7 @@ export default function SubscribeModalButton({ className }) {
   });
   return (
     <Dialog>
-      <Button ariaLabel='open subscribe modal' asChild className={cn('text-lg lg:p-6', className)}>
+      <Button aria-label='open subscribe modal' asChild className={cn('text-lg lg:p-6', className)}>
         <DialogTrigger className='flex gap-3 items-center '>
           <Mail size={22} />
           Subscribe
@@ -70,7 +70,7 @@ export default function SubscribeModalButton({ className }) {
               )}
             />
 
-            <Button ariaLabel='subscribe' type='submit'>
+            <Button aria-label='subscribe' type='submit'>
               Subscribe
             </Button>
           </form>

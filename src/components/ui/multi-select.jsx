@@ -22,7 +22,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
       <Popover modal={true} open={open} onOpenChange={setOpen} {...props}>
         <PopoverTrigger asChild>
           <Button
-            ariaLabel='open combobox'
+            aria-label='open combobox'
             variant='outline'
             role='combobox'
             aria-expanded={open}

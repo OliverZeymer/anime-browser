@@ -8,7 +8,7 @@ export default function SignUpModalButton() {
   const pathname = usePathname();
   return (
     <Dialog>
-      <Button ariaLabel='open sign up modal' asChild>
+      <Button aria-label='open sign up modal' asChild>
         <DialogTrigger className={pathname === '/' && 'text-black bg-white'}>Sign In</DialogTrigger>
       </Button>
       <DialogContent className='w-fit max-w-md'>

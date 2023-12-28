@@ -153,7 +153,7 @@ const CarouselPrevious = React.forwardRef(({ className, variant = "outline", siz
 
   return (
     <Button
-      ariaLabel='previous slide'
+      aria-label='previous slide'
       ref={ref}
       variant={variant}
       size={size}
@@ -173,7 +173,7 @@ const CarouselNext = React.forwardRef(({ className, variant = "outline", size = 
 
   return (
     <Button
-      ariaLabel='next slide'
+      aria-label='next slide'
       ref={ref}
       variant={variant}
       size={size}

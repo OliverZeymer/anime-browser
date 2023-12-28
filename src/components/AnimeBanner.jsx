@@ -10,7 +10,7 @@ export default function AnimeBanner({ anime }) {
         <h2 className='text-lg text-center md:text-xl lg:text-2xl text-white z-10'>{anime?.title_japanese}</h2>
       </div>
       <div className='flex justify-center items-center gap-6 z-10'>
-        <Button ariaLabel='bookmark' className='bg-white text-black hover:bg-white/90'>
+        <Button aria-label='bookmark' className='bg-white text-black hover:bg-white/90'>
           <Bookmark size={20} />
           <span className='ml-2'>Add to list</span>
         </Button>

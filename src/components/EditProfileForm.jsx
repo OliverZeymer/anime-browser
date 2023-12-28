@@ -84,7 +84,7 @@ export default function EditProfileForm({ data, refetch }) {
         <Textarea placeholder='Description' type='description' name='description' id='description' defaultValue={data?.user?.description} />
       </div>
 
-      <Button ariaLabel='apply changes' className='w-fit mx-auto mt-6' type='submit'>
+      <Button aria-label='apply changes' className='w-fit mx-auto mt-6' type='submit'>
         {isLoading ? <Loader form /> : 'Apply Changes'}
       </Button>
     </Form>

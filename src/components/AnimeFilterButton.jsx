@@ -24,7 +24,7 @@ export default function AnimeFilterButton({ order, status, type, genres }) {
   }, [paramsWithoutPage]);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Button ariaLabel='filter' asChild variant='ghost' type='button' className='pl-3 pr-4 py-2 h-auto border-l border-neutral-700 rounded-r-full'>
+      <Button aria-label='filter' asChild variant='ghost' type='button' className='pl-3 pr-4 py-2 h-auto border-l border-neutral-700 rounded-r-full'>
         <DialogTrigger>
           <Sliders size={24} />
         </DialogTrigger>

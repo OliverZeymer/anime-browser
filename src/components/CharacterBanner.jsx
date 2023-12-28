@@ -16,7 +16,7 @@ export default function CharacterBanner({ character }) {
         <h2 className='text-2xl text-white z-10'>{character.name_kanji}</h2>
       </div>
       <div className='flex justify-center items-center gap-6 z-10'>
-        <Button ariaLabel='favorite this character' className='bg-white text-black hover:bg-white/90'>
+        <Button aria-label='favorite this character' className='bg-white text-black hover:bg-white/90'>
           <Star size={24} />
           <span className='ml-2'>Favorite</span>
         </Button>

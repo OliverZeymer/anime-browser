@@ -12,7 +12,7 @@ export default function Error() {
       </h1>
       <img src='https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/madara-error_vogork.png' />
       <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.15] mt-6 text-center'>Page not found</h2>
-      <Button ariaLabel="back to home" onClick={() => router.push('/')}>Back to home</Button>
+      <Button aria-label="back to home" onClick={() => router.push('/')}>Back to home</Button>
     </section>
   );
 }
