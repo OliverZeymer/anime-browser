@@ -16,7 +16,7 @@ export default function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='outline-none ring-0 border-none' asChild>
-        <Button variant='ghost' className={cn('px-0 w-fit h-fit p-1', pathname === '/' ? 'text-white' : 'text-primary')} size='icon'>
+        <Button ariaLabel='open theme toggler' variant='ghost' className={cn('px-0 w-fit h-fit p-1', pathname === '/' ? 'text-white' : 'text-primary')} size='icon'>
           <Sun className='h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
           <Moon className='absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
           <span className='sr-only'>Toggle theme</span>

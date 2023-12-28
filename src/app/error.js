@@ -10,7 +10,9 @@ export default function Error({ error, reset }) {
       <h1 className='text-6xl sm:text-7xl lg:text-8xl font-bold leading-[1.15] text-center'>{error.message}</h1>
       <img src='https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/madara-error_vogork.png' />
       <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.15] mt-6 text-center'>Something went wrong</h2>
-      <Button onClick={() => router.back()}>Try again</Button>
+      <Button ariaLabel='go back' onClick={() => router.back()}>
+        Try again
+      </Button>
     </section>
   );
 }

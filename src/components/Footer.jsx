@@ -12,8 +12,8 @@ export default function Footer() {
         <div className='flex flex-col'>
           <div className='mb-12 bg-muted-foreground h-[2px]' />
           <div className='flex items-center justify-between flex-wrap gap-4'>
-            <Link href="/" className='flex gap-2 items-center'>
-              <img className='w-8 h-8 object-contain' src='/images/logo.png' />
+            <Link href='/' className='flex gap-2 items-center'>
+              <img className='w-8 h-8 object-contain' src='/images/logo.png' alt='Anime Browser Logo' />
               <h4 className='font-extrabold text-2xl'>Anime Browser</h4>
             </Link>
             <p className='font-normal text-sm text-muted-foreground'>Copyright &copy; 2023 - 2023 Anime Browser. All rights reserved.</p>

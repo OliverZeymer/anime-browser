@@ -26,7 +26,7 @@ export default function AnimeReview({ review }) {
       </div>
       <AnimeReviewText review={review.review} showMore={showMore} setShowMore={setShowMore} />
       {review.review.trim().length > 1000 && (
-        <Button className='w-fit mx-auto' variant='secondary' onClick={() => setShowMore(!showMore)}>
+        <Button ariaLabel='show more' className='w-fit mx-auto' variant='secondary' onClick={() => setShowMore(!showMore)}>
           {showMore ? (
             <>
               <span>Show Less</span>

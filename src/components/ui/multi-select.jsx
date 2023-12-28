@@ -22,6 +22,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
       <Popover modal={true} open={open} onOpenChange={setOpen} {...props}>
         <PopoverTrigger asChild>
           <Button
+            ariaLabel='open combobox'
             variant='outline'
             role='combobox'
             aria-expanded={open}
@@ -56,8 +57,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
           </Button>
         </PopoverTrigger>
         <PopoverContent className='w-[200px] p-0' container={containerRef.current}>
-          <Command className={cn(className, 'custom-scrollbar')
-          }>
+          <Command className={cn(className, 'custom-scrollbar')}>
             <CommandInput placeholder='Search ...' />
             <CommandEmpty>No item found.</CommandEmpty>
             <CommandGroup className='max-h-64 overflow-y-auto'>

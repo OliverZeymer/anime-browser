@@ -47,11 +47,7 @@ export default function MobileNav() {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}>
-          <img
-            src='/images/logo.png'
-            alt='Anime Browser Logo'
-            className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square'
-          />
+          <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
       </div>
       <div className='flex items-center justify-end gap-4'>
@@ -110,11 +106,11 @@ export default function MobileNav() {
                 ))}
               </ul>
               <div className='mt-auto flex w-full gap-4 justify-end my-5'>
-                <Button variant='ghost' className='p-1 h-auto'>
+                <Button ariaLabel='open search' variant='ghost' className='p-1 h-auto'>
                   <Search />
-                  </Button>
+                </Button>
                 <ThemeToggle />
-                <Button variant='ghost' className='p-1 h-auto'>
+                <Button ariaLabel='go to settings' variant='ghost' className='p-1 h-auto'>
                   <Link href='/settings'>
                     <Settings />
                   </Link>

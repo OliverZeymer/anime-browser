@@ -17,7 +17,9 @@ export default function SignUpContainer() {
         </p>
       </div>
       {isSignUp ? <SignUpForm /> : <SignInForm />}
-      <Button onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}</Button>
+      <Button ariaLabel={isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"} onClick={() => setIsSignUp(!isSignUp)}>
+        {isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
+      </Button>
       <p className='px-8 text-center text-sm text-muted-foreground'>
         By clicking continue, you agree to our{' '}
         <Link href='/terms' className='underline underline-offset-4 hover:text-primary'>

@@ -23,7 +23,7 @@ export default function Navbar() {
     <>
       <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-primary', pathname !== '/' && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
-          <img src='/images/logo.png' alt="Anime Browser Logo" className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
+          <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
         <ul className='flex gap-6 ml-12'>
           {Navigation.map((navItem) => (
@@ -38,11 +38,11 @@ export default function Navbar() {
           ))}
         </ul>
         <div className={cn('flex items-center gap-6 ml-auto', pathname === '/' ? 'text-white' : 'text-primary')}>
-          <Button variant='ghost' className='p-1 h-auto'>
+          <Button ariaLabel='open search' variant='ghost' className='p-1 h-auto'>
             <Search />
           </Button>
           <ThemeToggle />
-          <Button variant='ghost' className='p-1 h-auto'>
+          <Button ariaLabel='go to settings' variant='ghost' className='p-1 h-auto'>
             <Link href='/settings'>
               <Settings />
             </Link>

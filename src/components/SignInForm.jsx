@@ -62,7 +62,9 @@ export default function SignInForm({ className }) {
           />
         </div>
 
-        <Button type='submit'>{isLoading ? <Loader className='text-primary-foreground' /> : isLogin ? 'Login' : !isLogin ? 'Create Account' : 'Login'}</Button>
+        <Button ariaLabel='login' type='submit'>
+          {isLoading ? <Loader className='text-primary-foreground' /> : isLogin ? 'Login' : !isLogin ? 'Create Account' : 'Login'}
+        </Button>
       </form>
     </div>
   );

@@ -83,7 +83,9 @@ export default function SignUpForm({ className }) {
           />
         </div>
 
-        <Button type='submit'>{isLoading ? <Loader className="text-primary-foreground" /> : 'Create Account'}</Button>
+        <Button ariaLabel='create account' type='submit'>
+          {isLoading ? <Loader className='text-primary-foreground' /> : 'Create Account'}
+        </Button>
       </form>
     </div>
   );

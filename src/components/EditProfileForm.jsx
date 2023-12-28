@@ -51,7 +51,7 @@ export default function EditProfileForm({ data, refetch }) {
     }
   }
   return (
-    <Form onSubmit={handleSubmit} className="bg-">
+    <Form onSubmit={handleSubmit} className='bg-'>
       <div className='flex justify-between w-full items-center'>
         <DialogHeader className='text-2xl lg:text-3xl xl:text-4xl font-bold text-center text-white text-shadow'>Edit Profile</DialogHeader>
       </div>
@@ -84,7 +84,7 @@ export default function EditProfileForm({ data, refetch }) {
         <Textarea placeholder='Description' type='description' name='description' id='description' defaultValue={data?.user?.description} />
       </div>
 
-      <Button className='w-fit mx-auto mt-6' type='submit'>
+      <Button ariaLabel='apply changes' className='w-fit mx-auto mt-6' type='submit'>
         {isLoading ? <Loader form /> : 'Apply Changes'}
       </Button>
     </Form>
