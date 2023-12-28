@@ -6,7 +6,7 @@ import { Navigation, Socials } from '@/utils/constants';
 import { Fade as Hamburger } from 'hamburger-react';
 import NavLink from './NavLink';
 import SignUpModalButton from './SignUpModalButton';
-import Image from 'next/image';
+
 import { Search, Settings } from 'lucide-react';
 import { useContext } from 'react';
 import AuthContext from '@/contexts/AuthContext';
@@ -47,11 +47,9 @@ export default function MobileNav() {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}>
-          <Image
+          <img
             src='/images/logo.png'
             alt='Anime Browser Logo'
-            width={128}
-            height={128}
             className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square'
           />
         </Link>
@@ -65,9 +63,7 @@ export default function MobileNav() {
               <DropdownMenu>
                 <DropdownMenuTrigger className='outline-none'>
                   {auth?.profilePicture ? (
-                    <Image
-                      width={128}
-                      height={128}
+                    <img
                       className={auth?.profilePicture ? 'rounded-full w-12 h-12 object-cover' : 'rounded-full border border-gray-400 w-12 h-12 object-cover'}
                       src={auth?.profilePicture}
                       alt='user-profile'

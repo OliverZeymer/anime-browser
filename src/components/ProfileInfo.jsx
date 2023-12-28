@@ -4,7 +4,7 @@ import AuthContext from '@/contexts/AuthContext';
 import { useToast } from './ui/use-toast';
 import DiscordIcon from './icons/DiscordIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import Image from 'next/image';
+
 import ProfilePictureForm from '@/components/ProfilePictureUploader';
 import EditProfileForm from '@/components/EditProfileForm';
 import { Edit, User } from 'lucide-react';
@@ -45,7 +45,7 @@ export default function ProfileInfo({ data, id, refetch }) {
             <ProfilePictureForm />
           </>
         ) : data?.user?.image ? (
-          <Image width={200} height={200} src={data?.user?.image} alt={data?.user?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
+          <img src={data?.user?.image} alt={data?.user?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
         ) : (
           <User className='w-24 h-24' />
         )}

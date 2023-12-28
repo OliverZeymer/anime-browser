@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 import { useContext } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import UserDropdown from './UserDropdown';
-import Image from 'next/image';
+
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import ThemeToggle from './ThemeToggle';
@@ -23,7 +23,7 @@ export default function Navbar() {
     <>
       <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-primary', pathname !== '/' && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
-          <Image src='/images/logo.png' alt="Anime Browser Logo" width={128} height={128} className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
+          <img src='/images/logo.png' alt="Anime Browser Logo" className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
         <ul className='flex gap-6 ml-12'>
           {Navigation.map((navItem) => (
@@ -55,9 +55,7 @@ export default function Navbar() {
                 <DropdownMenu>
                   <DropdownMenuTrigger className='outline-none'>
                     {auth?.profilePicture ? (
-                      <Image
-                        width={128}
-                        height={128}
+                      <img
                         className={auth?.profilePicture ? 'rounded-full w-10 h-10 object-cover' : 'rounded-full border border-gray-400 w-10 h-10 object-cover'}
                         src={auth?.profilePicture}
                         alt='user-profile'

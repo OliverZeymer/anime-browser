@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import axios from 'axios';
-import Image from 'next/image';
+
 import { Edit, ImageIcon } from 'lucide-react';
 import { useRef } from 'react';
 
@@ -63,11 +63,9 @@ export default function ProfilePictureForm() {
             <ImageIcon width={150} height={150} className='aspect-square p-4 cursor-pointer border-none object-cover' />
           </div>
         ) : (
-          <Image
+          <img
             src={selectedFile ? selectedFile : auth?.profilePicture}
             alt={auth?.email + ' profile avatar'}
-            width={150}
-            height={150}
             className='aspect-square cursor-pointer rounded-full border-none object-cover'
           />
         )}

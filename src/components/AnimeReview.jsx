@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { Card } from './ui/card';
-import Image from 'next/image';
 import AnimeReviewText from './AnimeReviewText';
 import { Button } from './ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -13,7 +12,7 @@ export default function AnimeReview({ review }) {
     <div key={review.mal_id} className='bg-primary-foreground p-4 rounded-2xl flex flex-col gap-2'>
       <div className='flex justify-between gap-6 flex-col sm:gap-0 sm:flex-row'>
         <div className='flex gap-2 justify-center sm:justify-start'>
-          <Image className='rounded-full aspect-square object-cover' src={review.user.images.webp.image_url} width={64} height={64} />
+          <img className='rounded-full aspect-square object-cover' src={review.user.images.webp.image_url} />
           <div className='flex flex-col justify-between'>
             <p className='text-lg'>{review.user.username}</p>
             {review.tags.map((tag) => (

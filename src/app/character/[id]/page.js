@@ -2,7 +2,7 @@ import CharacterAbout from '@/components/CharacterAbout';
 import CharacterBanner from '@/components/CharacterBanner';
 import { getAnimeCharacterById } from '@/utils/api';
 import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
+
 import ClickableImage from '@/components/ClickableImage';
 
 export default async function CharacterPage({ params }) {
