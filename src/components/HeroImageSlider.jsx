@@ -5,7 +5,12 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 export default function HeroImageSlider() {
-  const heroImages = ['black-clover.jpg', 'demon-slayer.jpg', 'csm.jpg', 'aot.webp'];
+  const heroImages = [
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/black-clover_dkrnyw.jpg',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/demon-slayer_ylfio8.jpg',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/csm_kyeav6.jpg',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
+  ];
 
   return (
     <Swiper effect='fade' modules={[Autoplay, EffectFade]} speed={1000} autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: false }}>
@@ -20,7 +25,7 @@ export default function HeroImageSlider() {
             rgba(0, 0, 0, 0.8) 0%, /* Dark color at the top */
             rgba(51, 0, 99, 0.5) 100% /* Purple color at the bottom */
               ),
-              url(/images/${image})`,
+              url(${image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',

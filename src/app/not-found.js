@@ -7,8 +7,10 @@ export default function Error() {
 
   return (
     <section className='px-4 pt-32 flex flex-col h-full grow gap-6 flex-1 items-center justify-center'>
-      <h1 className='text-6xl sm:text-7xl lg:text-8xl font-bold leading-[1.15] text-center'>404 <br /> Not Found</h1>
-      <img src='/images/madara-error.png' />
+      <h1 className='text-6xl sm:text-7xl lg:text-8xl font-bold leading-[1.15] text-center'>
+        404 <br /> Not Found
+      </h1>
+      <img src='https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/madara-error_vogork.png' />
       <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.15] mt-6 text-center'>Page not found</h2>
       <Button onClick={() => router.push('/')}>Back to home</Button>
     </section>

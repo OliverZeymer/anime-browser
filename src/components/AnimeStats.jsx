@@ -3,9 +3,9 @@ import getScoreColor from '@/utils/getScoreColor';
 import { Badge } from '@/components/ui/badge';
 import { Play, Star } from 'lucide-react';
 export default function AnimeStats({ anime }) {
-  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
   return (
-    <ul className='flex flex-col gap-2 w-full items-center md:items-start mt-2 md:max-w-[300px]'>
+    <ul className='flex bg-primary-foreground p-4 rounded-2xl flex-col gap-2 w-full items-center md:items-start mt-2 md:max-w-[300px]'>
       <h3 className='text-xl font-semibold'>{anime?.title_english ? anime?.title_english : anime?.title}</h3>
       {anime?.genres && (
         <li className='flex pb-1'>
@@ -87,7 +87,7 @@ export default function AnimeStats({ anime }) {
             <p>Aired:</p>
             <div className='font-semibold flex gap-1 items-center justify-center'>
               <div className={`font-semibold flex gap-1 items-center justify-center`}>
-                <span className='text-sm'>
+                <span>
                   {anime?.aired.from ? new Date(anime?.aired.from).toLocaleDateString('en-US', dateOptions)?.replaceAll(',', '') : 'Unknown'} -{' '}
                   {anime?.aired.to ? new Date(anime?.aired.to).toLocaleDateString('en-US', dateOptions)?.replaceAll(',', '') : 'Unknown'}
                 </span>
@@ -114,7 +114,7 @@ export default function AnimeStats({ anime }) {
             <p>Rating:</p>
             <div className='font-semibold flex gap-1 items-center justify-center'>
               <div className={`font-semibold flex gap-1 items-center justify-center`}>
-                <span>{anime?.rating}</span>
+                <span title={anime?.rating} className='line-clamp-1'>{anime?.rating}</span>
               </div>
             </div>
           </div>
