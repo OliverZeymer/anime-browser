@@ -25,7 +25,7 @@ export default async function CharacterPage({ params }) {
       <CharacterBanner character={character} />
       <div className='mt-12 px-4 flex flex-col sm:flex-row gap-6'>
         <StickyAside>
-          <ClickableImage className='rounded' src={character.images.webp.image_url} alt={character.name} width={300} height={450} />
+          <ClickableImage src={character.images.webp.image_url} alt={character.name} width={300} height={450} />
           <CharacterStats character={character} />
         </StickyAside>
         <div className='flex flex-col gap-6 w-fit'>
