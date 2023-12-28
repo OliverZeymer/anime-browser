@@ -7,42 +7,42 @@ import { useToast } from './ui/use-toast';
 
 export default function ContextProvider({ children }) {
   const [auth, setAuth] = useState(false);
-  const [cookieCheckDone, setCookieCheckDone] = useState(false);
-  const { toast } = useToast();
+  const [cookieCheckDone, setCookieCheckDone] = useState(true);
+  // const { toast } = useToast();
 
-  async function checkToken() {
-    const CookieToken = getCookie('token');
-    if (CookieToken) {
-      try {
-        const response = await axios.get('/api/auth/verifytoken', {
-          headers: {
-            Authorization: `Bearer ${CookieToken}`,
-          },
-        });
-        if (response.data.success) {
-          setAuth(response.data.user);
-        } else {
-          setCookie('token', '', { days: 0 });
-          toast({
-            description: 'You have been logged out',
-          });
-        }
-      } catch (error) {
-        console.log(error);
-        toast({
-          description: 'You have been logged out',
-        });
-        setCookie('token', '', { days: 0 });
-      } finally {
-        setCookieCheckDone(true);
-      }
-    } else {
-      setCookieCheckDone(true);
-    }
-  }
+  // async function checkToken() {
+  //   const CookieToken = getCookie('token');
+  //   if (CookieToken) {
+  //     try {
+  //       const response = await axios.get('/api/auth/verifytoken', {
+  //         headers: {
+  //           Authorization: `Bearer ${CookieToken}`,
+  //         },
+  //       });
+  //       if (response.data.success) {
+  //         setAuth(response.data.user);
+  //       } else {
+  //         setCookie('token', '', { days: 0 });
+  //         toast({
+  //           description: 'You have been logged out',
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast({
+  //         description: 'You have been logged out',
+  //       });
+  //       setCookie('token', '', { days: 0 });
+  //     } finally {
+  //       setCookieCheckDone(true);
+  //     }
+  //   } else {
+  //     setCookieCheckDone(true);
+  //   }
+  // }
 
-  useEffect(() => {
-    checkToken();
-  }, []);
+  // useEffect(() => {
+  //   checkToken();
+  // }, []);
   return <AuthContext.Provider value={{ auth, setAuth, cookieCheckDone }}>{children}</AuthContext.Provider>;
 }
