@@ -10,7 +10,7 @@ export default function HeroSection() {
       <HeroImageSlider />
       <div className='flex flex-col flex-grow flex-1 justify-center h-full px-4 lg:px-12 z-10 relative max-w-4xl mt-16 lg:mt-0'>
         <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15]'>Browse Unlimited Anime Shows, Movies, New Releases and More Content.</h1>
-        <p className='text-sm md:text-base lg:text-lg text-white mt-4 font-medium'>
+        <p className='text-sm md:text-base lg:text-lg text-white mt-4 font-medium leading-relaxed'>
           Enjoy discovering exclusive popular Anime Movies and Shows.
           <br />
           Start browsing your favorite{' '}

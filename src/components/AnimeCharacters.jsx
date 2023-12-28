@@ -1,8 +1,7 @@
 import { getAnimeCharacters } from '@/utils/api';
 import CharacterCarousel from './CharacterCarousel';
 export default async function AnimeCharacters({ id }) {
-  const charactersResponse = await getAnimeCharacters(id);
-  const charactersData = await charactersResponse.json();
+  const charactersData = await getAnimeCharacters(id);
   const characters = charactersData.data;
   const mostFavoritedCharacters = characters?.sort((a, b) => b.favorites - a.favorites);
   return (

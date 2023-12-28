@@ -1,0 +1,16 @@
+'use client';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+export default function Error({ error, reset }) {
+  const router = useRouter();
+
+  return (
+    <section className='px-4 pt-32 flex flex-col h-full grow gap-6 flex-1 items-center justify-center'>
+      <h1 className='text-6xl sm:text-7xl lg:text-8xl font-bold leading-[1.15] text-center'>{error.message}</h1>
+      <Image src='/images/madara-error.png' width={500} height={500} />
+      <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.15] mt-6 text-center'>Something went wrong</h2>
+      <Button onClick={() => router.back()}>Try again</Button>
+    </section>
+  );
+}

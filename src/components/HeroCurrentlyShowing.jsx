@@ -6,6 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function HeroCurrentlyShowing() {
   const animes = [
     {
+      name: 'Black Clover',
+      id: '34572',
+    },
+    {
       name: 'Demon Slayer',
       id: '51019',
     },
@@ -17,10 +21,6 @@ export default function HeroCurrentlyShowing() {
       name: 'Attack on Titan',
       id: '16498',
     },
-    {
-      name: 'Black Clover',
-      id: '34572',
-    }
   ];
   const [anime, setAnime] = useState(animes[0]);
 

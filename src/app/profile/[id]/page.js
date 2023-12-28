@@ -33,7 +33,7 @@ export default function ProfilePage({ params }) {
           <Loader size="lg" />
         </div>
       ) : error ? (
-        <ErrorCard message={error?.message ? error?.message : 'Der skete en fejl. Prøv igen senere eller skriv til en administrator'} />
+        <ErrorCard message={error?.message ? error?.message : 'Error'} />
       ) : (
         <ProfileInfo data={data} id={id} refetch={refetch} />
       )}

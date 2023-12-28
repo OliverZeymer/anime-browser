@@ -17,7 +17,6 @@ export default function ProfilePictureForm() {
     if (!file) {
       return;
     }
-    console.log(file);
     if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
       return alert('Please select an image file');
     }
@@ -52,8 +51,7 @@ export default function ProfilePictureForm() {
       image: selectedFile,
       email: auth.email,
     });
-    setAuth({ ...auth, profilePicture: selectedFile })
-    console.log(res);
+    setAuth({ ...auth, profilePicture: selectedFile });
   };
 
   return (

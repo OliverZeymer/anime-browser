@@ -11,7 +11,6 @@ export default function AnimeDynamicHeading({data, order, status, search, type, 
     function getHeading() {
       const amountOfResults = data?.pagination?.items?.total?.toLocaleString('en-us') || '';
       const searchString = search ? `matching "${search}"` : '';
-      console.log(type);
 
       let genresString = genres.length > 0 ? `${genres.split(',').map(getGenreLabel).join(', ')}` : '';
       let statusString =  '';

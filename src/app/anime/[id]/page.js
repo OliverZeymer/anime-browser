@@ -4,26 +4,28 @@ import AnimeRecommendations from '@/components/AnimeRecommendations';
 import AnimeReviewList from '@/components/AnimeReviewList';
 import AnimeStats from '@/components/AnimeStats';
 import AnimeSynopsis from '@/components/AnimeSynopsis';
+import AnimeTrailer from '@/components/AnimeTrailer';
 import ClickableImage from '@/components/ClickableImage';
+import StickyAside from '@/components/StickyAside';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getAnimeById } from '@/utils/api';
 
 export default async function AnimePage({ params }) {
-  const animeResponse = await getAnimeById(params.id);
-  const animeData = await animeResponse.json();
-  const anime = animeData.data;
+  const data = await getAnimeById(params.id);
+  const anime = data.data;
 
   return (
     <section>
       <AnimeBanner anime={anime} />
       <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
-        <aside className='flex flex-col gap-2 w-full items-center md:items-start md:min-w-[300px] md:w-[300px]'>
-          <ClickableImage src={anime.images.webp.large_image_url} alt={anime.title_english} width={450} height={700} />
+        <StickyAside>
+          <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} width={450} height={700} />
           <AnimeStats anime={anime} />
-        </aside>
+        </StickyAside>
         <div className='flex flex-col gap-6 w-fit'>
-          <AnimeSynopsis synopsis={anime.synopsis.replace(/\[Written by MAL Rewrite\]$/, '').trim()} />
+          <AnimeSynopsis synopsis={anime?.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '')?.trim()} />
           <AnimeCharacters id={params.id} />
+          {anime?.trailer?.embed_url && <AnimeTrailer trailer={anime?.trailer?.embed_url} />}
         </div>
       </div>
       <Tabs defaultValue='recommended' className='mt-6 px-4'>

@@ -3,8 +3,7 @@ import AnimeCardList from './AnimeCardList';
 
 export default async function AnimeRecommendations({ id }) {
   const recommendedResponse = await getAnimeRecommendations(id);
-  const recommendedData = await recommendedResponse.json();
-  const recommendations = recommendedData.data;
+  const recommendations = recommendedResponse.data;
 
   const recommendationsLimit = 10;
 

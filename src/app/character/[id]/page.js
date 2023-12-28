@@ -7,13 +7,12 @@ import ClickableImage from '@/components/ClickableImage';
 
 export default async function CharacterPage({ params }) {
   const id = params.id;
-  const characterResponse = await getAnimeCharacterById(id);
-  const characterData = await characterResponse.json();
+  const characterData = await getAnimeCharacterById(id);
   const character = characterData.data;
   return (
     <section>
       <CharacterBanner character={character} />
-      <div className='mt-12 px-4 flex flex-col sm:flex-row gap-6'>
+      <div className='mt-12 px-4  flex flex-col sm:flex-row gap-6'>
         <aside className='flex flex-col gap-2 w-full items-center sm:items-start sm:min-w-[300px] sm:w-[300px]'>
           <ClickableImage className="rounded" src={character.images.webp.image_url} alt={character.title_english} width={300} height={450} />
           

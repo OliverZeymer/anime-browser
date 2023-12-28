@@ -19,8 +19,7 @@ export default async function AnimePage({ searchParams }) {
   const typeParam = type !== 'all' ? `&type=${type}` : '';
   const genreParam = genres ? `&genres=${genres}` : '';
   const params = `${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
-  const animeResponse = await getFileterdAnime(params);
-  const data =  await animeResponse.json();
+  const data = await getFileterdAnime(params);
 
 
   return (

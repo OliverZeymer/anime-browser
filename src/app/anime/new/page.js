@@ -18,8 +18,7 @@ export default async function NewAnimePage({ searchParams }) {
   const searchParam = search ? `&q=${search}` : '';
   const typeParam = type !== 'all' ? `&type=${type}` : '';
   const genreParam = genres ? `&genres=${genres}` : '';
-  const animeResponse = await getThisSeason(page);
-  const data = await animeResponse.json();
+  const data = await getThisSeason(page);
   console.log(data.season);
   return (
     <div className='px-4 pt-32'>

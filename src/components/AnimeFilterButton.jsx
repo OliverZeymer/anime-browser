@@ -15,7 +15,6 @@ export default function AnimeFilterButton({ order, status, type, genres }) {
   const searchParams = useSearchParams();
   const currentParams = Object.fromEntries(searchParams);
   const paramsWithoutPage = Object.keys(currentParams).filter((key) => key !== 'page');
-  console.log(currentParams);
   useEffect(() => {
     if (pathname === '/anime/new' && paramsWithoutPage.length > 0) {
       const newUrl = `/anime?${searchParams.toString()}`;
