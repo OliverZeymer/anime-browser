@@ -48,7 +48,7 @@ export default function AnimeCard({ anime, role }) {
 
           {anime?.episodes && <span className='text-neutral-400 font-bold'>&#xB7;</span>}
           {role && <span className='font-medium text-xs text-neutral-400'>{role} Character</span>}
-          <span className='font-medium text-xs text-neutral-400'>{animeGenres}</span>
+          <span className='font-medium text-xs text-neutral-400 line-clamp-1'>{animeGenres}</span>
         </div>
       </div>
       <div className='absolute rounded-b-[14px] -bottom-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent' />
