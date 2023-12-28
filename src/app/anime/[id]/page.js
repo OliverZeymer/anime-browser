@@ -37,7 +37,7 @@ export default async function AnimePage({ params }) {
           <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} width={450} height={700} />
           <AnimeStats anime={anime} />
         </StickyAside>
-        <div className='flex flex-col gap-6 w-fit'>
+        <div className='flex flex-col gap-6 w-full'>
           <AnimeSynopsis synopsis={anime?.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '')?.trim()} />
           <AnimeCharacters id={params.id} />
           {anime?.trailer?.embed_url && <AnimeTrailer trailer={anime?.trailer?.embed_url} />}
