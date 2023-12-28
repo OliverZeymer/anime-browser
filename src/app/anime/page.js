@@ -4,6 +4,7 @@ import AnimeSearchBar from '@/components/AnimeSearchBar';
 
 import { getFileterdAnime } from '@/utils/api';
 import AnimeDynamicHeading from '@/components/AnimeDynamicHeading';
+import { Suspense } from 'react';
 
 export default async function AnimePage({ searchParams }) {
   const limit = 24;
@@ -25,7 +26,9 @@ export default async function AnimePage({ searchParams }) {
   return (
     <div className='px-4 pt-32'>
       <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
+      <Suspense fallback={<p>Loading...</p>}>
       <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
+      </Suspense>
       <AnimeCardList data={data?.data} limit={limit} />
       <PaginationControls pagination={data?.pagination} />
     </div>

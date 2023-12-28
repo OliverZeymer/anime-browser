@@ -38,7 +38,7 @@ export function AnimeGenreSelect() {
   }, [genres, pathname, router, searchParams]);
 
   return (
-    <div className='flex flex-col space-y-2'>
+    <div className='flex flex-col w-full space-y-2'>
       <Label>Genres</Label>
       <MultiSelect options={animeGenres} selected={genres} onChange={setGenres} />
     </div>

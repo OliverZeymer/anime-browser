@@ -55,21 +55,27 @@ export default function AnimeFilterPopup({ order, status, type, genres, open, se
       <DialogHeader>
         <h2 className='text-lg font-semibold leading-none tracking-tight'>Filters</h2>
       </DialogHeader>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='flex flex-col items-center lg:items-start lg:grid lg:grid-cols-2 gap-4'>
         {params.map((param) => (
           <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
         ))}
         <AnimeGenreSelect genresParam={genres} />
-        <Button type='button' className='w-fit'>
+        <Button
+          onClick={() => {
+            setOpen(false);
+          }}
+          type='button'
+          className='w-full lg:w-fit'>
           <Check className='mr-1' size={14} />
           Apply
         </Button>
-        <Button 
-        onClick={() => {
-          router.push('/anime');
-          setOpen(false);
-        }}
-        type='button' className='w-fit ml-auto'>
+        <Button
+          onClick={() => {
+            router.push('/anime');
+            setOpen(false);
+          }}
+          type='button'
+          className='w-full lg:w-fit lg:ml-auto'>
           <RotateCcw className='mr-1' size={14} />
           Reset
         </Button>

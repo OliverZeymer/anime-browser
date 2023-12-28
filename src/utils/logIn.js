@@ -9,7 +9,6 @@ export async function logIn(email, password, router, toast, setAuth, setCookie, 
       body: JSON.stringify({ email, password }),
     });
     const data = await response.json();
-    console.log(data);
     if (response.ok) {
       setAuth(data.user, data.token.toString());
       setCookie('token', data?.token, {
