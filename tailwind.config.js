@@ -22,6 +22,10 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        crunchyroll: '#F47521',
+        netflixBg: '#101010',
+        netflixRed: '#e50914',
+        funimation: '#41009C',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',

@@ -33,10 +33,12 @@ export default async function AnimePage({ params }) {
     <section>
       <AnimeBanner anime={anime} />
       <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
-        <StickyAside>
+        <div>
           <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} width={450} height={700} />
-          <AnimeStats anime={anime} />
-        </StickyAside>
+          <StickyAside>
+            <AnimeStats anime={anime} />
+          </StickyAside>
+        </div>
         <div className='flex flex-col gap-6 w-full'>
           <AnimeSynopsis synopsis={anime?.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '')?.trim()} />
           <AnimeCharacters id={params.id} />
