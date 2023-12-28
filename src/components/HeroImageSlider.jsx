@@ -6,9 +6,9 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 export default function HeroImageSlider() {
   const heroImages = [
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/black-clover_dkrnyw.jpg',
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/demon-slayer_ylfio8.jpg',
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/csm_kyeav6.jpg',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/black-clover_dkrnyw_qsgtuc.webp',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/demon-slayer_ylfio8_lt6nfo.webp',
+    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769746/csm_kyeav6_ph6xfi.webp',
     'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
   ];
 

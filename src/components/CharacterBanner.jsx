@@ -7,7 +7,7 @@ export default function CharacterBanner({ character }) {
     <div className='relative flex flex-col items-center gap-6 justify-center h-[300px] lg:h-[400px] mt-16 lg:mt-0'>
       <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-neutral-700 to-transparent' style={{ mixBlendMode: 'multiply' }} />
       <img
-        src={character.anime[character.anime.length - 1]?.anime?.images?.jpg?.large_image_url}
+        src={character.anime[character.anime.length - 1]?.anime?.images?.webp?.large_image_url}
         alt={character.name}
         className='absolute inset-0 select-none -z-10 blur-md object-cover w-full h-[300px] lg:h-[400px]'
       />
