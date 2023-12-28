@@ -28,7 +28,7 @@ export default async function CharacterPage({ params }) {
           <ClickableImage src={character.images.webp.image_url} alt={character.name} width={300} height={450} />
           <CharacterStats character={character} />
         </StickyAside>
-        <div className='flex flex-col gap-6 w-fit'>
+        <div className='flex flex-col gap-6 w-full'>
           <CharacterAbout about={character.about} />
           <CharacterAnimeList data={character.anime} />
           <CharacterVoices voices={character.voices} />

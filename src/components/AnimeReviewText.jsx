@@ -2,7 +2,7 @@
 import { Fragment } from 'react';
 
 export default function AnimeReviewText({ review, showMore, setShowMore }) {
-  const firstThousandCharacters = review.trim().slice(0, 1000) + '...';
+  const firstThousandCharacters = review.trim().length > 1000 ? review.trim().slice(0, 1000) + '...' : review.trim().slice(0, 1000);
   const restOfCharacters = review.trim().slice(1000);
   const displayedCharacters = showMore ? review : firstThousandCharacters;
   return (
