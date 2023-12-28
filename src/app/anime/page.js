@@ -22,15 +22,16 @@ export default async function AnimePage({ searchParams }) {
   const params = `${orderParam}${sortParam}${limitParam}${statusParam}${pageParam}${searchParam}${typeParam}${genreParam}&sfw`;
   const data = await getFileterdAnime(params);
 
-
   return (
     <div className='px-4 pt-32'>
       <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
       <Suspense fallback={<p>Loading...</p>}>
-      <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
+        <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
       </Suspense>
       <AnimeCardList data={data?.data} limit={limit} />
-      <PaginationControls pagination={data?.pagination} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <PaginationControls pagination={data?.pagination} />
+      </Suspense>
     </div>
   );
 }

@@ -17,7 +17,9 @@ export default async function NewAnimePage({ searchParams }) {
         <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
       </Suspense>
       <AnimeCardList data={data?.data} limit={limit} />
-      <PaginationControls pagination={data?.pagination} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <PaginationControls pagination={data?.pagination} />
+      </Suspense>
     </div>
   );
 }
