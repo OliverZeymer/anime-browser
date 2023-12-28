@@ -4,7 +4,10 @@ import AnimeSearchBar from '@/components/AnimeSearchBar';
 
 import { getThisSeason } from '@/utils/api';
 import { Suspense } from 'react';
-
+export const metadata = {
+  title: `Anime Browser - ${new Date().getFullYear()} Anime`,
+  description: `Browse the newest anime of ${new Date().getFullYear()} on Anime Browser. We have a huge library of over 24,000 anime and a user friendly interface. Come sign up and start bookmarking and learning about your favorite anime.`,
+};
 export default async function NewAnimePage({ searchParams }) {
   const limit = 24;
 

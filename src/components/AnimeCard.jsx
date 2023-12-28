@@ -2,7 +2,7 @@
 import { Bookmark, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 import getScoreColor from '@/utils/getScoreColor';
-export default function AnimeCard({ anime }) {
+export default function AnimeCard({ anime, role }) {
   const animeGenres = anime?.genres
     ?.slice(0, 2)
     ?.map((genre) => genre.name)
@@ -45,7 +45,9 @@ export default function AnimeCard({ anime }) {
               )}
             </div>
           )}
+
           {anime?.episodes && <span className='text-neutral-400 font-bold'>&#xB7;</span>}
+          {role && <span className='font-medium text-xs text-neutral-400'>{role} Character</span>}
           <span className='font-medium text-xs text-neutral-400'>{animeGenres}</span>
         </div>
       </div>

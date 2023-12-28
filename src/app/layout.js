@@ -48,10 +48,9 @@ export const metadata = {
   },
   description:
     'Anime Browser is the best platform to browse anime completely free. We have a huge libraro of over 24,000 anime and a user friendly interface. Come sign up and start bookmarking and learning about your favorite anime.',
-  keywords:
-    'anime, anime browser, anime browser app, anime browser website, anime browser online, anime browser free, anime browser free online, anime browser free website',
+  keywords: 'anime, anime browser, anime browser app, anime browser website, anime browser online, anime browser free, anime browser free online, anime browser free website',
 };
-
+export const revalidate = 3600;
 export default function RootLayout({ children }) {
   return (
     <html lang='en' className='h-full dark' style={{ colorScheme: 'dark' }}>
