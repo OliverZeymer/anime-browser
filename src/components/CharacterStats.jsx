@@ -6,9 +6,9 @@ export default function CharacterStats({ character }) {
       <h1 className='text-xl font-bold'>{character.name}</h1>
       <h2 className='text-lg font-bold'>{character.name_kanji}</h2>
       {character.nicknames.length > 0 && (
-        <li className='flex gap-2 items-center flex-wrap'>
+        <li className='flex flex-col md:flex-row gap-2 items-center flex-wrap'>
           <h3 className=''>Nicknames:</h3>
-          <div className='flex gap-2 flex-wrap'>
+          <div className='flex gap-2 flex-wrap flex-col items-center md:items-start md:flex-row'>
             {character.nicknames.map((nickname, index) => (
               <Badge className='hover:bg-primary' key={index}>
                 {nickname}
