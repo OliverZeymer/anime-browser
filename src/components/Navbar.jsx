@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Search, Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import MobileNav from './MobileNav';
-import { useContext } from 'react';
+import { Suspense, useContext } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import UserDropdown from './UserDropdown';
 
@@ -28,12 +28,14 @@ export default function Navbar() {
         <ul className='flex gap-6 ml-12'>
           {Navigation.map((navItem) => (
             <li key={navItem.name}>
-              <NavLink
-                navItem={navItem}
-                activeClassName={pathname === '/' ? 'text-white' : 'text-primary'}
-                className={cn('flex gap-2 font-semibold text-neutral-500 transition-colors', pathname === '/' || 'login' ? 'hover:text-white' : 'hover:text-primary')}>
-                {navItem.name}
-              </NavLink>
+              <Suspense fallback={<div>Loading...</div>}>
+                <NavLink
+                  navItem={navItem}
+                  activeClassName={pathname === '/' ? 'text-white' : 'text-primary'}
+                  className={cn('flex gap-2 font-semibold text-neutral-500 transition-colors', pathname === '/' || 'login' ? 'hover:text-white' : 'hover:text-primary')}>
+                  {navItem.name}
+                </NavLink>
+              </Suspense>
             </li>
           ))}
         </ul>

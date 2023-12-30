@@ -1,6 +1,6 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Navigation, Socials } from '@/utils/constants';
 import { Fade as Hamburger } from 'hamburger-react';
@@ -93,15 +93,17 @@ export default function MobileNav() {
               <ul className='mt-24 text-3xl flex w-full flex-col items-end justify-center gap-8'>
                 {Navigation.map((item, index) => (
                   <li key={index}>
-                    <NavLink
-                      navItem={item}
-                      className='flex items-center gap-2 justify-center'
-                      activeClassName='border-b-4 border-primary'
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                      }}>
-                      {item.name}
-                    </NavLink>
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <NavLink
+                        navItem={item}
+                        className='flex items-center gap-2 justify-center'
+                        activeClassName='border-b-4 border-primary'
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                        }}>
+                        {item.name}
+                      </NavLink>
+                    </Suspense>
                   </li>
                 ))}
               </ul>

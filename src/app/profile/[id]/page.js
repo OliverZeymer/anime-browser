@@ -30,12 +30,14 @@ export default function ProfilePage({ params }) {
     <section className='section'>
       {isLoadingProfile || isLoading ? (
         <div className='w-full flex mx-auto'>
-          <Loader size="lg" />
+          <Loader size='lg' />
         </div>
       ) : error ? (
         <ErrorCard message={error?.message ? error?.message : 'Error'} />
       ) : (
-        <ProfileInfo data={data} id={id} refetch={refetch} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProfileInfo data={data} id={id} refetch={refetch} />
+        </Suspense>
       )}
     </section>
   );

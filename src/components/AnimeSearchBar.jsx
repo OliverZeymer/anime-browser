@@ -4,7 +4,7 @@ import AnimeFilterButton from './AnimeFilterButton';
 import { Input } from './ui/input';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from './ui/button';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 export default function AnimeSearchBar({ order, status, search, type, genres }) {
   const router = useRouter();
@@ -59,7 +59,9 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
           </Button>
         )}
       </div>
-      <AnimeFilterButton order={order} status={status} type={type} genres={genres} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <AnimeFilterButton order={order} status={status} type={type} genres={genres} />
+      </Suspense>
     </form>
   );
 }

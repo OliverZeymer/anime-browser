@@ -5,6 +5,7 @@ import { AnimeGenreSelect } from './AnimeGenreSelect';
 import { Button } from './ui/button';
 import { Check, RotateCcw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 export default function AnimeFilterPopup({ order, status, type, genres, open, setOpen }) {
   const router = useRouter();
   const params = [
@@ -57,9 +58,13 @@ export default function AnimeFilterPopup({ order, status, type, genres, open, se
       </DialogHeader>
       <div className='flex flex-col items-center lg:items-start lg:grid lg:grid-cols-2 gap-4'>
         {params.map((param) => (
-          <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
+          <Suspense key={param.title} fallback={<div>Loading...</div>}>
+            <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
+          </Suspense>
         ))}
-        <AnimeGenreSelect genresParam={genres} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <AnimeGenreSelect genresParam={genres} />
+        </Suspense>
         <Button
           aria-label='apply filters'
           onClick={() => {

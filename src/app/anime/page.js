@@ -25,11 +25,11 @@ export default async function AnimePage({ searchParams }) {
   return (
     <div className='px-4 pt-32'>
       <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
       </Suspense>
       <AnimeCardList data={data?.data} limit={limit} />
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<div>Loading...</div>}>
         <PaginationControls pagination={data?.pagination} />
       </Suspense>
     </div>
