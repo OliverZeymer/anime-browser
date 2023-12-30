@@ -31,7 +31,7 @@ export default function ProfileInfo({ data, id }) {
     }
   }, [editParam, isMyProfile]);
   return (
-    <PrimaryCard className='flex items-center w-fit mx-auto space-x-4 justify-center'>
+    <PrimaryCard className='flex relative items-center w-fit mx-auto space-x-4 justify-center'>
       {isMyProfile ? (
         <>
           <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
