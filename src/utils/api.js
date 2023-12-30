@@ -13,6 +13,11 @@ export const getAnime = async () => {
   return handleResponse(response);
 };
 
+export const getProfile = async (id) => {
+  const response = await fetch(`http://localhost:3000/api/user/${id}`, { next: { revalidate: 3600 } });
+  return handleResponse(response);
+}
+
 export const getFileterdAnime = async (params) => {
   const response = await fetch(`${BASE_API}/anime?${params}`, { next: { revalidate: 3600 } });
   return handleResponse(response);

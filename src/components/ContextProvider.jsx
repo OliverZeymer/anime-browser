@@ -7,7 +7,7 @@ import { useToast } from './ui/use-toast';
 
 export default function ContextProvider({ children }) {
   const [auth, setAuth] = useState(false);
-  const [cookieCheckDone, setCookieCheckDone] = useState(true);
+  const [cookieCheckDone, setCookieCheckDone] = useState(false);
   const { toast } = useToast();
 
   async function checkToken() {
