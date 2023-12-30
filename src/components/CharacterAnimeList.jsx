@@ -1,10 +1,11 @@
 import AnimeCardList from './AnimeCardList';
+import PrimaryCard from './PrimaryCard';
 
 export default function CharacterAnimeList({ data }) {
   return (
-    <div className='bg-primary-foreground p-4 rounded-2xl'>
+    <PrimaryCard>
       <h3 className='text-xl lg:text-2xl font-bold'>Anime</h3>
       <AnimeCardList className="mt-4" isCharacter data={data} />
-    </div>
+    </PrimaryCard>
   );
 }

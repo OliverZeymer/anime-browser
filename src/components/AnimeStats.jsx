@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import getScoreColor from '@/utils/getScoreColor';
 import { Badge } from '@/components/ui/badge';
-import { Play, Share2, Star } from 'lucide-react';
-import { Button } from './ui/button';
-import CrunchyrollIcon from './icons/CrunchyrollIcon';
+import { Play, Star } from 'lucide-react';
+
 import AnimeWatchButton from './AnimeWatchButton';
+import ShareModalButton from './ShareModalButton';
+import PrimaryCard from './PrimaryCard';
 export default function AnimeStats({ anime }) {
   const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
   return (
-    <div className='bg-primary-foreground p-4 flex flex-col gap-2 w-full rounded-2xl mt-2 md:max-w-[300px] items-center md:items-start '>
+    <PrimaryCard className='flex flex-col gap-2 w-full mt-2 md:max-w-[300px] items-center md:items-start'>
       <ul className='flex flex-col gap-2 w-full items-center md:items-start'>
         <h3 className='text-xl font-semibold'>{anime?.title_english ? anime?.title_english : anime?.title}</h3>
         {anime?.genres && (
@@ -139,11 +140,7 @@ export default function AnimeStats({ anime }) {
         </>
       )}
       <div className='w-full bg-white h-[1px] rounded-full my-2' />
-      <h4 className='text-lg font-semibold mb-2'>Share</h4>
-      <Button className='w-full'>
-        <Share2 className='mr-2' size={16} />
-        Share with friends
-      </Button>
-    </div>
+      <ShareModalButton />
+    </PrimaryCard>
   );
 }

@@ -1,6 +1,53 @@
-import { Clock, Facebook, Film, Home, Instagram, MonitorPlay, Sparkles, Twitter } from 'lucide-react';
+import CrunchyrollIcon from '@/components/icons/CrunchyrollIcon';
+import FunimationIcon from '@/components/icons/FunimationIcon';
+import NetflixIcon from '@/components/icons/NetflixIcon';
+import { Clock, Film, Home, Instagram, MonitorPlay, Sparkles, Twitter } from 'lucide-react';
 
 export const BASE_API = 'https://api.jikan.moe/v4';
+
+export const heroImages = [
+  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/black-clover_dkrnyw_qsgtuc.webp',
+  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/demon-slayer_ylfio8_lt6nfo.webp',
+  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769746/csm_kyeav6_ph6xfi.webp',
+  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
+];
+
+export const featuredAnime = [
+  {
+    name: 'Black Clover',
+    id: '34572',
+  },
+  {
+    name: 'Demon Slayer',
+    id: '51019',
+  },
+  {
+    name: 'Chainsaw Man',
+    id: '44511',
+  },
+  {
+    name: 'Attack on Titan',
+    id: '16498',
+  },
+];
+
+export const platforms = [
+  {
+    name: 'Crunchyroll',
+    icon: <CrunchyrollIcon className='h-6' />,
+    classes: 'bg-crunchyroll hover:bg-crunchyroll/90',
+  },
+  {
+    name: 'Funimation',
+    icon: <FunimationIcon className='h-6' />,
+    classes: 'bg-funimation hover:bg-funimation/90 text-white',
+  },
+  {
+    name: 'Netflix',
+    icon: <NetflixIcon className='h-6' />,
+    classes: 'bg-netflixBg hover:bg-netflixBg/90 text-netflixRed',
+  },
+];
 
 export const Navigation = [
   {
@@ -34,8 +81,7 @@ export const Navigation = [
   {
     name: 'New Releases',
     href: '/anime/new',
-    params: {
-    },
+    params: {},
     icon: Sparkles,
   },
 ];

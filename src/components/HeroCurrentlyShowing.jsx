@@ -2,41 +2,24 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { featuredAnime } from '@/utils/constants';
 
 export default function HeroCurrentlyShowing() {
-  const animes = [
-    {
-      name: 'Black Clover',
-      id: '34572',
-    },
-    {
-      name: 'Demon Slayer',
-      id: '51019',
-    },
-    {
-      name: 'Chainsaw Man',
-      id: '44511',
-    },
-    {
-      name: 'Attack on Titan',
-      id: '16498',
-    },
-  ];
-  const [anime, setAnime] = useState(animes[0]);
+  const [anime, setAnime] = useState(featuredAnime[0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const index = animes.findIndex((a) => a.id === anime.id);
-      if (index === animes.length - 1) {
-        setAnime(animes[0]);
+      const index = featuredAnime.findIndex((a) => a.id === anime.id);
+      if (index === featuredAnime.length - 1) {
+        setAnime(featuredAnime[0]);
       } else {
-        setAnime(animes[index + 1]);
+        setAnime(featuredAnime[index + 1]);
       }
     }, 6000);
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
-  }, [anime, animes]);
+  }, [anime, featuredAnime]);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },

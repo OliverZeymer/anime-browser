@@ -1,8 +1,9 @@
 import ClickableImage from './ClickableImage';
+import PrimaryCard from './PrimaryCard';
 
 export default function CharacterVoices({ voices }) {
   return (
-    <div className='bg-primary-foreground p-4 rounded-2xl'>
+    <PrimaryCard>
       <h1 className='text-xl font-bold'>Voice Actors</h1>
       <ul className='mt-4 grid grid-cols-small-fit gap-2'>
         {voices.map((voice) => (
@@ -14,6 +15,6 @@ export default function CharacterVoices({ voices }) {
         ))}
         <div className={voices.length % 2 === 0 ? 'grow' : 'hidden'} />
       </ul>
-    </div>
+    </PrimaryCard>
   );
 }

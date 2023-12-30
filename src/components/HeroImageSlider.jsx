@@ -4,14 +4,8 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import { heroImages } from '@/utils/constants';
 export default function HeroImageSlider() {
-  const heroImages = [
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/black-clover_dkrnyw_qsgtuc.webp',
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/demon-slayer_ylfio8_lt6nfo.webp',
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769746/csm_kyeav6_ph6xfi.webp',
-    'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
-  ];
-
   return (
     <Swiper effect='fade' modules={[Autoplay, EffectFade]} speed={1000} autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: false }}>
       {heroImages.map((image, index) => (

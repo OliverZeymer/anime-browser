@@ -1,22 +1,11 @@
-import React from 'react';
-import NoResultsFound from './NoResultsFound';
+import CollapsedText from './CollapsedText';
+import PrimaryCard from './PrimaryCard';
 
 export default function AnimeSynopsis({ synopsis }) {
   return (
-    <div className='bg-primary-foreground p-4 rounded-2xl h-fit'>
+    <PrimaryCard>
       <h3 className='text-xl lg:text-2xl font-bold'>Synopsis</h3>
-      <p className='lg:text-lg mt-2 leading-relaxed'>
-        {synopsis ? (
-          synopsis?.split('\n').map((paragraph, index) => (
-            <React.Fragment key={index}>
-              {paragraph}
-              <br />
-            </React.Fragment>
-          ))
-        ) : (
-          <NoResultsFound />
-        )}
-      </p>
-    </div>
+      <CollapsedText text={synopsis} />
+    </PrimaryCard>
   );
 }
