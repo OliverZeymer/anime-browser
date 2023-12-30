@@ -44,8 +44,8 @@ export default function ProfileInfo({ data, id, refetch }) {
             </Dialog>
             <ProfilePictureForm />
           </>
-        ) : data?.user?.image ? (
-          <img src={data?.user?.image} alt={data?.user?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
+        ) : data?.user?.profilePicture ? (
+          <img src={data?.user?.profilePicture} alt={data?.user?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
         ) : (
           <User className='w-24 h-24' />
         )}
