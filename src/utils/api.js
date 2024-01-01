@@ -14,12 +14,12 @@ export const getAnime = async () => {
 };
 
 export const getProfile = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/user/${id}`, { next: { revalidate: 3600 } });
+  const response = await fetch(`https://animebrowser.vercel.app/api/user/${id}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
 };
 
 export const getAnimeList = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/anime-list/${id}`, { cache: 'no-store' });
+  const response = await fetch(`https://animebrowser.vercel.app/api/anime-list/${id}`, { cache: 'no-store' });
   return handleResponse(response);
 };
 
