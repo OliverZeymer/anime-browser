@@ -11,7 +11,7 @@ export default async function AnimeListPage({ params }) {
     <section className='section'>
       <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6 text-center'>
         {user?.username}
-        's Anime List
+        &apos;s Anime List
       </h1>
       <AnimeCardList data={animeListData?.animeList?.anime} />
     </section>
