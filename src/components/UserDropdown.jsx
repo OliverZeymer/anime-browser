@@ -1,21 +1,20 @@
 'use client';
-import { LogOut, User, UserCog } from 'lucide-react';
+import { ListVideo, LogOut, ShieldHalf, User, UserCog } from 'lucide-react';
 import Link from 'next/link';
 import { setCookie } from 'react-use-cookie';
 import AuthContext from '@/contexts/AuthContext';
 import { useContext } from 'react';
-import { useToast } from './ui/use-toast';
+import { toast } from 'sonner';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 
 export default function UserDropdown() {
   const { auth, setAuth } = useContext(AuthContext);
-  const { toast } = useToast();
 
   function logOut() {
     setCookie('token', '', 0);
     setAuth(false);
-    toast({
-      description: 'You have been logged out',
+    toast('You have been logged out', {
+      description: 'See you soon!',
     });
   }
   return (
@@ -34,6 +33,24 @@ export default function UserDropdown() {
           <p>Edit Profile</p>
         </Link>
       </DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <Link href={`/anime-list/${auth?._id}`} className='flex items-center gap-2 rounded-lg cursor-pointer'>
+          <ListVideo size={20} />
+          <p>Anime List</p>
+        </Link>
+      </DropdownMenuItem>
+      {auth?.role === 'admin' && (
+        <>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <Link href='/admin' className='flex items-center gap-2 rounded-lg cursor-pointer'>
+              <ShieldHalf size={20} />
+              <p>Admin Panel</p>
+            </Link>
+          </DropdownMenuItem>
+        </>
+      )}
+      <DropdownMenuSeparator />
       <DropdownMenuItem asChild>
         <button onClick={logOut} className='flex items-center w-full gap-2 rounded-lg cursor-pointer'>
           <LogOut color='red' size={20} />

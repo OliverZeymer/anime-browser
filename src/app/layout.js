@@ -4,7 +4,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import TopLevelClient from '@/components/TopLevelClient';
 import Navbar from '@/components/Navbar';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner'
 import Footer from '@/components/Footer';
 import QueryClientProviderComponent from '@/components/QueryClientProviderComponent';
 import ThemeProvider from '@/components/ThemeProvider';

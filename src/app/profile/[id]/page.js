@@ -5,8 +5,7 @@ import { getProfile } from '@/utils/api';
 
 export default async function ProfilePage({ params }) {
   const id = params.id;
-  const data = await getProfile(id);
-
+  const profileData = await getProfile(id);
   return (
     <section className='section'>
       <Suspense
@@ -15,8 +14,9 @@ export default async function ProfilePage({ params }) {
             <Loader size='lg' />
           </div>
         }>
-        <ProfileInfo data={data.data} id={id} />
+        <ProfileInfo data={profileData.data} id={id} />
       </Suspense>
     </section>
   );
 }
+export const dynamic = 'force-dynamic';

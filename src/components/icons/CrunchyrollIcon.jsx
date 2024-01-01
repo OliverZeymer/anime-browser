@@ -1,6 +1,6 @@
 export default function CrunchyrollIcon({ className }) {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio={true} className={className} fill='#fff' x='0px' y='0px' viewBox='0 0 615 116.9'>
+    <svg xmlns='http://www.w3.org/2000/svg'  className={className} fill='#fff' x='0px' y='0px' viewBox='0 0 615 116.9'>
       <path d='M601.3,90.5V21.7h12.1v68.9H601.3z' />
       <path d='M575.2,90.5V21.7h12.1v68.9H575.2z' />
       <path

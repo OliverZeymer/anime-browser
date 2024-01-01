@@ -17,6 +17,7 @@ import ThemeToggle from './ThemeToggle';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import NavbarAvatar from './NavbarAvatar';
 
 export default function MobileNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -51,30 +52,7 @@ export default function MobileNav() {
         </Link>
       </div>
       <div className='flex items-center justify-end gap-4'>
-        {cookieCheckDone ? (
-          <div>
-            {!auth ? (
-              <SignUpModalButton />
-            ) : (
-              <DropdownMenu>
-                <DropdownMenuTrigger className='outline-none'>
-                  {auth?.profilePicture ? (
-                    <img
-                      className={auth?.profilePicture ? 'rounded-full w-12 h-12 object-cover' : 'rounded-full border border-gray-400 w-12 h-12 object-cover'}
-                      src={auth?.profilePicture}
-                      alt='user-profile'
-                    />
-                  ) : (
-                    <div className='rounded-full border border-gray-600 w-12 h-12' />
-                  )}
-                </DropdownMenuTrigger>
-                <UserDropdown />
-              </DropdownMenu>
-            )}
-          </div>
-        ) : (
-          <Skeleton className='w-10 h-10 rounded-full' />
-        )}
+        <NavbarAvatar auth={auth} cookieCheckDone={cookieCheckDone} />
 
         <Hamburger toggled={isMobileMenuOpen} toggle={setIsMobileMenuOpen} />
       </div>

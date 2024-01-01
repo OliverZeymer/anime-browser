@@ -28,7 +28,10 @@ const userSchema = new Schema(
     },
     discord: {
       type: String,
-      unique: true,
+    },
+    savedAnime: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }

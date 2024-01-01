@@ -4,7 +4,10 @@
 
 @layer components {
   .section {
-    @apply pt-28 md:pt-32;
+    @apply pt-28 md:pt-32 px-4;
+  }
+  .heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6;
   }
 }
 

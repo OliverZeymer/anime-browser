@@ -15,14 +15,14 @@ export async function logIn(email, password, router, toast, setAuth, setCookie, 
         days: 1,
       });
 
-      toast({ description: 'You have successfully logged in!' });
+      toast('You have successfully logged in', { description: 'You are now logged in to your account' });
       router.push('/');
     } else {
-      toast({ title: data.message || 'Something went wrong!', variant: 'destructive' });
+      toast("Couldn't log in", { title: data.message || 'Something went wrong!' });
     }
   } catch (error) {
     console.log(error);
-    toast({ description: 'An error occurred while logging in.', variant: 'destructive' });
+    toast("Couldn't log in", { description: 'An error occurred while logging in.' });
   } finally {
     setIsLoading(false);
   }

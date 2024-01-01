@@ -9,11 +9,11 @@ import Loader from './Loader';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { useToast } from './ui/use-toast';
+import { toast } from "sonner";
 
 // This gets handled by the [...nextauth] endpoint
 export default function SignInForm({ className }) {
-  const { toast } = useToast();
+  
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const { setAuth } = useContext(AuthContext);

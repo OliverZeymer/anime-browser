@@ -5,10 +5,12 @@ import axios from 'axios';
 
 import { Edit, ImageIcon } from 'lucide-react';
 import { useRef } from 'react';
+import { Button } from './ui/button';
 
 export default function ProfilePictureForm() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imageHovered, setImageHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
   const inputRef = useRef(null);
 
@@ -47,20 +49,29 @@ export default function ProfilePictureForm() {
     if (!selectedFile.startsWith('data:image')) {
       return alert('Please select an image file');
     }
-    const res = await axios.post('/api/user/update', {
-      image: selectedFile,
-      email: auth.email,
-    });
-    setAuth({ ...auth, profilePicture: selectedFile });
+    try{
+      setIsLoading(true);
+      const res = await axios.post('/api/user/update', {
+        image: selectedFile,
+        email: auth.email,
+      });
+      setAuth({ ...auth, profilePicture: selectedFile });
+
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+      setSelectedFile(null);
+    }
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className='mx-auto flex cursor-pointer flex-col w-24 h-24 items-center justify-center gap-2 rounded-full'>
+    <form onSubmit={handleFormSubmit} className='flex cursor-pointer flex-col items-center justify-center gap-2 rounded-full max-w-[6rem]'>
       <input accept='image/*' ref={inputRef} className='hidden' type='file' onChange={handleFileChange} />
       <div onMouseEnter={() => setImageHovered(true)} onMouseLeave={() => setImageHovered(false)} onClick={() => inputRef.current.click()} className='relative'>
         {!selectedFile && !auth.profilePicture ? (
           <div className='border-2 rounded-full'>
-            <ImageIcon width={150} height={150} className='aspect-square p-4 cursor-pointer border-none object-cover' />
+            <ImageIcon width={80} height={80} className='aspect-square p-4 cursor-pointer border-none object-cover' />
           </div>
         ) : (
           <img
@@ -76,9 +87,9 @@ export default function ProfilePictureForm() {
         )}
       </div>
       {selectedFile && (
-        <button className='primary_btn rounded-full px-6 py-2.5 font-semibold tracking-wide' type='submit'>
-          Upload
-        </button>
+        <Button className='rounded-full h-6 px-2' type='submit'>
+          {isLoading ? 'Uploading...' : 'Upload'}
+        </Button>
       )}
     </form>
   );

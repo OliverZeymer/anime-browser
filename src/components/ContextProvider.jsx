@@ -3,12 +3,11 @@ import { useEffect, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
 import { getCookie, setCookie } from 'react-use-cookie';
 import axios from 'axios';
-import { useToast } from './ui/use-toast';
+import { toast } from 'sonner';
 
 export default function ContextProvider({ children }) {
   const [auth, setAuth] = useState(false);
   const [cookieCheckDone, setCookieCheckDone] = useState(false);
-  const { toast } = useToast();
 
   async function checkToken() {
     const CookieToken = getCookie('token');
@@ -23,14 +22,14 @@ export default function ContextProvider({ children }) {
           setAuth(response.data.user);
         } else {
           setCookie('token', '', { days: 0 });
-          toast({
-            description: 'You have been logged out',
+          toast('You have been logged out', {
+            description: 'See you soon!',
           });
         }
       } catch (error) {
         console.log(error);
-        toast({
-          description: 'You have been logged out',
+        toast('An error has occurred while loggin you in', {
+          description: 'Please try logging in again',
         });
         setCookie('token', '', { days: 0 });
       } finally {
@@ -42,7 +41,12 @@ export default function ContextProvider({ children }) {
   }
 
   useEffect(() => {
-    checkToken();
+    async function initialize() {
+      await checkToken();
+      setCookieCheckDone(true);
+    }
+
+    initialize();
   }, []);
   return <AuthContext.Provider value={{ auth, setAuth, cookieCheckDone }}>{children}</AuthContext.Provider>;
 }

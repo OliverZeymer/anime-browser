@@ -1,7 +1,7 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '@/contexts/AuthContext';
-import { useToast } from './ui/use-toast';
+import { toast } from "sonner";
 import DiscordIcon from './icons/DiscordIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -14,7 +14,7 @@ import { useSearchParams } from 'next/navigation';
 import PrimaryCard from './PrimaryCard';
 export default function ProfileInfo({ data, id }) {
   const searchParams = useSearchParams();
-  const { toast } = useToast();
+  
   const { auth } = useContext(AuthContext);
   const [isMyProfile, setIsMyProfile] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -31,7 +31,7 @@ export default function ProfileInfo({ data, id }) {
     }
   }, [editParam, isMyProfile]);
   return (
-    <PrimaryCard className='flex relative items-center w-fit mx-auto space-x-4 justify-center'>
+    <PrimaryCard className='flex relative items-center w-fit mx-auto gap-4 justify-center'>
       {isMyProfile ? (
         <>
           <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
@@ -47,13 +47,15 @@ export default function ProfileInfo({ data, id }) {
       ) : data?.profilePicture ? (
         <img src={data?.profilePicture} alt={data?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
       ) : (
-        <User className='w-24 h-24' />
+        <div className='border-2 rounded-full'>
+          <User width={80} height={80} className='aspect-square p-4 cursor-pointer border-none object-cover' />
+        </div>
       )}
       <div>
         <h1 className=''>{data.username}</h1>
-        <div className='cursor-pointer flex items-center'>
-          <p>{data?.email}</p>
-        </div>
+
+        <p>{data?.email}</p>
+
         {data?.discord && (
           <TooltipProvider delayDuration={0}>
             <Tooltip>

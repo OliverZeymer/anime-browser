@@ -16,9 +16,14 @@ export const getAnime = async () => {
 export const getProfile = async (id) => {
   const response = await fetch(`http://localhost:3000/api/user/${id}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
-}
+};
 
-export const getFileterdAnime = async (params) => {
+export const getAnimeList = async (id) => {
+  const response = await fetch(`http://localhost:3000/api/anime-list/${id}`, { cache: 'no-store' });
+  return handleResponse(response);
+};
+
+export const getFilterdAnime = async (params) => {
   const response = await fetch(`${BASE_API}/anime?${params}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
 };

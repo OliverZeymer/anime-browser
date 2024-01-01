@@ -1,6 +1,6 @@
 import User from '@/models/user.model';
 import { connectToDB } from '@/utils/database';
-
+import jwt from 'jsonwebtoken';
 export async function POST(req) {
   await connectToDB();
   const { email, password, username, discord } = await req.json();
@@ -24,8 +24,9 @@ export async function POST(req) {
       username,
       discord,
     });
+    const newToken = jwt.sign({ email: user.email }, process.env.TOKEN_SECRET);
 
-    return new Response(JSON.stringify({ success: true, data: user }), {
+    return new Response(JSON.stringify({ success: true, data: { user, token: newToken } }), {
       status: 201,
     });
   } catch (error) {

@@ -9,7 +9,6 @@ import ClickableImage from '@/components/ClickableImage';
 import StickyAside from '@/components/StickyAside';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getAnimeById } from '@/utils/api';
-export const revalidate = 3600;
 export async function generateMetadata({ params }) {
   const data = await getAnimeById(params.id);
   const anime = data.data;
@@ -60,3 +59,5 @@ export default async function AnimePage({ params }) {
     </section>
   );
 }
+
+export const revalidate = 3600;

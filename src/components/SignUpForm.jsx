@@ -1,15 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { validateForm } from '@/utils/validateForm';
 import { createUser } from '@/utils/createUser';
 import Loader from './Loader';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { useToast } from './ui/use-toast';
+import { toast } from "sonner";
+import AuthContext from '@/contexts/AuthContext';
+import { setCookie } from 'react-use-cookie';
 
 export default function SignUpForm({ className }) {
-  const { toast } = useToast();
+  
+  const { setAuth } = useContext(AuthContext);
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [enteredUsername, setEnteredUsername] = useState('');
@@ -23,7 +26,7 @@ export default function SignUpForm({ className }) {
     e.preventDefault();
     const isFormValid = validateForm(enteredEmail, enteredPassword, enteredUsername, setRedEmailField, setRedPasswordField, setRedUsernameField, toast, true);
     if (!isFormValid) return;
-    createUser(enteredEmail, enteredPassword, enteredUsername, enteredDiscord, toast, setIsLoading);
+    createUser(enteredEmail, enteredPassword, enteredUsername, enteredDiscord, toast, setIsLoading, setAuth, setCookie);
   }
 
   return (

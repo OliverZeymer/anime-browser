@@ -1,6 +1,6 @@
 export default function HiDiveIcon({ className }) {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio={true} className={className} xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 342.28 83.65'>
+    <svg xmlns='http://www.w3.org/2000/svg'  className={className} xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 342.28 83.65'>
       <g>
         <path
           d='M376.56,229.35H332.19V313h44.37a16.15,16.15,0,0,0,16.15-16.15V245.5a16.15,16.15,0,0,0-16.15-16.15M378.14,291a7.42,7.42,0,0,1-7.42,7.42H348.55V243.92h22.17a7.42,7.42,0,0,1,7.42,7.42Z'

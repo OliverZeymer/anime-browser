@@ -4,15 +4,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import AuthContext from '@/contexts/AuthContext';
 import { useContext } from 'react';
-import { useToast } from './ui/use-toast';
+import { toast } from 'sonner';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
-import { DialogHeader} from '@/components/ui/dialog';
+import { DialogHeader } from '@/components/ui/dialog';
 import { Form } from './ui/form';
 export default function EditProfileForm({ data, refetch }) {
   const { auth, setAuth } = useContext(AuthContext);
-  const { toast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,18 +31,21 @@ export default function EditProfileForm({ data, refetch }) {
       discord: payload.discord,
     };
     if (!body.email || !validateEmail(body.email)) {
-      return toast({ description: 'Email has to be valid', variant: 'destructive' });
+      return toast('Please enter a valid email', {
+        description: 'You need to enter a valid email to continue',
+      });
     }
     try {
       setIsLoading(true);
       const res = await axios.put(`/api/user`, body, { headers: { Authorization: `Bearer ${auth?.token}` } });
       if (res.status > 199 && res.status < 300) {
-        toast({ description: 'Changes applied', variant: 'success' });
+        toast(
+          'Changeds applied',
+          { description: 'Your changes has been applied.'});
       }
     } catch (error) {
-      toast({
-        description: error.response?.data?.message || 'Something went wrong',
-        variant: 'destructive',
+      toast(error.response?.data?.message || 'An error has occurred', {
+        description: 'Please try again',
       });
     } finally {
       setIsLoading(false);

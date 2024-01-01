@@ -1,24 +1,34 @@
-export async function createUser(email, password, username, discord, toast, setIsLoading) {
+import axios from 'axios';
+
+export async function createUser(email, password, username, discord, toast, setIsLoading, setAuth, setCookie) {
   try {
     setIsLoading(true);
-    const response = await fetch('/api/user/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password, username, discord }),
-    });
-    const data = await response.json();
 
-    if (response.ok) {
-      toast({ description: 'You have successfully created an account! Please log in.' });
+    const response = await axios.post('/api/user/create', {
+      email,
+      password,
+      username,
+      discord,
+    });
+
+    const data = response.data;
+
+    if (data.success === true) {
+      setAuth(data?.data?.user, data?.data?.token?.toString());
+      setCookie('token', data?.data?.token, {
+        days: 1,
+      });
+
+      toast('Account created', { description: 'You have successfully created an account!' });
     } else {
-      toast({ description: data.message || 'Something went wrong!', variant: 'destructive' });
+      toast("Couldn't create account", { description: data.message || 'Something went wrong.' });
     }
+
     return response;
   } catch (error) {
-    console.log(error);
-    toast({ description: 'An error occurred while creating an account.', variant: 'destructive' });
+    console.error(error);
+
+    toast("Couldn't create account", { description: 'An error occurred while creating an account.' });
     return null;
   } finally {
     setIsLoading(false);

@@ -1,6 +1,11 @@
-import { Button } from '@/components/ui/button';
-import { Bookmark } from 'lucide-react';
+'use client';
+
+import AuthContext from '@/contexts/AuthContext';
+
+import { useContext } from 'react';
+import AddToListButton from './AddToListButton';
 export default function AnimeBanner({ anime }) {
+  const { auth } = useContext(AuthContext);
   return (
     <div className='relative flex flex-col items-center gap-3 md:gap-6 justify-center md:h-72 xl:h-96 mt-16 lg:mt-0'>
       <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-neutral-700 to-transparent' style={{ mixBlendMode: 'multiply' }} />
@@ -10,10 +15,7 @@ export default function AnimeBanner({ anime }) {
         <h2 className='text-lg text-center md:text-xl lg:text-2xl text-white z-10'>{anime?.title_japanese}</h2>
       </div>
       <div className='flex justify-center items-center z-10'>
-        <Button aria-label='bookmark' className='bg-white text-black hover:bg-white/90'>
-          <Bookmark size={20} />
-          <span className='ml-2'>Add to list</span>
-        </Button>
+        <AddToListButton userId={auth?._id} anime={anime} />
       </div>
     </div>
   );

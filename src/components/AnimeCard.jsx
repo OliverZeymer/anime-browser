@@ -26,7 +26,7 @@ export default function AnimeCard({ anime, role }) {
             <>
               <Star size={15} color='#ffcd19' fill='#ffcd19' />
               <span className={`font-semibold text-xs tracking-wider ${getScoreColor(anime.score)}`}>{anime?.score}</span>
-              <div className='w-[1px] h-full bg-neutral-400 mx-1' />
+              <div className='w-[1px] h-1/2 bg-neutral-400 mx-1' />
             </>
           )}
           {anime?.episodes && (

@@ -7,14 +7,10 @@ import { Button } from './ui/button';
 import MobileNav from './MobileNav';
 import { Suspense, useContext } from 'react';
 import AuthContext from '@/contexts/AuthContext';
-import UserDropdown from './UserDropdown';
-
-import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Skeleton } from '@/components/ui/skeleton';
 import ThemeToggle from './ThemeToggle';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import SignUpModalButton from './SignUpModalButton';
+import NavbarAvatar from './NavbarAvatar';
 
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
@@ -49,30 +45,7 @@ export default function Navbar() {
               <Settings />
             </Link>
           </Button>
-          {cookieCheckDone ? (
-            <div>
-              {!auth ? (
-                <SignUpModalButton />
-              ) : (
-                <DropdownMenu>
-                  <DropdownMenuTrigger className='outline-none'>
-                    {auth?.profilePicture ? (
-                      <img
-                        className={auth?.profilePicture ? 'rounded-full w-10 h-10 object-cover' : 'rounded-full border border-gray-400 w-10 h-10 object-cover'}
-                        src={auth?.profilePicture}
-                        alt='user-profile'
-                      />
-                    ) : (
-                      <div className='rounded-full border border-gray-600 w-10 h-10' />
-                    )}
-                  </DropdownMenuTrigger>
-                  <UserDropdown />
-                </DropdownMenu>
-              )}
-            </div>
-          ) : (
-            <Skeleton className='w-10 h-10 rounded-full' />
-          )}
+          <NavbarAvatar auth={auth} cookieCheckDone={cookieCheckDone} />
         </div>
       </nav>
       <MobileNav />
