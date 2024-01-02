@@ -21,8 +21,6 @@ export default function HeroImageSlider() {
       effect='fade'
       modules={[Autoplay, EffectFade, Pagination]}
       speed={1000}
-      watchSlidesProgress={true}
-      a11y={false}
       autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: false }}>
       {heroSwiperBackgrounds.map((item, index) => (
         <SwiperSlide key={item.id}>
