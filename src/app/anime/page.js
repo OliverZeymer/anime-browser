@@ -40,7 +40,7 @@ export default async function AnimePage({ searchParams }) {
   const data = await getFilterdAnime(params);
 
   return (
-    <div className='px-4 pt-32'>
+    <div className='section'>
       <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
       <Suspense fallback={<Loader />}>
         <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />

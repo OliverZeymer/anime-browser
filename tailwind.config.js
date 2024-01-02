@@ -75,12 +75,10 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       gridTemplateColumns: {
-        'auto-fit': 'repeat(auto-fit, minmax(300px, 1fr));',
-        'small-fit': 'repeat(auto-fit, minmax(176px, 1fr));',
-        'auto-fill': 'repeat(auto-fill, minmax(0, 1fr))',
-      },
-      gridTemplateRows: {
-        'auto-fill': 'repeat(auto-fill, minmax(0, 1fr))',
+        'auto-fill-lg': 'repeat(auto-fill, minmax(300px, 1fr));',
+        'auto-fill-md': 'repeat(auto-fill, minmax(225px, 1fr));',
+        'auto-fill-sm': 'repeat(auto-fill, minmax(150px, 1fr));',
+        'auto-fill-xs': 'repeat(auto-fill, minmax(100px, 1fr));',
       },
     },
   },

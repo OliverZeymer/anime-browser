@@ -103,7 +103,7 @@ export default function AnimeSlider({ title, data, href }) {
       </div>
       <Slider {...settings} className='relative'>
         {data?.map((anime) => (
-          <AnimeCard key={anime?.mal_id} anime={anime} />
+          <AnimeCard key={anime?.mal_id} anime={anime} small />
         ))}
       </Slider>
     </section>

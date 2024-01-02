@@ -1,6 +1,3 @@
-import CrunchyrollIcon from './icons/CrunchyrollIcon';
-import FunimationIcon from './icons/FunimationIcon';
-import NetflixIcon from './icons/NetflixIcon';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { platforms } from '@/utils/constants';

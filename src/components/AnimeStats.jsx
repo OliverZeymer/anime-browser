@@ -2,12 +2,20 @@ import Link from 'next/link';
 import getScoreColor from '@/utils/getScoreColor';
 import { Badge } from '@/components/ui/badge';
 import { Play, Star } from 'lucide-react';
-
+import { platforms } from '@/utils/constants';
 import AnimeWatchButton from './AnimeWatchButton';
 import ShareModalButton from './ShareModalButton';
 import PrimaryCard from './PrimaryCard';
 export default function AnimeStats({ anime }) {
   const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+  // Utility function to check if a streaming name exists in the platforms array
+  const isStreamingPlatform = (platformName) => {
+    return platforms.some((platform) => platform.name === platformName);
+  };
+
+  // Check if any streaming link name is present in the platforms
+  const hasMatchingPlatform = anime?.streaming?.some((link) => isStreamingPlatform(link.name));
+
   return (
     <PrimaryCard className='flex flex-col gap-2 w-full mt-2 md:max-w-[300px] items-center md:items-start'>
       <ul className='flex flex-col gap-2 w-full items-center md:items-start'>
@@ -128,7 +136,7 @@ export default function AnimeStats({ anime }) {
           </li>
         )}
       </ul>
-      {anime?.streaming?.length > 0 && (
+      {hasMatchingPlatform && (
         <>
           <div className='w-full bg-white h-[1px] rounded-full mt-1 mb-2' />
           <h4 className='text-lg font-semibold mb-2'>Watch on</h4>
