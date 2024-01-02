@@ -5,11 +5,27 @@ import { Clock, Film, Home, Instagram, MonitorPlay, Sparkles, Twitter } from 'lu
 
 export const BASE_API = 'https://api.jikan.moe/v4';
 
-export const heroImages = [
-  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/black-clover_dkrnyw_qsgtuc.webp',
-  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/demon-slayer_ylfio8_lt6nfo.webp',
-  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769746/csm_kyeav6_ph6xfi.webp',
-  'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
+export const heroSwiperBackgrounds = [
+  {
+    name: 'Black Clover',
+    id: '34572',
+    image: 'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/black-clover_dkrnyw_qsgtuc.webp',
+  },
+  {
+    name: 'Demon Slayer',
+    id: '51019',
+    image: 'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769745/demon-slayer_ylfio8_lt6nfo.webp',
+  },
+  {
+    name: 'Chainsaw Man',
+    id: '44511',
+    image: 'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703769746/csm_kyeav6_ph6xfi.webp',
+  },
+  {
+    name: 'Attack on Titan',
+    id: '16498',
+    image: 'https://res.cloudinary.com/dg1ge7qf8/image/upload/v1703768628/aot_sceson.webp',
+  },
 ];
 
 export const featuredAnime = [

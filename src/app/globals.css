@@ -95,9 +95,16 @@ li {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  z-index: -1 !important;
 }
-
+.swiper-pagination {
+  @apply flex gap-2 absolute z-10 bottom-2 left-1/2 transform -translate-x-1/2;
+}
+.swiper-pagination-bullet{
+  @apply w-5 h-2 rounded-full bg-white opacity-50 cursor-pointer transition-all duration-1000;
+}
+.swiper-pagination-bullet-active{
+  @apply w-8 opacity-100;
+}
 button.slick-disabled {
   opacity: 0 !important;
 }

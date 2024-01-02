@@ -2,8 +2,6 @@ import SubscribeModalButton from './SubscribeModalButton';
 import HeroImageSlider from './HeroImageSlider';
 import LandingButton from './HeroButton';
 import Link from 'next/link';
-import HeroCurrentlyShowing from './HeroCurrentlyShowing';
-import HeroProgressBar from './HeroProgressBar';
 export default function HeroSection() {
   return (
     <section className='min-h-[100vh] lg:min-h-[80vh] flex flex-col relative w-full'>
@@ -24,8 +22,6 @@ export default function HeroSection() {
           <SubscribeModalButton className='text-[#171717] bg-[#fafafa] hover:bg-[#fafafa]/90' />
         </div>
       </div>
-      <HeroCurrentlyShowing />
-      <HeroProgressBar />
     </section>
   );
 }
