@@ -13,8 +13,8 @@ module.exports = {
 
     extend: {
       screens: {
-        xs: '450px',
-        '2xl': '2000px',
+        xs: { raw: '(min-width: 450px)' },
+        '2xl': { raw: '(min-width: 1900px)' },
         'sm-height': { raw: '(max-height: 1080px)' },
       },
       fontFamily: {
