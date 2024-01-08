@@ -1,14 +1,9 @@
 import { Socials } from '@/utils/constants';
-import SubscribeModalButton from './SubscribeModalButton';
 import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className='py-8 px-4 lg:px-12 mt-16 w-full mx-auto relative overflow-hidden lg:overflow-visible'>
       <div className={`mx-auto flex flex-col gap-8`}>
-        <div className='flex items-center justify-between flex-wrap gap-5'>
-          <h4 className='font-bold text-3xl md:text-4xl lg:text-5xl xl:text-6xl'>Become a member</h4>
-          <SubscribeModalButton />
-        </div>
         <div className='flex flex-col'>
           <div className='mb-12 bg-muted-foreground h-[2px]' />
           <div className='flex items-center justify-between flex-wrap gap-4'>

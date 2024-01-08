@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   darkMode: ['class'],
   content: ['./pages/**/*.{js,jsx}', './components/**/*.{js,jsx}', './app/**/*.{js,jsx}', './src/**/*.{js,jsx}'],
   theme: {
@@ -11,7 +14,8 @@ module.exports = {
     extend: {
       screens: {
         xs: '450px',
-        '2xl': '1400px',
+        '2xl': '2000px',
+        'sm-height': { raw: '(max-height: 1080px)' },
       },
       fontFamily: {
         sans: ['var(--font-gilroy)'],
@@ -69,14 +73,24 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
+        'skew-scroll': {
+          '0%': {
+            transform: 'rotatex(20deg) rotateZ(-20deg) skewX(20deg) translateZ(0) translateY(0)',
+          },
+          '100%': {
+            transform: 'rotatex(20deg) rotateZ(-20deg) skewX(20deg) translateZ(0) translateY(-100%)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'skew-scroll': 'skew-scroll 20s linear infinite',
       },
       gridTemplateColumns: {
-        'auto-fill-lg': 'repeat(auto-fill, minmax(300px, 1fr));',
-        'auto-fill-md': 'repeat(auto-fill, minmax(225px, 1fr));',
+        'auto-fill-2xl': 'repeat(auto-fill, minmax(300px, 1fr));',
+        'auto-fill-lg': 'repeat(auto-fill, minmax(225px, 1fr));',
+        'auto-fill-md': 'repeat(auto-fill, minmax(175px, 1fr));',
         'auto-fill-sm': 'repeat(auto-fill, minmax(150px, 1fr));',
         'auto-fill-xs': 'repeat(auto-fill, minmax(100px, 1fr));',
       },

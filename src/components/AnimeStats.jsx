@@ -138,7 +138,7 @@ export default function AnimeStats({ anime }) {
       </ul>
       {hasMatchingPlatform && (
         <>
-          <div className='w-full bg-white h-[1px] rounded-full mt-1 mb-2' />
+          <div className='w-full bg-primary h-[1px] rounded-full mt-1 mb-2' />
           <h4 className='text-lg font-semibold mb-2'>Watch on</h4>
           <div className='flex flex-col gap-6 items-center w-full justify-center'>
             {anime?.streaming?.map((platform) => (
@@ -147,7 +147,7 @@ export default function AnimeStats({ anime }) {
           </div>
         </>
       )}
-      <div className='w-full bg-white h-[1px] rounded-full my-2' />
+      <div className='w-full bg-primary h-[1px] rounded-full my-2' />
       <ShareModalButton />
     </PrimaryCard>
   );

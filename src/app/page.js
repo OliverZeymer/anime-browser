@@ -1,6 +1,7 @@
 import { getAnimeByLimit } from '@/utils/api';
 import HeroSection from '@/components/HeroSection';
 import AnimeSlider from '@/components/AnimeSlider';
+import ScrollingCards from '@/components/ScrollingCards';
 
 export default async function Home() {
   const topRatedData = await getAnimeByLimit('top/anime', 20);
