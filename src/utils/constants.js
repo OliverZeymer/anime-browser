@@ -114,6 +114,8 @@ export const Socials = [
   },
 ];
 
+export const pathsWithBanner = [/^\/(anime|character)\/\d+$/, /^\/$/];
+
 export const animeGenres = [
   {
     value: 1,

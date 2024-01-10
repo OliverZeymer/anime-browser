@@ -4,13 +4,13 @@ import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu
 import { Skeleton } from '@/components/ui/skeleton';
 import { User } from 'lucide-react';
 
-export default function NavbarAvatar({ auth, cookieCheckDone }) {
+export default function NavbarAvatar({ auth, cookieCheckDone, isPathWithBanner }) {
   return (
     <>
       {cookieCheckDone ? (
         <>
           {!auth ? (
-            <SignUpModalButton />
+            <SignUpModalButton isPathWithBanner={isPathWithBanner}/>
           ) : (
             <DropdownMenu>
               <DropdownMenuTrigger className='outline-none'>

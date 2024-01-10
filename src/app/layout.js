@@ -6,7 +6,6 @@ import TopLevelClient from '@/components/TopLevelClient';
 import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/sonner'
 import Footer from '@/components/Footer';
-import QueryClientProviderComponent from '@/components/QueryClientProviderComponent';
 import ThemeProvider from '@/components/ThemeProvider';
 import { GeistSans } from 'geist/font/sans';
 const gilroy = localFont({
@@ -56,7 +55,6 @@ export default function RootLayout({ children }) {
     <html lang='en' className='h-full dark' style={{ colorScheme: 'dark' }}>
       <body className={cn('relative h-full font-sans antialiased', gilroy.variable)}>
         <TopLevelClient>
-          <QueryClientProviderComponent>
             <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
               <NextTopLoader color='#5A2E98' />
               <Navbar />
@@ -68,7 +66,6 @@ export default function RootLayout({ children }) {
               </div>
               <Toaster />
             </ThemeProvider>
-          </QueryClientProviderComponent>
         </TopLevelClient>
       </body>
     </html>

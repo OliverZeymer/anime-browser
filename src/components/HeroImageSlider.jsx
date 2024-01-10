@@ -24,7 +24,7 @@ export default function HeroImageSlider() {
       {heroSwiperBackgrounds.map((item, index) => (
         <SwiperSlide key={item.id}>
           <Link className='z-10 font-medium absolute top-20 -translate-1/2 right-1/3 xs:translate-x-0 xs:top-auto lg:right-12 xs:right-6 xs:bottom-2' href={`/anime/${item.id}`}>
-            <Badge variant='secondary'>{item.name}</Badge>
+            <Badge>{item.name}</Badge>
           </Link>
           <img src={item.image} className='absolute inset-0 h-full w-full object-cover' />
           <div className='absolute inset-0 h-full w-full bg-gradient-to-b from-black/80 via-black/60 to-purple-950/50' />

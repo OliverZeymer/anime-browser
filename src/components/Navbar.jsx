@@ -11,13 +11,14 @@ import ThemeToggle from './ThemeToggle';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import NavbarAvatar from './NavbarAvatar';
-
+import { pathsWithBanner } from '@/utils/constants';
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
   const pathname = usePathname();
+  const isPathWithBanner = pathsWithBanner.some((regex) => regex.test(pathname));
   return (
     <>
-      <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-primary', pathname !== '/' && 'border-b-2 dark:border-b-0')}>
+      <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-muted-foreground', !isPathWithBanner && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
           <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
@@ -27,25 +28,25 @@ export default function Navbar() {
               <Suspense fallback={<div>Loading...</div>}>
                 <NavLink
                   navItem={navItem}
-                  activeClassName={pathname === '/' ? 'text-white' : 'text-primary'}
-                  className={cn('flex gap-2 font-semibold text-neutral-500 transition-colors', pathname === '/' || 'login' ? 'hover:text-white' : 'hover:text-primary')}>
+                  activeClassName={isPathWithBanner ? 'text-white' : 'text-primary'}
+                  className={cn('flex gap-2 font-semibold text-neutral-500 transition-colors', isPathWithBanner ? 'hover:text-white' : 'hover:text-primary')}>
                   {navItem.name}
                 </NavLink>
               </Suspense>
             </li>
           ))}
         </ul>
-        <div className={cn('flex items-center gap-6 ml-auto', pathname === '/' ? 'text-white' : 'text-primary')}>
+        <div className={cn('flex items-center gap-6 ml-auto', isPathWithBanner ? 'text-white' : 'text-primary')}>
           <Button aria-label='open search' variant='ghost' className='p-1 h-auto'>
             <Search />
           </Button>
-          <ThemeToggle />
+          <ThemeToggle isPathWithBanner={isPathWithBanner} />
           <Button aria-label='go to settings' variant='ghost' className='p-1 h-auto'>
             <Link href='/settings'>
               <Settings />
             </Link>
           </Button>
-          <NavbarAvatar auth={auth} cookieCheckDone={cookieCheckDone} />
+          <NavbarAvatar auth={auth} cookieCheckDone={cookieCheckDone} isPathWithBanner={isPathWithBanner} />
         </div>
       </nav>
       <MobileNav />

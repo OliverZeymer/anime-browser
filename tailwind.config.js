@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       screens: {
         xs: { raw: '(min-width: 450px)' },
-        '2xl': { raw: '(min-width: 1900px)' },
+        '2xl': { raw: '(min-width: 2000px)' },
         'sm-height': { raw: '(max-height: 1080px)' },
       },
       fontFamily: {
