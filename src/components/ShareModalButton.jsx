@@ -16,20 +16,18 @@ export default function ShareModalButton({ className }) {
         </DialogTrigger>
       </Button>
       <DialogContent className='p-0 max-w-md !rounded-2xl shadow-2xl border-none'>
-        <DialogHeader>
-          <div>
-            <img src='/images/one-piece.webp' alt='One Piece Cover' className='w-full max-w-md max-h-72 object-cover rounded-t-2xl ' />
-          </div>
-          <div className='!m-0 px-4 pb-6'>
-            <DialogTitle className='text-center !mb-3 !mt-6 text-2xl font-bold lg:text-3xl'>This website rocks!</DialogTitle>
-            <DialogDescription className='text-base text-center mb-4'>
-              Share Anime Browser with your family and neighbours.
-              <br />
-              Hell, share it with the whole World!
-            </DialogDescription>
-            <CopyInput />
-          </div>
-        </DialogHeader>
+        <div>
+          <img src='/images/one-piece.webp' alt='One Piece Cover' className='w-full max-w-md max-h-72 object-cover rounded-t-2xl ' />
+        </div>
+        <div className='!m-0 px-4 pb-6'>
+          <DialogTitle className='text-center !mb-3 !mt-6 text-2xl font-bold lg:text-3xl'>This website rocks!</DialogTitle>
+          <DialogDescription className='text-base text-center mb-4'>
+            Share Anime Browser with your family and neighbours.
+            <br />
+            Hell, share it with the whole World!
+          </DialogDescription>
+          <CopyInput />
+        </div>
       </DialogContent>
     </Dialog>
   );

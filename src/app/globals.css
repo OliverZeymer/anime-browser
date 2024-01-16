@@ -9,6 +9,13 @@
   .heading {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] mb-6;
   }
+  .no-drag {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
 }
 
 @layer base {
@@ -99,10 +106,10 @@ li {
 .swiper-pagination {
   @apply flex gap-2 z-10 absolute bottom-2 left-1/2 transform -translate-x-1/2;
 }
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   @apply w-5 h-2 rounded-full bg-white opacity-50 cursor-pointer transition-all duration-1000;
 }
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
   @apply w-8 opacity-100;
 }
 button.slick-disabled {

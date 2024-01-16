@@ -2,7 +2,7 @@
 import { Navigation } from '@/utils/constants';
 import NavLink from './NavLink';
 import Link from 'next/link';
-import { Search, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import MobileNav from './MobileNav';
 import { Suspense, useContext } from 'react';
@@ -12,13 +12,15 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import NavbarAvatar from './NavbarAvatar';
 import { pathsWithBanner } from '@/utils/constants';
+import SearchModalButton from './SearchModalButton';
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
   const pathname = usePathname();
   const isPathWithBanner = pathsWithBanner.some((regex) => regex.test(pathname));
   return (
     <>
-      <nav className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-muted-foreground', !isPathWithBanner && 'border-b-2 dark:border-b-0')}>
+      <nav
+        className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-muted-foreground', !isPathWithBanner && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
           <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
         </Link>
@@ -37,9 +39,7 @@ export default function Navbar() {
           ))}
         </ul>
         <div className={cn('flex items-center gap-6 ml-auto', isPathWithBanner ? 'text-white' : 'text-primary')}>
-          <Button aria-label='open search' variant='ghost' className='p-1 h-auto'>
-            <Search />
-          </Button>
+          <SearchModalButton />
           <ThemeToggle isPathWithBanner={isPathWithBanner} />
           <Button aria-label='go to settings' variant='ghost' className='p-1 h-auto'>
             <Link href='/settings'>

@@ -20,7 +20,7 @@ const DialogOverlay = React.forwardRef(({ className, ...props }, ref) => (
     className={cn('fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0', className)}
     {...props}>
     {' '}
-    {props.isImageModal && (
+    {props.isFullModal && (
       <DialogPrimitive.Close className='absolute right-4 top-4 rounded-sm ring-offset-background transition-opacityfocus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
         <X className='h-6 w-6' />
         <span className='sr-only'>Close</span>
@@ -40,7 +40,7 @@ const DialogContent = React.forwardRef(({ className, children, ...props }, ref) 
         className
       )}
       {...props}>
-      {!props.isImageModal && (
+      {!props.isFullModal && (
         <DialogPrimitive.Close className='absolute right-4 top-4 rounded-sm ring-offset-background transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'>
           <X className='h-5 w-5' />
           <span className='sr-only'>Close</span>

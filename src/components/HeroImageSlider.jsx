@@ -10,6 +10,8 @@ import { Badge } from './ui/badge';
 export default function HeroImageSlider() {
   return (
     <Swiper
+    draggable={false}
+    className='select-none'
       pagination={{
         clickable: true,
         renderBullet: function (index, className) {
@@ -20,6 +22,7 @@ export default function HeroImageSlider() {
       modules={[Autoplay, EffectFade, Pagination]}
       loop={true}
       speed={1000}
+      allowTouchMove={false}
       autoplay={{ delay: 5000 }}>
       {heroSwiperBackgrounds.map((item, index) => (
         <SwiperSlide key={item.id}>
