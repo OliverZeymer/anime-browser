@@ -22,7 +22,7 @@ function ResultsList({ results, selectedIndex, searchValue }) {
   return (
     <ul className='flex flex-col gap-2 w-full mt-2'>
       <h3 className='text-lg font-semibold leading-none tracking-tight mb-3'>
-        {results.length} result{results.length > 1 ? 's' : ''} found for <span className='capitalize'>"{searchValue}"</span>
+        {results.length} result{results.length > 1 ? 's' : ''} found for <span className='capitalize'>&quot;{searchValue}&quot;</span>
       </h3>
       {results.map((anime, index) => (
         <li key={anime.mal_id} className={`flex items-center gap-4 w-full hover:bg-secondary transition-colors rounded-md ${index === selectedIndex ? 'bg-secondary' : ''}`}>

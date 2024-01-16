@@ -1,13 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+import { DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog';
 import { Search, X } from 'lucide-react';
-import { Input } from './ui/input';
 import debounce from 'lodash.debounce';
 import { getAnimeBySearch } from '@/utils/api';
 import Loader from './Loader';
-import Link from 'next/link';
 import SearchModal from './SearchModal';
 import SearchModalInput from './SearchModalInput';
 import SearchModalResults from './SearchModalResults';
