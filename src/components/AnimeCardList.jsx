@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 export default function AnimeCardList({ data, isRecommendations, isCharacter, className, small }) {
   return (
-    <section className={!isCharacter && 'mt-6'}>
+    <section>
       <ul className={cn('grid grid-cols-auto-fill-sm md:grid-cols-auto-fill-md lg:grid-cols-auto-fill-lg 2xl:grid-cols-auto-fill-2xl place-items-center gap-3 lg:gap-6 h-fit', className)}>
         {data?.length === 0 || !data ? (
           <NoResultsFound />

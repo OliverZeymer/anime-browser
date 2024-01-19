@@ -31,7 +31,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
     router.push(`/anime${query}`);
   };
   return (
-    <form onSubmit={onSubmit} className='bg-primary-foreground mx-auto w-full md:w-fit  flex items-center border border-neutral-700 rounded-full'>
+    <form onSubmit={onSubmit} className='bg-primary-foreground mx-auto sm:mx-0 w-full md:w-fit flex items-center border border-neutral-700 rounded-full'>
       <div className='relative grow'>
         <Button aria-label='search' variant='ghost' type='submit' className='absolute left-3 p-1 h-fit top-1/2 -translate-y-1/2'>
           <SearchIcon size={20} />
@@ -43,7 +43,7 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
           }}
           value={searchValue}
           placeholder='Search'
-          className='rounded-none text-base h-10 w-full md:w-96 pl-12 bg-white dark:bg-black/30 rounded-l-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
+          className='rounded-none text-sm h-10 w-full md:w-96 lg:min-w-[275px] lg:w-fit pl-12 bg-white dark:bg-black/30 lg:rounded-full border-none focus:outline-none focus:ring-0 focus:ring-transparent focus:ring-offset-0'
         />
         {searchValue && (
           <Button
@@ -54,14 +54,16 @@ export default function AnimeSearchBar({ order, status, search, type, genres }) 
               setSearchValue('');
               router.push(`${pathname}`);
             }}
-            className='absolute right-1 p-1 h-fit top-1/2 -translate-y-1/2'>
+            className='absolute rounded-full right-1 p-1 h-fit top-1/2 -translate-y-1/2'>
             <X size={20} />
           </Button>
         )}
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <AnimeFilterButton order={order} status={status} type={type} genres={genres} />
-      </Suspense>
+      <div className='lg:hidden'>
+        <Suspense fallback={<div>Loading...</div>}>
+          <AnimeFilterButton order={order} status={status} type={type} genres={genres} />
+        </Suspense>
+      </div>
     </form>
   );
 }

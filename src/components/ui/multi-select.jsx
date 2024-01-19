@@ -26,7 +26,7 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
             variant='outline'
             role='combobox'
             aria-expanded={open}
-            className={`w-full max-w-[200px] justify-between hover:bg-transparent ${selected.length > 1 ? 'h-full' : 'h-10'}`}
+            className={`w-full justify-between hover:bg-transparent ${selected.length > 1 ? 'h-full' : 'h-10'}`}
             onClick={() => setOpen(!open)}>
             {selected.length > 0 ? (
               <div className='flex gap-1 flex-wrap'>

@@ -1,3 +1,5 @@
-export default function StickyAside({ children }) {
-  return <aside className='flex flex-col self-start gap-2 w-full items-center md:items-start md:min-w-[300px] md:sticky md:top-4 md:w-[300px]'>{children}</aside>;
+import { cn } from '@/lib/utils';
+
+export default function StickyAside({ children, className }) {
+  return <aside className={cn('md:top-4 md:sticky', className)}>{children}</aside>;
 }

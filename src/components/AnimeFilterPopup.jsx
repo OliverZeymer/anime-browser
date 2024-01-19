@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Check, RotateCcw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
-export default function AnimeFilterPopup({ order, status, type, genres, open, setOpen }) {
+export default function AnimeFilterPopup({ order, status, type, genres, setOpen }) {
   const router = useRouter();
   const params = [
     {
@@ -59,7 +59,7 @@ export default function AnimeFilterPopup({ order, status, type, genres, open, se
       <div className='flex flex-col items-center lg:items-start lg:grid lg:grid-cols-2 gap-4'>
         {params.map((param) => (
           <Suspense key={param.title} fallback={<div>Loading...</div>}>
-            <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />
+            <SelectFilter className="w-[200px]" key={param.title} title={param.title} param={param.param} options={param.options} />
           </Suspense>
         ))}
         <Suspense fallback={<div>Loading...</div>}>

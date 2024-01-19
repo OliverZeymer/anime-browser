@@ -34,7 +34,7 @@ export default async function AnimePage({ params }) {
       <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
         <div>
           <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} width={450} height={700} />
-          <StickyAside>
+          <StickyAside className='md:items-start self-start flex flex-col gap-2 items-center md:min-w-[300px] md:top-4 md:w-[300px]'>
             <AnimeStats anime={anime} />
           </StickyAside>
         </div>

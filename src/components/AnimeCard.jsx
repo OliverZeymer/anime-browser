@@ -1,5 +1,5 @@
 'use client';
-import { Bookmark, Play, Star } from 'lucide-react';
+import { Bookmark, Flame, Play, Star } from 'lucide-react';
 import Link from 'next/link';
 import getScoreColor from '@/utils/getScoreColor';
 import { cn } from '@/lib/utils';
@@ -19,13 +19,12 @@ export default function AnimeCard({ anime, role, small }) {
         backgroundRepeat: 'no-repeat',
       }}
       className={cn(
-        'min-w-[150px] user min-h-[225px] aspect-[1/1.5] h-full w-full md:min-w-[175px] md:min-h-[262.5px] lg:min-w-[225px] lg:min-h-[337.5px] 2xl:min-w-[300px] 2xl:min-h-[450px] rounded-2xl relative px-2 lg:px-5 py-2 max-w-[400px] no-drag cursor-pointer',
+        'min-w-[150px] min-h-[225px] aspect-[1/1.5] h-full w-full md:min-w-[175px] md:min-h-[262.5px] lg:min-w-[225px] lg:min-h-[337.5px] 2xl:min-w-[300px] 2xl:min-h-[450px] rounded-2xl relative px-2 lg:px-5 py-2 max-w-[400px] no-drag cursor-pointer',
         small && 'max-w-[300px]'
       )}>
       <Link href={`/anime/${anime?.mal_id}`} draggable={false} className='absolute top-0 left-0 w-full h-full z-20' />
-      {/* <Bookmark size={32} className='absolute top-5 right-5 z-20 bg-black/75 p-1 rounded-full' /> */}
       <div className='flex flex-col justify-end h-full relative z-10'>
-        <h3 className='text-white font-semibold text-sm line-clamp-3 lg:line-clamp-2 mb-1'>{animeTitle}</h3>
+        <h3 className='text-white font-semibold text-sm line-clamp-3 lg:line-clamp-2 mb-0.5'>{animeTitle}</h3>
         <div className='flex items-center gap-1'>
           {anime.score && (
             <>

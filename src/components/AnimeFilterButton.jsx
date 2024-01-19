@@ -18,7 +18,6 @@ export default function AnimeFilterButton({ order, status, type, genres }) {
   useEffect(() => {
     if (pathname === '/anime/new' && paramsWithoutPage.length > 0) {
       const newUrl = `/anime?${searchParams.toString()}`;
-
       router.push(newUrl);
     }
   }, [paramsWithoutPage]);

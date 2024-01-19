@@ -52,20 +52,20 @@ export const metadata = {
 export const revalidate = 3600;
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className='h-full dark' style={{ colorScheme: 'dark' }}>
-      <body className={cn('relative h-full font-sans antialiased', gilroy.variable)}>
+    <html lang='en' className={`${GeistSans.className} dark`} style={{ colorScheme: 'dark' }}>
+      <body className={cn('relative h-full font-sans antialiased')}>
         <TopLevelClient>
-            <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-              <NextTopLoader color='#5A2E98' />
-              <Navbar />
-              <div className='w-full flex flex-col relative min-h-screen'>
-                <main className='grow'>
-                  <div className='flex-grow flex-1'>{children}</div>
-                </main>
-                <Footer />
-              </div>
-              <Toaster />
-            </ThemeProvider>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+            <NextTopLoader color='#5A2E98' />
+            <Navbar />
+            <div className='w-full flex flex-col relative min-h-screen'>
+              <main className='grow'>
+                <div className='flex-grow flex-1'>{children}</div>
+              </main>
+              <Footer />
+            </div>
+            <Toaster />
+          </ThemeProvider>
         </TopLevelClient>
       </body>
     </html>
