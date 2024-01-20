@@ -30,6 +30,7 @@ module.exports = {
         netflixBg: '#101010',
         netflixRed: '#e50914',
         funimation: '#41009C',
+        animebrowser: "#651CBA",
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',

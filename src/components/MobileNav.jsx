@@ -5,17 +5,11 @@ import Link from 'next/link';
 import { Navigation, Socials } from '@/utils/constants';
 import { Fade as Hamburger } from 'hamburger-react';
 import NavLink from './NavLink';
-import SignUpModalButton from './SignUpModalButton';
 
 import { Search, Settings } from 'lucide-react';
 import { useContext } from 'react';
 import AuthContext from '@/contexts/AuthContext';
-import UserDropdown from './UserDropdown';
-import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Skeleton } from '@/components/ui/skeleton';
 import ThemeToggle from './ThemeToggle';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import NavbarAvatar from './NavbarAvatar';
 

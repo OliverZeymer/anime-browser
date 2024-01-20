@@ -7,7 +7,7 @@ import AnimeDynamicHeading from '@/components/AnimeDynamicHeading';
 import { Suspense } from 'react';
 import Loader from '@/components/Loader';
 import AnimeFiltersSidebar from '@/components/AnimeFiltersSidebar';
-import { filter } from 'lodash';
+import AnimeBrowserAdvertisement from '@/components/AnimeBrowserAdvertisement';
 
 export default async function AnimePage({ searchParams }) {
   const defaultLimit = 10;
@@ -86,12 +86,12 @@ export default async function AnimePage({ searchParams }) {
     },
   ];
   return (
-    <div className='section flex gap-6 space-x-8'>
+    <div className='section flex gap-3 space-x-4'>
       <AnimeFiltersSidebar filterParams={filterParams} genres={genres} minScore={min_score} maxScore={max_score} />
       <div className='grow'>
-        <div className='flex flex-col lg:flex-row gap-3 lg:gap-0 items-center justify-between'>
+        <div className='flex flex-col xl:flex-row gap-4 xl:gap-0 items-center justify-between'>
           <AnimeDynamicHeading data={data} order={order} status={status} search={search} type={type} genres={genres} />
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center w-full xl:w-fit gap-3'>
             <Suspense fallback={<Loader />}>
               <AnimeSearchBar order={order} status={status} search={search} type={type} genres={genres} />
             </Suspense>
@@ -102,6 +102,7 @@ export default async function AnimePage({ searchParams }) {
           <PaginationControls pagination={data?.pagination} />
         </Suspense>
       </div>
+      <AnimeBrowserAdvertisement />
     </div>
   );
 }

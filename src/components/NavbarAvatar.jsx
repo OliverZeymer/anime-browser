@@ -1,5 +1,5 @@
 import UserDropdown from './UserDropdown';
-import SignUpModalButton from './SignUpModalButton';
+import SignInModalButton from './SignInModalButton';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { User } from 'lucide-react';
@@ -10,7 +10,7 @@ export default function NavbarAvatar({ auth, cookieCheckDone, isPathWithBanner }
       {cookieCheckDone ? (
         <>
           {!auth ? (
-            <SignUpModalButton isPathWithBanner={isPathWithBanner}/>
+            <SignInModalButton isPathWithBanner={isPathWithBanner}/>
           ) : (
             <DropdownMenu>
               <DropdownMenuTrigger className='outline-none'>
