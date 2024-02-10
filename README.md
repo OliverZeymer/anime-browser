@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Anime Browser
 
-First, run the development server:
+Anime Browser is a webapp for browsing and bookmarking a huge library of anime.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<div align="center">
+
+  [![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/OliverZeymer/anime-browser) 
+
+</div>
+
+---
+
+<p align="center"> Dive into the vast world of anime with Anime Browser, a modern web application designed to enhance your anime viewing experience. Create profiles, bookmark your favorite shows, and explore every anime imaginable with ease and style.
+    <br> 
+</p>
+
+## 📝 Table of Contents
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [TODO](../TODO.md)
+- [Contributing](../CONTRIBUTING.md)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
+
+## 🧐 About <a name = "about"></a>
+Anime Browser is a Next.js web application designed for anime enthusiasts and newcomers alike. Leveraging the latest in web technologies, it offers a seamless and immersive experience for browsing, discovering, and tracking anime series. Whether you're looking to dive into new worlds or keep track of your anime watching journey, Anime Browser provides a comprehensive platform with a focus on user experience and modern design.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+
+### Prerequisites
+Before you begin, ensure you have the latest version of Node.js and npm installed. You will also need MongoDB set up on your local machine or a MongoDB Atlas account for database services.
+
+### Installing & Running the project
+Follow these steps to get your development environment running:
 ```
+npm install npm@latest -g
+```
+ 1. Clone the repo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+git clone https://github.com/OliverZeymer/anime-browser
+```
+2. Install NPM packages
+```
+npm i
+```
+3. Start the development server
+```
+npm run dev
+```
+This will start the server on `localhost:3000`, and you can begin exploring the application.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🎈 Usage <a name="usage"></a>
+After setting up the project, you can use Anime Browser to:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Create and customize your profile.
+- Browse and discover new and popular anime.
+- Bookmark and track your favorite series.
 
-## Learn More
+## 🚀 Deployment <a name = "deployment"></a>
+For deployment, you can use Vercel, which integrates nicely with Next.js projects. Follow the Vercel deployment documentation for more details.
 
-To learn more about Next.js, take a look at the following resources:
+## ⛏️ Built Using <a name = "built_using"></a>
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Node.js](https://nodejs.org/en/) - Server Environment
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+- Hat tip to anyone whose code was used
+- Inspiration
