@@ -1,6 +1,6 @@
-import AnimeCardList from '@/components/AnimeCardList';
+import AnimeCardList from '@/components/anime/AnimeCardList';
 import PaginationControls from '@/components/PaginationControls';
-import AnimeSearchBar from '@/components/AnimeSearchBar';
+import AnimeSearchBar from '@/components/anime/AnimeSearchBar';
 
 import { getThisSeason } from '@/utils/api';
 import { Suspense } from 'react';

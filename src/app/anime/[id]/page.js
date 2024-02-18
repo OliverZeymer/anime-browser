@@ -1,10 +1,10 @@
-import AnimeBanner from '@/components/AnimeBanner';
-import AnimeCharacters from '@/components/AnimeCharacters';
-import AnimeRecommendations from '@/components/AnimeRecommendations';
-import AnimeReviewList from '@/components/AnimeReviewList';
-import AnimeStats from '@/components/AnimeStats';
-import AnimeSynopsis from '@/components/AnimeSynopsis';
-import AnimeTrailer from '@/components/AnimeTrailer';
+import AnimeBanner from '@/components/anime/AnimeBanner';
+import AnimeCharacters from '@/components/anime/AnimeCharacters';
+import AnimeRecommendations from '@/components/anime/AnimeRecommendations';
+import AnimeReviewList from '@/components/anime/AnimeReviewList';
+import AnimeStats from '@/components/anime/AnimeStats';
+import AnimeSynopsis from '@/components/anime/AnimeSynopsis';
+import AnimeTrailer from '@/components/anime/AnimeTrailer';
 import ClickableImage from '@/components/ClickableImage';
 import StickyAside from '@/components/StickyAside';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';

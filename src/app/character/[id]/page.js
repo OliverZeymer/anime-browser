@@ -1,11 +1,11 @@
-import CharacterAbout from '@/components/CharacterAbout';
-import CharacterBanner from '@/components/CharacterBanner';
+import CharacterAbout from '@/components/character/CharacterAbout';
+import CharacterBanner from '@/components/character/CharacterBanner';
 import { getAnimeCharacterById } from '@/utils/api';
 import ClickableImage from '@/components/ClickableImage';
 import StickyAside from '@/components/StickyAside';
-import CharacterAnimeList from '@/components/CharacterAnimeList';
-import CharacterStats from '@/components/CharacterStats';
-import CharacterVoices from '@/components/CharacterVoices';
+import CharacterAnimeList from '@/components/character/CharacterAnimeList';
+import CharacterStats from '@/components/character/CharacterStats';
+import CharacterVoices from '@/components/character/CharacterVoices';
 export const revalidate = 3600;
 export async function generateMetadata({ params }) {
   const characterData = await getAnimeCharacterById(params.id);

@@ -3,10 +3,10 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import TopLevelClient from '@/components/TopLevelClient';
-import Navbar from '@/components/Navbar';
-import { Toaster } from '@/components/ui/sonner'
-import Footer from '@/components/Footer';
-import ThemeProvider from '@/components/ThemeProvider';
+import Navbar from '@/components/global/nav/Navbar';
+import { Toaster } from '@/components/ui/sonner';
+import Footer from '@/components/global/Footer';
+import ThemeProvider from '@/components/global/ThemeProvider';
 import { GeistSans } from 'geist/font/sans';
 const gilroy = localFont({
   src: [

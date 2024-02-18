@@ -1,6 +1,6 @@
-import SubscribeModalButton from './SubscribeModalButton';
+import SubscribeModalButton from './buttons/SubscribeModalButton';
 import HeroImageSlider from './HeroImageSlider';
-import LandingButton from './HeroButton';
+import LandingButton from './buttons/HeroButton';
 import Link from 'next/link';
 export default function HeroSection() {
   return (

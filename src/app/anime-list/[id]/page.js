@@ -1,6 +1,6 @@
 import { getAnimeList } from '@/utils/api';
 import { getProfile } from '@/utils/api';
-import AnimeCardList from '@/components/AnimeCardList';
+import AnimeCardList from '@/components/anime/AnimeCardList';
 
 export default async function AnimeListPage({ params }) {
   const id = params.id;

@@ -1,13 +1,12 @@
-import AnimeCardList from '@/components/AnimeCardList';
+import AnimeCardList from '@/components/anime/AnimeCardList';
 import PaginationControls from '@/components/PaginationControls';
-import AnimeSearchBar from '@/components/AnimeSearchBar';
+import AnimeSearchBar from '@/components/anime/AnimeSearchBar';
 
 import { getFilterdAnime } from '@/utils/api';
-import AnimeDynamicHeading from '@/components/AnimeDynamicHeading';
+import AnimeDynamicHeading from '@/components/anime/AnimeDynamicHeading';
 import { Suspense } from 'react';
 import Loader from '@/components/Loader';
-import AnimeFiltersSidebar from '@/components/AnimeFiltersSidebar';
-import AnimeBrowserAdvertisement from '@/components/AnimeBrowserAdvertisement';
+import AnimeFiltersSidebar from '@/components/anime/AnimeFiltersSidebar';
 
 export default async function AnimePage({ searchParams }) {
   const defaultLimit = 10;
@@ -102,7 +101,6 @@ export default async function AnimePage({ searchParams }) {
           <PaginationControls pagination={data?.pagination} />
         </Suspense>
       </div>
-      <AnimeBrowserAdvertisement />
     </div>
   );
 }
