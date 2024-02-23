@@ -23,7 +23,7 @@ export default async function CharacterPage({ params }) {
   return (
     <section>
       <CharacterBanner character={character} />
-      <div className='mt-12 px-4 flex flex-col md:flex-row gap-6'>
+      <div className='mt-8 px-4 flex flex-col md:flex-row gap-6'>
         <StickyAside className='md:items-start self-start flex flex-col gap-2 items-center md:min-w-[300px] md:top-4 md:w-[300px]'>
           <ClickableImage src={character.images.webp.image_url} alt={character.name} width={300} height={450} />
           <CharacterStats character={character} />

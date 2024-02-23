@@ -41,9 +41,17 @@ const Slider = React.forwardRef(({ className, min, max, step, formatLabel, value
               type='number'
               value={value}
               onChange={(e) => {
-                const newValues = [...localValues];
-                newValues[index] = e.target.value;
-                handleValueChange(newValues);
+                const newValue = parseFloat(e.target.value);
+                if (!isNaN(newValue)) {
+                  const newValues = [...localValues];
+                  newValues[index] = newValue;
+                  if (index === 0 && newValue > newValues[1]) {
+                    newValues[0] = newValues[1];
+                  } else if (index === 1 && newValue < newValues[0]) {
+                    newValues[1] = newValues[0];
+                  }
+                  handleValueChange(newValues);
+                }
               }}
             />
             {index === 0 && <span className='text-primary'>-</span>}

@@ -19,7 +19,7 @@ export default function AnimeCard({ anime, role, small }) {
         backgroundRepeat: 'no-repeat',
       }}
       className={cn(
-        'min-w-[150px] min-h-[225px] aspect-[1/1.5] h-full w-full md:min-w-[175px] md:min-h-[262.5px] lg:min-w-[225px] lg:min-h-[337.5px] 2xl:min-w-[300px] 2xl:min-h-[450px] rounded-2xl relative px-2 lg:px-5 py-2 max-w-[400px] no-drag cursor-pointer',
+        'min-w-[150px] min-h-[225px] aspect-[1/1.5] h-full w-full md:min-w-[175px] md:min-h-[262.5px] lg:min-w-[225px] lg:min-h-[337.5px] 3xl:min-w-[300px] 3xl:min-h-[450px] rounded-2xl relative px-2 lg:px-5 py-2 max-w-[400px] no-drag cursor-pointer',
         small && 'max-w-[300px]'
       )}>
       <Link href={`/anime/${anime?.mal_id}`} draggable={false} className='absolute top-0 left-0 w-full h-full z-20' />

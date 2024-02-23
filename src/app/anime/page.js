@@ -9,29 +9,13 @@ import Loader from '@/components/Loader';
 import AnimeFiltersSidebar from '@/components/anime/AnimeFiltersSidebar';
 
 export default async function AnimePage({ searchParams }) {
-  const defaultLimit = 10;
-
-  const calculateLimit = () => {
-    if (typeof window === 'undefined') return 20;
-
-    const windowWidth = window.innerWidth;
-
-    if (windowWidth >= 3248) return 20;
-    if (windowWidth > 2923) return 20;
-    if (windowWidth <= 2923 && windowWidth > 2599) return 24;
-    if (windowWidth <= 2599 && windowWidth > 2275) return 21;
-    if (windowWidth <= 2275 && windowWidth > 1951) return 24;
-    if (windowWidth <= 1951 && windowWidth > 1627) return 25;
-    if (windowWidth <= 1627 && windowWidth > 1303) return 24;
-  };
-
-  const limit = calculateLimit();
+  const defaultLimit = 20;
 
   const { page = '1', order = 'members', status = 'all', search = '', type = 'all', genres = '', min_score = '', max_score = '' } = searchParams;
 
   const orderParam = `order_by=${order}`;
   const sortParam = '&sort=desc';
-  const limitParam = `&limit=${limit}`;
+  const limitParam = `&limit=${defaultLimit}`;
   const statusParam = status && status !== 'all' ? `&status=${status}` : '';
   const pageParam = `&page=${page}`;
   const searchParam = search ? `&q=${search}` : '';
@@ -96,7 +80,7 @@ export default async function AnimePage({ searchParams }) {
             </Suspense>
           </div>
         </div>
-        <AnimeCardList data={data?.data} limit={limit} className='mt-3' />
+        <AnimeCardList data={data?.data} limit={defaultLimit} className='mt-3' />
         <Suspense fallback={<Loader />}>
           <PaginationControls pagination={data?.pagination} />
         </Suspense>

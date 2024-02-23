@@ -9,5 +9,5 @@ export default async function AnimeRecommendations({ id }) {
 
   const recommendationsData = await recommendations?.slice(0, recommendationsLimit);
 
-  return <AnimeCardList data={recommendationsData} limit={10} isRecommendations />;
+  return <AnimeCardList className='mt-6' data={recommendationsData} limit={10} isRecommendations />;
 }

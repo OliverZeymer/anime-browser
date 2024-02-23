@@ -52,8 +52,8 @@ export const metadata = {
 export const revalidate = 3600;
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className={`${GeistSans.className} dark`} style={{ colorScheme: 'dark' }}>
-      <body className={cn('relative h-full font-sans antialiased')}>
+    <html lang='en' className={`${GeistSans.className} dark antialiased`} style={{ colorScheme: 'dark' }}>
+      <body className={cn('relative h-full font-sans')}>
         <TopLevelClient>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <NextTopLoader color='#5A2E98' />

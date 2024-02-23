@@ -22,7 +22,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
-
+    --animebrowser: #651cba;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
 
@@ -93,6 +93,16 @@
 
 li {
   list-style: none;
+}
+
+.recharts-bar-rectangle {
+  fill: var(--animebrowser);
+}
+.recharts-tooltip-wrapper {
+  text-transform: capitalize;
+}
+.recharts-tooltip-cursor {
+  display: none;
 }
 
 .swiper {

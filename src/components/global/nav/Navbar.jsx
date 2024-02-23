@@ -41,11 +41,11 @@ export default function Navbar() {
         <div className={cn('flex items-center gap-6 ml-auto', isPathWithBanner ? 'text-white' : 'text-primary')}>
           <SearchModalButton />
           <ThemeToggle isPathWithBanner={isPathWithBanner} />
-          <Button aria-label='go to settings' variant='ghost' className='p-1 h-auto'>
+          {/* <Button aria-label='go to settings' variant='ghost' className='p-1 h-auto'>
             <Link href='/settings'>
               <Settings />
             </Link>
-          </Button>
+          </Button> */}
           <NavbarAvatar auth={auth} cookieCheckDone={cookieCheckDone} isPathWithBanner={isPathWithBanner} />
         </div>
       </nav>

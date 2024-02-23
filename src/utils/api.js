@@ -31,10 +31,15 @@ export const getFilterdAnime = async (params) => {
 export const getAnimeBySearch = async (query, limit) => {
   const response = await fetch(`${BASE_API}/anime?q=${query}&limit=${limit}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
-}
+};
 
 export const getAnimeById = async (id) => {
   const response = await fetch(`${BASE_API}/anime${id && '/' + id}/full`, { next: { revalidate: 3600 } });
+  return handleResponse(response);
+};
+
+export const getAnimeStatsById = async (id) => {
+  const response = await fetch(`${BASE_API}/anime${id && '/' + id}/statistics`, { next: { revalidate: 3600 } });
   return handleResponse(response);
 };
 
