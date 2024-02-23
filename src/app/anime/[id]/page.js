@@ -2,15 +2,14 @@ import AnimeBanner from '@/components/anime/AnimeBanner';
 import AnimeCharacters from '@/components/anime/AnimeCharacters';
 import AnimeRecommendations from '@/components/anime/AnimeRecommendations';
 import AnimeReviewList from '@/components/anime/AnimeReviewList';
-import dynamic from 'next/dynamic';
 import AnimeStats from '@/components/anime/AnimeStats';
 import AnimeSynopsis from '@/components/anime/AnimeSynopsis';
 import AnimeYoutubeEmbed from '@/components/anime/AnimeYoutubeEmbed';
 import ClickableImage from '@/components/ClickableImage';
 import StickyAside from '@/components/StickyAside';
+import AnimeStatistics from '@/components/anime/AnimeStatistics';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAnimeById, getAnimeStatsById } from '@/utils/api';
-const AnimeStatistics = dynamic(() => import('@/components/anime/AnimeStatistics'), { ssr: false });
+import { getAnimeById } from '@/utils/api';
 export async function generateMetadata({ params }) {
   const data = await getAnimeById(params.id);
   const anime = data.data;
@@ -27,9 +26,7 @@ export async function generateMetadata({ params }) {
 }
 export default async function AnimePage({ params }) {
   const data = await getAnimeById(params.id);
-  const statsData = await getAnimeStatsById(params.id);
   const anime = data.data;
-  const statistics = statsData.data;
 
   return (
     <section>
@@ -46,7 +43,7 @@ export default async function AnimePage({ params }) {
           <AnimeCharacters id={params.id} />
           <div className='flex h-full w-full flex-col 2xl:flex-row gap-6'>
             <AnimeYoutubeEmbed title='Trailer' url={anime?.trailer?.embed_url} />
-            <AnimeStatistics statistics={statistics} />
+            <AnimeStatistics id={params.id} />
           </div>
         </div>
       </div>

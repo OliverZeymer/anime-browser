@@ -3,8 +3,7 @@ import AnimeReview from './AnimeReview';
 import NoResultsFound from '../NoResultsFound';
 
 export default async function AnimeReviewList({ id }) {
-  // Adding a delay of 3 seconds using setTimeout
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const reviewsData = await getAnimeReviews(id);
   const reviews = reviewsData.data;
