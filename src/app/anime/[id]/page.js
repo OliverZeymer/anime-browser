@@ -2,7 +2,7 @@ import AnimeBanner from '@/components/anime/AnimeBanner';
 import AnimeCharacters from '@/components/anime/AnimeCharacters';
 import AnimeRecommendations from '@/components/anime/AnimeRecommendations';
 import AnimeReviewList from '@/components/anime/AnimeReviewList';
-import AnimeStatistics from '@/components/anime/AnimeStatistics';
+import dynamic from 'next/dynamic';
 import AnimeStats from '@/components/anime/AnimeStats';
 import AnimeSynopsis from '@/components/anime/AnimeSynopsis';
 import AnimeYoutubeEmbed from '@/components/anime/AnimeYoutubeEmbed';
@@ -10,6 +10,7 @@ import ClickableImage from '@/components/ClickableImage';
 import StickyAside from '@/components/StickyAside';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getAnimeById, getAnimeStatsById } from '@/utils/api';
+const AnimeStatistics = dynamic(() => import('@/components/anime/AnimeStatistics'), { ssr: false });
 export async function generateMetadata({ params }) {
   const data = await getAnimeById(params.id);
   const anime = data.data;
