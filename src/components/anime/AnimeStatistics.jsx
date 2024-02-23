@@ -26,7 +26,7 @@ export default function AnimeStatistics({ statistics }) {
       value: statistics?.on_hold,
     },
   ];
-  const sortedWatchStats = watchStats.sort((a, b) => b.value - a.value);
+  const sortedWatchStats = watchStats?.sort((a, b) => b?.value - a?.value);
   const valueFormatter = (number) => {
     return number.toLocaleString('en-US');
   };
@@ -36,7 +36,6 @@ export default function AnimeStatistics({ statistics }) {
       <h4 className='text-2xl font-bold mb-6'>Statistics</h4>
       {statistics ? (
         <>
-          {' '}
           <h5 className='text-lg font-bold mb-3'>Watching Stats</h5>
           <BarList color='animebrowser' valueFormatter={valueFormatter} data={sortedWatchStats} />
           <h5 className='text-lg font-bold mt-6 mb-3'>Score Distribution</h5>
