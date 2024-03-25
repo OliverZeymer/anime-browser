@@ -181,7 +181,9 @@ module.exports = {
   },
   plugins: [
     require('tailwindcss-animate'),
-    [require('@headlessui/tailwindcss'), require('@tailwindcss/forms')],
+    require('@headlessui/tailwindcss'),
+    require('@tailwindcss/forms'),
+    require('tailwindcss-3d'),
     function ({ addVariant }) {
       addVariant('child', '& > *');
       addVariant('child-hover', '& > *:hover');

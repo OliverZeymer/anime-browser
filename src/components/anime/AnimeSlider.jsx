@@ -10,9 +10,7 @@ import Link from 'next/link';
 function PrevArrow(props) {
   const { onClick, className } = props;
   return (
-    <button
-      className={`absolute !z-30 top-1/2 flex !left-0 rounded-r-2xl text-white transform !h-full !w-fit items-center -translate-y-1/2 !bg-black/75 focus:outline-none ${className}`}
-      onClick={onClick}>
+    <button className={`absolute !z-30  flex !left-0 rounded-r-2xl text-white transform !h-full !w-fit items-center !bg-black/75 focus:outline-none ${className}`} onClick={onClick}>
       <ChevronLeft size={58} className='inline-block text-primary' />
     </button>
   );
@@ -21,9 +19,7 @@ function PrevArrow(props) {
 function NextArrow(props) {
   const { onClick, className } = props;
   return (
-    <button
-      className={`absolute !z-30 top-1/2 flex !right-0 rounded-l-2xl text-white transform !h-full !w-fit items-center -translate-y-1/2 !bg-black/50 focus:outline-none ${className}`}
-      onClick={onClick}>
+    <button className={`absolute !z-30 flex !right-0 rounded-l-2xl text-white transform !h-full !w-fit items-center !bg-black/50 focus:outline-none ${className}`} onClick={onClick}>
       <ChevronRight size={58} className='inline-block text-primary' />
     </button>
   );
