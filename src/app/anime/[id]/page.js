@@ -9,15 +9,22 @@ import PrimaryCard from '@/components/PrimaryCard';
 export async function generateMetadata({ params }) {
   const data = await getAnimeById(params.id);
   const anime = data.data;
+  const ogImageUrl = anime.images?.webp?.large_image_url;
   return {
-    title: anime.title_english ? anime.title_english : anime.title_japanese ? anime.title_japanese : anime.title,
-    description: anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '')?.trim()
-      ? anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '')?.trim()
-      : anime.title_english
-      ? anime.title_english
-      : anime.title_japanese
-      ? anime.title_japanese
-      : anime.title,
+    title: anime.title_english || anime.title_japanese || anime.title,
+    description: anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '').trim() ||
+                 anime.title_english || anime.title_japanese || anime.title,
+    openGraph: {
+      title: anime.title_english || anime.title_japanese || anime.title,
+      description: anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '').trim() ||
+                   anime.title_english || anime.title_japanese || anime.title,
+      images: ogImageUrl ? [{
+        url: ogImageUrl,
+        width: 800,
+        height: 600,
+        alt: anime.title_english || anime.title_japanese || anime.title,
+      }] : [],
+    },
   };
 }
 export default async function AnimePage({ params }) {
