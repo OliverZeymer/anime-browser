@@ -1,15 +1,10 @@
-import { Suspense } from 'react';
-import PrimaryCard from '../PrimaryCard';
-import AnimeLoadStatistics from './AnimeLoadStatistics';
-import Loader from '../Loader';
+import AnimeStatisticsCharts from './AnimeStatisticsCharts';
+import { getAnimeStatsById } from '@/utils/api';
 
 export default async function AnimeStatistics({ id }) {
+  await new Promise((resolve) => setTimeout(resolve, 1100));
+  const statsData = await getAnimeStatsById(id);
   return (
-    <PrimaryCard className='w-full font-medium 2xl:w-[30%]'>
-      <h4 className='text-2xl font-bold mb-6'>Statistics</h4>
-      <Suspense fallback={<Loader />}>
-        <AnimeLoadStatistics id={id} />
-      </Suspense>
-    </PrimaryCard>
+    <AnimeStatisticsCharts statistics={statsData?.data} />
   );
 }

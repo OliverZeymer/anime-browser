@@ -1,3 +1,4 @@
+"use server";
 import { BASE_API } from './constants';
 
 const handleResponse = async (response) => {

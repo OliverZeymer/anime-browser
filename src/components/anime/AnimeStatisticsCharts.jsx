@@ -1,45 +1,97 @@
 'use client';
-import { BarList, BarChart } from '@tremor/react';
-import ErrorCard from '../ErrorCard';
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+
 export default function AnimeStatisticsCharts({ statistics }) {
-  const watchStats = [
+  console.log(statistics);
+  const watchChartData = [
     {
       name: 'Completed',
-      value: statistics?.completed,
+      viewers: statistics?.completed,
     },
     {
-      name: 'Watching Now',
-      value: statistics?.watching,
+      name: 'Watching',
+      viewers: statistics?.watching,
     },
     {
-      name: 'Plan to Watch',
-      value: statistics?.plan_to_watch,
+      name: 'Plan to',
+      viewers: statistics?.plan_to_watch,
     },
     {
       name: 'Dropped',
-      value: statistics?.dropped,
+      viewers: statistics?.dropped,
     },
     {
       name: 'On Hold',
-      value: statistics?.on_hold,
+      viewers: statistics?.on_hold,
     },
   ];
-  const sortedWatchStats = watchStats?.sort((a, b) => b?.value - a?.value);
-  const valueFormatter = (number) => {
-    return number.toLocaleString('en-US');
+  const watchChartConfig = {
+    viewers: {
+      label: 'Viewers',
+      color: 'hsl(var(--chart-1))',
+    },
+  };
+  const scoreChartConfig = {
+    votes: {
+      label: 'Votes',
+      color: 'var(--animebrowser)',
+    },
   };
   return (
     <>
-      {statistics ? (
-        <>
-          <h5 className='text-lg font-bold mb-3'>Watching Stats</h5>
-          <BarList color='animebrowser' valueFormatter={valueFormatter} data={sortedWatchStats} />
-          <h5 className='text-lg font-bold mt-6 mb-3'>Score Distribution</h5>
-          <BarChart showLegend={false} colors={['animebrowser']} data={statistics?.scores} categories={['votes']} index='score' valueFormatter={valueFormatter} />{' '}
-        </>
-      ) : (
-        <ErrorCard className='w-full h-full flex flex-col items-center justify-center' message={`No statistics found.`}></ErrorCard>
-      )}
+      <h3 className='text-lg font-bold mb-3'>Watch Status</h3>
+      <ChartContainer config={watchChartConfig}>
+        <BarChart
+          margin={{
+            top: 20,
+          }}
+          accessibilityLayer
+          data={watchChartData}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            tickFormatter={(tick) => {
+              return tick.toLocaleString();
+            }}
+            dataKey='name'
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+          <Bar dataKey='viewers' fill='var(--animebrowser)' radius={8}>
+            <LabelList
+              position='top'
+              offset={12}
+              className='fill-foreground'
+              formatter={(value) =>
+                new Intl.NumberFormat('en-US', {
+                  notation: 'compact',
+                  compactDisplay: 'short',
+                }).format(value)
+              }
+              fontSize={14}
+            />
+          </Bar>
+        </BarChart>
+      </ChartContainer>
+      <h3 className='text-lg font-bold mt-3'>Score Distribution</h3>
+      <ChartContainer config={scoreChartConfig} className='mr-auto aspect-square max-h-[250px] lg:max-h-80'>
+        <RadarChart data={statistics?.scores}>
+          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+          <PolarAngleAxis dataKey='score' />
+          <PolarGrid />
+          <Radar
+            dataKey='votes'
+            fill='var(--animebrowser)'
+            fillOpacity={0.6}
+            dot={{
+              r: 4,
+              fillOpacity: 1,
+            }}
+          />
+        </RadarChart>
+      </ChartContainer>
     </>
   );
 }
