@@ -3,8 +3,6 @@ import AnimeReview from './AnimeReview';
 import NoResultsFound from '../NoResultsFound';
 
 export default async function AnimeReviewList({ id }) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   const reviewsData = await getAnimeReviews(id);
   const reviews = reviewsData.data;
 

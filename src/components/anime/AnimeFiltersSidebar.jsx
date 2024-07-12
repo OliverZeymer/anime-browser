@@ -18,7 +18,7 @@ export default function AnimeFiltersSidebar({ filterParams }) {
     <StickyAside className='hidden md:flex whitespace-nowrap flex-col gap-4 w-fit pr-2 overflow-y-auto h-screen md:top-4'>
       <div className='flex flex-col gap-4 overflow-hidden'>
         <h2 className='text-2xl font-semibold'>Filters</h2>
-        <Input type='text' placeholder='Search filters...' />
+        {/* <Input type='text' placeholder='Search filters...' /> */}
         {filterParams.map((param) => (
           <Suspense key={param.title} fallback={<div>Loading...</div>}>
             <SelectFilter key={param.title} title={param.title} param={param.param} options={param.options} />

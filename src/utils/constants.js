@@ -92,14 +92,14 @@ export const Navigation = [
     params: {
       status: 'upcoming',
     },
-    icon: Clock,
-  },
-  {
-    name: 'New Releases',
-    href: '/anime/new',
-    params: {},
     icon: Sparkles,
   },
+  // {
+  //   name: 'New Releases',
+  //   href: '/anime/new',
+  //   params: {},
+  //   icon: Sparkles,
+  // },
 ];
 export const Socials = [
   {

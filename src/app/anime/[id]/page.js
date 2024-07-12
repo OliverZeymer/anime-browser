@@ -10,19 +10,20 @@ export async function generateMetadata({ params }) {
   const data = await getAnimeById(params.id);
   const anime = data.data;
   const ogImageUrl = anime.images?.webp?.large_image_url;
+  const resolvedTitle = anime.title_english || anime.title_japanese || anime.title;
   return {
-    title: anime.title_english || anime.title_japanese || anime.title,
+    title: `${resolvedTitle} - AnimeBrowser`,
     description: anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '').trim() ||
-                 anime.title_english || anime.title_japanese || anime.title,
+      resolvedTitle,
     openGraph: {
-      title: anime.title_english || anime.title_japanese || anime.title,
+      title: resolvedTitle,
       description: anime.synopsis?.replace(/\[Written by MAL Rewrite\]$/, '').trim() ||
-                   anime.title_english || anime.title_japanese || anime.title,
+        resolvedTitle,
       images: ogImageUrl ? [{
         url: ogImageUrl,
         width: 800,
         height: 600,
-        alt: anime.title_english || anime.title_japanese || anime.title,
+        alt: resolvedTitle,
       }] : [],
     },
   };

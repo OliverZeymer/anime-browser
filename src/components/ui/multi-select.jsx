@@ -56,9 +56,9 @@ function MultiSelect({ options, selected, onChange, className, ...props }) {
             <ChevronDown className='h-4 w-4 shrink-0 opacity-50' />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className='w-[200px] p-0' container={containerRef.current}>
+        <PopoverContent className='p-0 w-[var(--radix-popper-anchor-width)]' container={containerRef.current}>
           <Command className={cn(className, 'custom-scrollbar')}>
-            <CommandInput placeholder='Search ...' />
+            <CommandInput placeholder='Find Genres...' className="h-fit py-1.5 border-input" />
             <CommandEmpty>No item found.</CommandEmpty>
             <CommandGroup className='max-h-64 overflow-y-auto'>
               {options.map((option) => (

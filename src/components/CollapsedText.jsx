@@ -1,6 +1,7 @@
 'use client';
+import { cn } from '@/lib/utils';
 import { useState } from 'react';
-export default function CollapsedText({ text, isReview }) {
+export default function CollapsedText({ text, isReview, className }) {
   const [showMore, setShowMore] = useState(false);
   const maxText = 500 + (isReview ? 1000 : 0);
   const toggleShowMore = () => {
@@ -10,7 +11,7 @@ export default function CollapsedText({ text, isReview }) {
   const truncatedText = text ? text.slice(0, maxText) : '';
   if (!text || text.length === 0) return <p className='lg:text-lg mt-2 leading-relaxed'>No text available.</p>;
   return (
-    <p className='lg:text-lg mt-2 leading-relaxed' style={{ whiteSpace: 'pre-line' }}>
+    <p className={cn('lg:text-lg mt-2 leading-relaxed', className)} style={{ whiteSpace: 'pre-line' }}>
       {truncatedText ? (
         <>
           {/* Display the truncated text */}

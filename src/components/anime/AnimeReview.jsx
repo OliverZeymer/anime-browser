@@ -21,7 +21,7 @@ export default function AnimeReview({ review }) {
         </div>
         <AnimeReviewStars rating={review.score} />
       </div>
-      <CollapsedText isReview text={review.review} />
+      <CollapsedText className="text-sm lg:text-base" isReview text={review.review} />
     </PrimaryCard>
   );
 }

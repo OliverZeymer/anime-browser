@@ -19,7 +19,7 @@ export default function HeroSection() {
         </p>
         <div className='flex flex-col gap-4 mt-12 sm:flex-row w-fit'>
           <LandingButton />
-          <SubscribeModalButton className='text-[#171717] bg-[#fafafa] hover:bg-[#fafafa]/90' />
+          {/* <SubscribeModalButton className='text-[#171717] bg-[#fafafa] hover:bg-[#fafafa]/90' /> */}
         </div>
       </div>
     </section>

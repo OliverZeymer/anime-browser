@@ -3,7 +3,6 @@ import { Bar, BarChart, CartesianGrid, LabelList, XAxis, PolarAngleAxis, PolarGr
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
 export default function AnimeStatisticsCharts({ statistics }) {
-  console.log(statistics);
   const watchChartData = [
     {
       name: 'Completed',
@@ -76,7 +75,7 @@ export default function AnimeStatisticsCharts({ statistics }) {
         </BarChart>
       </ChartContainer>
       <h3 className='text-lg font-bold mt-3'>Score Distribution</h3>
-      <ChartContainer config={scoreChartConfig} className='mr-auto aspect-square max-h-[250px] lg:max-h-80'>
+      <ChartContainer config={scoreChartConfig} className='mr-auto aspect-square 2xl:max-h-80 3xl:max-h-full'>
         <RadarChart data={statistics?.scores}>
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <PolarAngleAxis dataKey='score' />

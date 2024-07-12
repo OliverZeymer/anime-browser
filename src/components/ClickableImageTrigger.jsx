@@ -8,8 +8,8 @@ import { useState } from 'react';
 export default function ClickableImageTrigger({ src, alt, className }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <DialogTrigger className='w-full relative' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <img src={src} alt={alt} className={`w-full sm:w-1/2 mx-auto md:w-[300px] md:h-[450px] rounded-2xl object-cover ${className}`} />
+    <DialogTrigger className='w-full xs:max-w-xs mx-auto relative' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <img src={src} alt={alt} className={`w-full xs:max-w-xs mx-auto md:w-[300px] md:h-[450px] rounded-2xl object-cover ${className}`} />
       <AnimatePresence>
         {isHovered && (
           <motion.div
