@@ -44,7 +44,7 @@ export default function AnimeStatisticsCharts({ statistics }) {
       <ChartContainer config={watchChartConfig}>
         <BarChart
           margin={{
-            top: 20,
+            top: 28,
           }}
           accessibilityLayer
           data={watchChartData}>
