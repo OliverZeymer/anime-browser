@@ -1,5 +1,4 @@
 import NextTopLoader from 'nextjs-toploader';
-import localFont from 'next/font/local';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import TopLevelClient from '@/components/TopLevelClient';
@@ -7,37 +6,8 @@ import Navbar from '@/components/global/nav/Navbar';
 import { Toaster } from '@/components/ui/sonner';
 import Footer from '@/components/global/Footer';
 import ThemeProvider from '@/components/global/ThemeProvider';
-import { GeistSans } from 'geist/font/sans';
-const gilroy = localFont({
-  src: [
-    {
-      path: '../../public/fonts/Gilroy-Light.ttf',
-      weight: '300',
-    },
-    {
-      path: '../../public/fonts/Gilroy-Regular.ttf',
-      weight: '400',
-    },
-    {
-      path: '../../public/fonts/Gilroy-Medium.ttf',
-      weight: '500',
-    },
-    {
-      path: '../../public/fonts/Gilroy-SemiBold.ttf',
-      weight: '600',
-    },
-    {
-      path: '../../public/fonts/Gilroy-Bold.ttf',
-      weight: '700',
-    },
-    {
-      path: '../../public/fonts/Gilroy-ExtraBold.ttf',
-      weight: '800',
-    },
-  ],
-  variable: '--font-gilroy',
-});
-
+import { Inter } from 'next/font/google'
+const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Anime Browser',
   icons: {
@@ -52,8 +22,8 @@ export const metadata = {
 export const revalidate = 3600;
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className={`${GeistSans.className} dark antialiased`} style={{ colorScheme: 'dark' }}>
-      <body className={cn('relative h-full font-sans')}>
+    <html lang='en' className='antialiased' style={{ colorScheme: 'dark' }}>
+      <body className={cn('relative h-full', inter.className)}>
         <TopLevelClient>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <NextTopLoader color='#5A2E98' />

@@ -24,6 +24,8 @@ export default function CharacterCarousel({ characters }) {
     <Carousel
       opts={{
         align: 'start',
+        skipSnaps: true,
+        loop: true,
       }}
       className='max-w-[calc(100vw-175px)] md:max-w-[calc(100vw-500px)] mx-auto select-none w-full mt-4'>
       <CarouselContent>

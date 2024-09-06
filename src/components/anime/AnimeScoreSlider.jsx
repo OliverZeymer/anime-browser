@@ -2,67 +2,43 @@
 
 import { Label } from '@/components/ui/label';
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Slider } from '../ui/multi-range-slider';
 import { debounce } from 'lodash';
-export default function AnimeScoreSlider({}) {
+
+export default function AnimeScoreSlider() {
   const pathname = usePathname();
-  const min = 0;
-  const max = 10;
-  const step = 0.01;
+  const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [minScore, setMinScore] = useState(min);
-  const [maxScore, setMaxScore] = useState(max);
+  const minScoreParam = parseFloat(searchParams.get('min_score')) || 0;
+  const maxScoreParam = parseFloat(searchParams.get('max_score')) || 10;
+
+  const [minScore, setMinScore] = useState(minScoreParam);
+  const [maxScore, setMaxScore] = useState(maxScoreParam);
 
   useEffect(() => {
-    const currentSearchParams = new URLSearchParams(router.query);
-    const minScoreParam = currentSearchParams.get('min_score');
-    const maxScoreParam = currentSearchParams.get('max_score');
+    const params = new URLSearchParams(searchParams);
 
-    if (minScoreParam) {
-      setMinScore(parseFloat(minScoreParam));
-    }
+    if (minScore === 0) params.delete('min_score');
+    else params.set('min_score', minScore.toString());
 
-    if (maxScoreParam) {
-      setMaxScore(parseFloat(maxScoreParam));
-    }
-  }, [router.query]);
+    if (maxScore === 10) params.delete('max_score');
+    else params.set('max_score', maxScore.toString());
 
-  useEffect(() => {
-    const currentSearchParams = new URLSearchParams(router.query);
-
-    const minScoreStr = minScore.toString();
-    const maxScoreStr = maxScore.toString();
-
-    if (minScore === min) {
-      currentSearchParams.delete('min_score');
-    } else {
-      currentSearchParams.set('min_score', minScoreStr);
-    }
-
-    if (maxScore === max) {
-      currentSearchParams.delete('max_score');
-    } else {
-      currentSearchParams.set('max_score', maxScoreStr);
-    }
-
-    const newURL = `${pathname}?${currentSearchParams.toString()}`;
+    const newURL = `${pathname}?${params.toString()}`;
     router.push(newURL, undefined, { shallow: true });
-  }, [minScore, maxScore, router]);
+  }, [minScore, maxScore, pathname, router, searchParams]);
 
-  const debouncedHandleRangeChange = debounce((value) => {
-    setMinScore(value[0]);
-    setMaxScore(value[1]);
+  const handleRangeChange = debounce(([newMin, newMax]) => {
+    setMinScore(newMin);
+    setMaxScore(newMax);
   }, 500);
 
-  const handleRangeChange = (value) => {
-    debouncedHandleRangeChange(value);
-  };
   return (
     <div className='flex flex-col gap-2'>
       <Label className='font-semibold'>Score</Label>
-      <Slider className='mt-2' min={min} max={max} step={step} range={[minScore, maxScore]} onValueChange={handleRangeChange} />
+      <Slider className='mt-2' min={0} max={10} step={0.01} value={[minScore, maxScore]} range={[minScore, maxScore]} onValueChange={handleRangeChange} />
     </div>
   );
 }

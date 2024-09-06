@@ -10,7 +10,7 @@ export default function AnimeYoutubeEmbed({ url, title }) {
         <iframe
           src={urlWithoutAutoplay}
           title='YouTube video player'
-          className='aspect-video w-full rounded-2xl'
+          className='aspect-video w-full rounded-2xl yt-trailer'
           allow='accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;'
           allowFullScreen></iframe>
       ) : (

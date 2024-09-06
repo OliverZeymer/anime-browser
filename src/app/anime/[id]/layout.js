@@ -17,12 +17,12 @@ export default async function AnimeLayout({ params, children }) {
     <section>
       <AnimeBanner anime={anime} />
       <div className='mt-8 px-4 flex flex-col w-full md:flex-row gap-6 items-center md:items-start'>
-        <div className="w-full md:w-fit flex flex-col">
-          <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} className="self-center" width={450} height={700} />
-          <StickyAside className='md:items-start md:self-start flex flex-col gap-2 items-center md:min-w-[300px] md:top-4 md:w-[300px]'>
+        <StickyAside className='md:items-start md:self-start flex flex-col gap-2 items-center md:w-[300px]'>
+          <div className='w-full md:w-fit flex flex-col'>
+            <ClickableImage src={anime?.images?.webp?.large_image_url} alt={anime?.title_english} className='self-center' width={450} height={700} />
             <AnimeStats anime={anime} />
-          </StickyAside>
-        </div>
+          </div>
+        </StickyAside>
         {children}
       </div>
       <ClientAnimeTabs id={params.id} />

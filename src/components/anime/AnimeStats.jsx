@@ -20,7 +20,7 @@ export default function AnimeStats({ anime }) {
   return (
     <PrimaryCard className='flex flex-col gap-2 w-full mt-2 md:max-w-[300px] items-center md:items-start'>
       <ul className='flex flex-col gap-2 w-full items-center md:items-start'>
-        <h3 className='text-xl font-semibold'>{anime?.title_english ? anime?.title_english : anime?.title}</h3>
+        <h3 className='text-xl font-bold'>{anime?.title_english ? anime?.title_english : anime?.title}</h3>
         {anime?.genres && (
           <li className='flex pb-1'>
             <div className='flex items-center gap-2 justify-center'>

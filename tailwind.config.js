@@ -23,9 +23,6 @@ module.exports = {
         '3xl': { raw: '(min-width: 2000px)' },
         'sm-height': { raw: '(max-height: 1080px)' },
       },
-      fontFamily: {
-        sans: ['var(--font-gilroy)'],
-      },
       colors: {
         tremor: {
           brand: {

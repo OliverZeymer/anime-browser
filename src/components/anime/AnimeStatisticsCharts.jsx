@@ -1,6 +1,7 @@
 'use client';
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, PolarAngleAxis, PolarGrid, Radar, RadarChart } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { useEffect, useState } from 'react';
 
 export default function AnimeStatisticsCharts({ statistics }) {
   const watchChartData = [
@@ -37,8 +38,24 @@ export default function AnimeStatisticsCharts({ statistics }) {
       color: 'var(--animebrowser)',
     },
   };
+  const [trailerHeight, setTrailerHeight] = useState(void 0);
+  useEffect(() => {
+    const trailer = document.querySelector('.yt-trailer');
+    if (!trailer) {
+      return;
+    }
+    setTrailerHeight(trailer.offsetHeight);
+    window.addEventListener('resize', () => {
+      setTrailerHeight(trailer.offsetHeight);
+    });
+    return () => {
+      window.removeEventListener('resize', () => {
+        setTrailerHeight(trailer.offsetHeight);
+      });
+    };
+  }, []);
   return (
-    <>
+    <div className='animeStatCharts' style={{ height: trailerHeight + 'px' }}>
       <h3 className='text-lg font-bold mb-3'>Watch Status</h3>
       <ChartContainer config={watchChartConfig}>
         <BarChart
@@ -75,7 +92,7 @@ export default function AnimeStatisticsCharts({ statistics }) {
         </BarChart>
       </ChartContainer>
       <h3 className='text-lg font-bold mt-3'>Score Distribution</h3>
-      <ChartContainer config={scoreChartConfig} className='mr-auto aspect-square 2xl:max-h-80 3xl:max-h-full'>
+      <ChartContainer config={scoreChartConfig}>
         <RadarChart data={statistics?.scores}>
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <PolarAngleAxis dataKey='score' />
@@ -91,6 +108,6 @@ export default function AnimeStatisticsCharts({ statistics }) {
           />
         </RadarChart>
       </ChartContainer>
-    </>
+    </div>
   );
 }
