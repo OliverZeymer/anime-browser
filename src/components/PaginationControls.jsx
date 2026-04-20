@@ -10,12 +10,15 @@ export default function PaginationControls({ pagination }) {
     return null;
   }
 
-  const generatePaginationLink = (page) => {
+  const hrefForPage = (page) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
-    current.set("page", page);
+    current.set('page', String(page));
     const search = current.toString();
-    const query = search ? `?${search}` : '';
-    const href = `${pathname}${query}`;
+    return search ? `${pathname}?${search}` : pathname;
+  };
+
+  const generatePaginationLink = (page) => {
+    const href = hrefForPage(page);
     return (
       <PaginationItem key={page}>
         <PaginationLink isActive={page === pagination.current_page} href={href}>
@@ -56,11 +59,23 @@ const renderPaginationLinks = () => {
     <Pagination className='mt-6'>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href={pagination.current_page > 1 ? `?page=${pagination.current_page - 1}` : ''} />
+          <PaginationPrevious
+            href={pagination.current_page > 1 ? hrefForPage(pagination.current_page - 1) : '#'}
+            aria-disabled={pagination.current_page <= 1}
+            className={pagination.current_page <= 1 ? 'pointer-events-none opacity-40' : undefined}
+          />
         </PaginationItem>
         {renderPaginationLinks()}
         <PaginationItem>
-          <PaginationNext href={`?page=${pagination.current_page + 1}`} />
+          <PaginationNext
+            href={
+              pagination.current_page < pagination.last_visible_page ? hrefForPage(pagination.current_page + 1) : '#'
+            }
+            aria-disabled={pagination.current_page >= pagination.last_visible_page}
+            className={
+              pagination.current_page >= pagination.last_visible_page ? 'pointer-events-none opacity-40' : undefined
+            }
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

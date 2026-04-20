@@ -4,13 +4,17 @@ import AnimeFilterButton from './AnimeFilterButton';
 import { Input } from '../ui/input';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '../ui/button';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 export default function AnimeSearchBar({ order, status, search, type, genres }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [searchValue, setSearchValue] = useState(search);
+
+  useEffect(() => {
+    setSearchValue(search);
+  }, [search]);
   const onSubmit = (event) => {
     event.preventDefault();
     const current = new URLSearchParams(Array.from(searchParams.entries())); // -> has to use this form

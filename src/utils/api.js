@@ -15,11 +15,6 @@ export const getAnime = async () => {
   return handleResponse(response);
 };
 
-export const getFilterdAnime = async (params) => {
-  const response = await fetch(`${BASE_API}/anime?${params}`, { next: { revalidate: 3600 } });
-  return handleResponse(response);
-};
-
 export const getAnimeBySearch = async (query, limit) => {
   const response = await fetch(`${BASE_API}/anime?q=${query}&limit=${limit}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
