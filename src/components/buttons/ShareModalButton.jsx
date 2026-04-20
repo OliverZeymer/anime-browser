@@ -7,6 +7,7 @@ import { ImageIcon, Share } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Input } from '../ui/input';
 import CopyInput from '../CopyInput';
+import Image from 'next/image';
 
 export default function ShareModalButton({ className }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -30,9 +31,11 @@ export default function ShareModalButton({ className }) {
               <ImageIcon size={32} className='w-16 h-16 text-gray-500' />
             </div>
           )}
-          <img
+          <Image
             src='/images/one-piece.webp'
             alt='One Piece Cover'
+            width={448}
+            height={288}
             className={`w-full max-w-md max-h-72 object-cover rounded-t-2xl transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={handleImageLoad}
           />

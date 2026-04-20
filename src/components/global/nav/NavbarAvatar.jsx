@@ -3,6 +3,7 @@ import SignInModalButton from '../../buttons/SignInModalButton';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { User } from 'lucide-react';
+import Image from 'next/image';
 
 export default function NavbarAvatar({ auth, cookieCheckDone, isPathWithBanner }) {
   return (
@@ -15,10 +16,13 @@ export default function NavbarAvatar({ auth, cookieCheckDone, isPathWithBanner }
             <DropdownMenu>
               <DropdownMenuTrigger className='outline-none'>
                 {auth?.profilePicture ? (
-                  <img
+                  <Image
                     className={auth?.profilePicture ? 'rounded-full w-10 h-10 object-cover' : 'rounded-full border border-gray-400 w-10 h-10 object-cover'}
                     src={auth?.profilePicture}
                     alt='user-profile'
+                    width={40}
+                    height={40}
+                    unoptimized={typeof auth?.profilePicture === 'string' && auth.profilePicture.startsWith('data:')}
                   />
                 ) : (
                   <div className='rounded-full border border-primary flex items-center justify-center w-10 h-10'>

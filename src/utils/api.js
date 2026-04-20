@@ -1,4 +1,5 @@
 "use server";
+import { cache } from 'react';
 import { BASE_API } from './constants';
 
 const handleResponse = async (response) => {
@@ -14,16 +15,6 @@ export const getAnime = async () => {
   return handleResponse(response);
 };
 
-export const getProfile = async (id) => {
-  const response = await fetch(`https://animebrowser.vercel.app/api/user/${id}`, { next: { revalidate: 3600 } });
-  return handleResponse(response);
-};
-
-export const getAnimeList = async (id) => {
-  const response = await fetch(`https://animebrowser.vercel.app/api/anime-list/${id}`, { cache: 'no-store' });
-  return handleResponse(response);
-};
-
 export const getFilterdAnime = async (params) => {
   const response = await fetch(`${BASE_API}/anime?${params}`, { next: { revalidate: 3600 } });
   return handleResponse(response);
@@ -34,10 +25,10 @@ export const getAnimeBySearch = async (query, limit) => {
   return handleResponse(response);
 };
 
-export const getAnimeById = async (id) => {
+export const getAnimeById = cache(async (id) => {
   const response = await fetch(`${BASE_API}/anime${id && '/' + id}/full`, { next: { revalidate: 3600 } });
   return handleResponse(response);
-};
+});
 
 export const getAnimeStatsById = async (id) => {
   const response = await fetch(`${BASE_API}/anime${id && '/' + id}/statistics`, { next: { revalidate: 3600 } });

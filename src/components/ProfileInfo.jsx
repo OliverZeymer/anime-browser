@@ -12,6 +12,8 @@ import { Edit, User } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { useSearchParams } from 'next/navigation';
 import PrimaryCard from './PrimaryCard';
+import Image from 'next/image';
+
 export default function ProfileInfo({ data, id }) {
   const searchParams = useSearchParams();
   
@@ -45,7 +47,14 @@ export default function ProfileInfo({ data, id }) {
           <ProfilePictureForm />
         </>
       ) : data?.profilePicture ? (
-        <img src={data?.profilePicture} alt={data?.username + ' profile avatar'} className='rounded-full w-24 h-24 object-cover' />
+        <Image
+          src={data.profilePicture}
+          alt={data?.username + ' profile avatar'}
+          width={96}
+          height={96}
+          className='rounded-full w-24 h-24 object-cover'
+          unoptimized={typeof data.profilePicture === 'string' && data.profilePicture.startsWith('data:')}
+        />
       ) : (
         <div className='border-2 rounded-full'>
           <User width={80} height={80} className='aspect-square p-4 cursor-pointer border-none object-cover' />

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '../ui/button';
 
 function InitialMessage() {
@@ -27,7 +28,13 @@ function ResultsList({ results, selectedIndex, searchValue }) {
       {results.map((anime, index) => (
         <li key={anime.mal_id} className={`flex items-center gap-4 w-full hover:bg-secondary transition-colors rounded-md ${index === selectedIndex ? 'bg-secondary' : ''}`}>
           <Link className='flex items-center w-full gap-4' href={`/anime/${anime.mal_id}`}>
-            <img src={anime.images.jpg.image_url} alt={anime.title} className='w-[60px] object-cover aspect-[1/1.5] rounded-md' />
+            <Image
+              src={anime.images.jpg.image_url}
+              alt={anime.title}
+              width={60}
+              height={90}
+              className='w-[60px] object-cover aspect-[1/1.5] rounded-md'
+            />
             <div className='flex flex-col gap-1'>
               <h3 className='text-base line-clamp-1 font-semibold'>{anime.title}</h3>
               <p className='text-xs text-neutral-400'>{anime.type}</p>

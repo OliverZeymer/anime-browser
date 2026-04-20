@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Edit, ImageIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { Button } from './ui/button';
+import Image from 'next/image';
 
 export default function ProfilePictureForm() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -74,10 +75,16 @@ export default function ProfilePictureForm() {
             <ImageIcon width={80} height={80} className='aspect-square p-4 cursor-pointer border-none object-cover' />
           </div>
         ) : (
-          <img
+          <Image
             src={selectedFile ? selectedFile : auth?.profilePicture}
             alt={auth?.email + ' profile avatar'}
+            width={80}
+            height={80}
             className='aspect-square cursor-pointer rounded-full border-none object-cover'
+            unoptimized={
+              typeof (selectedFile || auth?.profilePicture) === 'string' &&
+              (selectedFile || auth?.profilePicture).startsWith('data:')
+            }
           />
         )}
         {imageHovered && (

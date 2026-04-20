@@ -5,6 +5,8 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
+import Image from 'next/image';
+
 export default function AnimeBrowserAdvertisement() {
   const [hideAd, setHideAd] = useState(false);
   return (
@@ -18,10 +20,15 @@ export default function AnimeBrowserAdvertisement() {
         }}>
         <X size={24} />
       </Button>
-      <img
-        src='/images/animebrowser_ad.webp'
-        className='w-full object-cover h-full overflow-hidden to-primary-foreground/20 rounded-md uppercase font-semibold text-center justify-center flex items-center'
-      />
+      <div className='relative w-full h-full min-h-[120px]'>
+        <Image
+          src='/images/animebrowser_ad.webp'
+          alt=''
+          fill
+          className='object-cover rounded-md'
+          sizes='250px'
+        />
+      </div>
       <Link href='/' className='w-full h-full z-10 absolute bottom-0 left-0 right-0' />
     </StickyAside>
   );

@@ -13,6 +13,8 @@ import { cn } from '@/lib/utils';
 import NavbarAvatar from './NavbarAvatar';
 import { pathsWithBanner } from '@/utils/constants';
 import SearchModalButton from '../../search/SearchModalButton';
+import Image from 'next/image';
+
 export default function Navbar() {
   const { auth, cookieCheckDone } = useContext(AuthContext);
   const pathname = usePathname();
@@ -22,7 +24,13 @@ export default function Navbar() {
       <nav
         className={cn('hidden lg:flex absolute w-full py-4 select-none lg:pt-6 z-20 items-center px-4 lg:px-12 border-muted-foreground', !isPathWithBanner && 'border-b-2 dark:border-b-0')}>
         <Link href='/'>
-          <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
+          <Image
+            src='/images/logo.png'
+            alt='Anime Browser Logo'
+            width={48}
+            height={48}
+            className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square'
+          />
         </Link>
         <ul className='flex gap-6 ml-12'>
           {Navigation.map((navItem) => (

@@ -4,12 +4,20 @@ import { DialogTrigger } from '@radix-ui/react-dialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ZoomInIcon } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function ClickableImageTrigger({ src, alt, className }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <DialogTrigger className='w-full xs:max-w-xs mx-auto relative' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <img src={src} alt={alt} className={`w-full xs:max-w-xs mx-auto md:w-[300px] md:h-[450px] rounded-2xl object-cover ${className}`} />
+      <Image
+        src={src}
+        alt={alt}
+        width={300}
+        height={450}
+        sizes='(max-width: 480px) 100vw, 300px'
+        className={`w-full xs:max-w-xs mx-auto md:w-[300px] md:h-[450px] rounded-2xl object-cover ${className}`}
+      />
       <AnimatePresence>
         {isHovered && (
           <motion.div

@@ -2,6 +2,7 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import '@/styles/carousel.css';
 export default function CharacterCarousel({ characters }) {
   function formatCharacterName(characterName) {
@@ -32,7 +33,13 @@ export default function CharacterCarousel({ characters }) {
         {characters?.map((character) => (
           <CarouselItem key={character.character.mal_id} className='carouselItem'>
             <Link className='flex items-center justify-between h-full flex-col' href={`/character/${character.character.mal_id}`}>
-              <img src={character.character.images.webp.image_url} alt={character.character.name} className='max-w-[200px] rounded' />
+              <Image
+                src={character.character.images.webp.image_url}
+                alt={character.character.name}
+                width={200}
+                height={300}
+                className='max-w-[200px] h-auto rounded'
+              />
               <p className='line-clamp-1 mt-2'>{formatCharacterName(character.character.name)}</p>
             </Link>
           </CarouselItem>

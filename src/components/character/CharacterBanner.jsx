@@ -1,16 +1,22 @@
 import { Star } from 'lucide-react';
 
 import { Button } from '../ui/button';
+import Image from 'next/image';
 
 export default function CharacterBanner({ character }) {
+  const bgUrl = character.anime[character.anime.length - 1]?.anime?.images?.webp?.large_image_url;
   return (
     <div className='relative flex flex-col items-center gap-3 md:gap-6 justify-center md:h-72 xl:h-96 mt-16 lg:mt-0'>
       <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-neutral-700 to-transparent' style={{ mixBlendMode: 'multiply' }} />
-      <img
-        src={character.anime[character.anime.length - 1]?.anime?.images?.webp?.large_image_url}
-        alt={character.name}
-        className='absolute inset-0 -z-10 blur-md object-cover w-full h-44 md:h-72 xl:h-96 select-none'
-      />
+      {bgUrl ? (
+        <Image
+          src={bgUrl}
+          alt={character.name}
+          fill
+          sizes='100vw'
+          className='absolute inset-0 -z-10 blur-md object-cover w-full h-44 md:h-72 xl:h-96 select-none'
+        />
+      ) : null}
       <div className='z-10 mt-6 md:mt-12 lg:mt-[120px] flex flex-col items-center justify-center gap-3'>
         <h1 className='text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white'>{character?.name}</h1>
         <h2 className='text-lg text-center md:text-xl lg:text-2xl text-white z-10'>{character?.name_kanji}</h2>

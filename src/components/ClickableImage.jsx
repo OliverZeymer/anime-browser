@@ -4,6 +4,7 @@ import { ImagePlus, ZoomInIcon } from 'lucide-react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import ClickableImageTrigger from './ClickableImageTrigger';
+import Image from 'next/image';
 
 export default function ClickableImage({ src, alt, width, height, className }) {
   return (
@@ -15,13 +16,9 @@ export default function ClickableImage({ src, alt, width, height, className }) {
         </Button> */}
       <ClickableImageTrigger src={src} alt={alt} className={className} />
       <DialogContent isFullModal className='bg-transparent border-0 p-0'>
-        <img
-          src={src}
-          alt={alt}
-          className={`h-full w-screen ${width && `max-w-${width}`} 
-        ${height && `max-h-${height}`}
-        px-4 md:px-0 md:w-full rounded relative object-cover`}
-        />
+        <div className='relative w-screen max-h-[90vh] min-h-[40vh] px-4 md:px-0 md:w-full'>
+          {src ? <Image src={src} alt={alt ?? ''} fill className='rounded object-contain' sizes='100vw' /> : null}
+        </div>
       </DialogContent>
     </Dialog>
   );

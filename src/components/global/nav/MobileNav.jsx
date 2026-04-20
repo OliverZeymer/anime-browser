@@ -12,6 +12,7 @@ import AuthContext from '@/contexts/AuthContext';
 import ThemeToggle from '../ThemeToggle';
 import { Button } from '../../ui/button';
 import NavbarAvatar from './NavbarAvatar';
+import Image from 'next/image';
 
 export default function MobileNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -42,7 +43,13 @@ export default function MobileNav() {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}>
-          <img src='/images/logo.png' alt='Anime Browser Logo' className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square' />
+          <Image
+            src='/images/logo.png'
+            alt='Anime Browser Logo'
+            width={48}
+            height={48}
+            className='relative text-white h-12 w-12 flex items-center justify-center rounded-full aspect-square'
+          />
         </Link>
       </div>
       <div className='flex items-center justify-end gap-4'>
