@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import Loader from '@/components/Loader';
 import AnimeBrowsePage from '@/components/anime/AnimeBrowsePage';
 
+export const dynamic = 'force-static';
+
 export const metadata = {
   title: 'Browse Anime - Anime Browser',
   description: 'Browse thousands of anime titles. Filter by genre, status, type, and more.',
