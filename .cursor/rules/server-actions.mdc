@@ -1,0 +1,78 @@
+---
+alwaysApply: true
+---
+
+# Server Actions
+
+## Authentication
+
+Server Actions are exposed as public HTTP endpoints. Always verify authentication inside each Server Action — do not rely solely on middleware or page-level checks:
+
+```ts
+'use server';
+
+export const deleteEnrollment = async (enrollmentId: string) => {
+  const authUser = await validateAuth();
+  const logger = createChildLogger({ trace: 'deleteEnrollment', instructorId: authUser.instructorId });
+
+  await db.enrollment.delete({ where: { id: enrollmentId, instructorId: authUser.instructorId } });
+  revalidatePath('/enrollments');
+};
+```
+
+Always scope mutations to the authenticated user's data (e.g., `where: { instructorId: authUser.instructorId }`) to prevent unauthorized access.
+
+## Return Rules
+
+When fetching data in server actions:
+
+- If fetching a single item that might not exist and it's possible to use `notFound()`, don't return `null`
+- Instead, return `notFound()` from `next/navigation` to trigger the 404 page
+- This provides better user experience and proper HTTP status codes
+
+## Redirect Rules
+
+- If possible to redirect from server action, always redirect from server action
+- Use `redirect()` from `next/navigation` instead of returning redirect data to the client
+- This provides better performance and user experience
+
+## Redirect Errors in try-catch
+
+`redirect()`, `notFound()`, and other navigation APIs throw special errors internally. If your server action uses try-catch, you must rethrow these errors or they will be swallowed silently:
+
+```ts
+import { redirect } from 'next/navigation';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
+
+export const createItem = async (data: FormData) => {
+  let item;
+  try {
+    item = await db.item.create({ data });
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+    return { error: 'Failed to create item' };
+  }
+  redirect(`/items/${item.id}`);
+};
+```
+
+Preferred approach: keep `redirect()` / `notFound()` outside the try-catch block entirely. Only use `isRedirectError` when the navigation call must be inside the try block (e.g., auth flows where redirect happens mid-logic).
+
+## Revalidation After Mutations
+
+After a mutation (create, update, delete), call `revalidatePath` from `next/cache` to bust the cached page:
+
+```ts
+import { revalidatePath } from 'next/cache';
+
+export const updateSettings = async (data: SettingsInput) => {
+  await db.settings.update({ ... });
+  revalidatePath('/settings');
+};
+```
+
+- Pass the route path that displays the mutated data.
+- For nested layouts that need full revalidation, pass `'layout'` as the second argument: `revalidatePath('/club/settings', 'layout')`.
+- Revalidate at the end of the action, after the mutation succeeds.

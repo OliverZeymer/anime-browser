@@ -1,0 +1,57 @@
+---
+description: "Environment variable and configuration conventions"
+alwaysApply: true
+---
+
+# Environment Configuration
+
+## Config Modules
+
+Never use `process.env` directly in feature code (pages, components, services). Instead, access environment variables through typed config modules in `src/config/`:
+
+```ts
+// src/config/clerk.ts
+export const CLERK_CONFIG = {
+  SIGN_IN_URL: process.env.VERCEL_ENV === 'production' ? 'https://accounts.lumant.dk/sign-in' : '/sign-in',
+  CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+};
+
+// src/config/stripe.ts
+export const STRIPE_CONFIG = {
+  SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  // ...
+};
+```
+
+Import from the config module:
+
+```ts
+// Good
+import { CLERK_CONFIG } from '@/config/clerk';
+
+// Bad
+const signInUrl = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL;
+```
+
+## Why
+
+- Type safety: config objects are typed, raw `process.env` is always `string | undefined`.
+- Single source of truth: environment-aware logic (production vs dev) lives in one place.
+- Searchability: easier to find all usages of a config value.
+- Testability: config objects can be mocked without stubbing `process.env`.
+
+## Naming Conventions
+
+- Server-only variables: no prefix (e.g., `STRIPE_SECRET_KEY`, `CLERK_SECRET_KEY`).
+- Client-accessible variables: prefix with `NEXT_PUBLIC_` (e.g., `NEXT_PUBLIC_FIREBASE_CONFIG_API_KEY`).
+- Config object names: `UPPER_SNAKE_CASE` matching the service (e.g., `CLERK_CONFIG`, `STRIPE_CONFIG`, `INNGEST_CONFIG`).
+
+## Vercel Environment
+
+Use `process.env.VERCEL_ENV` (not `NODE_ENV`) to distinguish between production, preview, and development on Vercel:
+
+```ts
+const isProduction = process.env.VERCEL_ENV === 'production';
+```
+
+This is the standard check in `proxy.ts` and config modules.

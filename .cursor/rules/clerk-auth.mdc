@@ -1,0 +1,71 @@
+---
+description: "Clerk authentication patterns for Lumant frontend projects"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Clerk Authentication
+
+These patterns apply to **frontend** Lumant projects (app.lumant.dk, mit.lumant.dk, etc.). API-only services (payments-service, email-service) may include `@clerk/nextjs` as a dependency but do not use `validateAuth` — they authenticate via other means (e.g., Stripe webhook signatures, bearer tokens).
+
+## validateAuth / fetchAuthUser
+
+Every frontend project has a `validateAuth()` function in `src/_shared/libs/auth.ts`. This is the standard entry point for server-side authentication. Always use it instead of calling Clerk APIs directly.
+
+```ts
+import { validateAuth } from '@/libs/auth';
+
+export const fetchInstructor = async (id: string) => {
+  const authUser = await validateAuth();
+  // authUser is guaranteed to be authenticated at this point
+};
+```
+
+`validateAuth` internally:
+1. Calls Clerk's `auth()` or `currentUser()` to get the session
+2. Looks up the corresponding app user in the database
+3. Redirects to sign-in if no session or no matching user
+4. Returns a typed `AuthUser` object
+
+## Do Not Call Clerk Directly in Features
+
+Do not import `auth()`, `currentUser()`, or `createClerkClient()` in feature code (pages, services, components). Always go through `validateAuth()` from `@/libs/auth`. The auth module handles:
+
+- Session validation
+- User lookup (Clerk -> DB mapping via `unsafeMetadata.user_id`)
+- Redirect to sign-in on missing session
+- Redirect to session-invalid on broken user mapping
+- Logging
+
+## isRedirectError in Auth Code
+
+Auth functions use `redirect()` internally. If auth code is wrapped in try-catch, always rethrow redirect errors:
+
+```ts
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
+
+try {
+  const user = await validateAuth();
+  // ... logic that may redirect
+} catch (error) {
+  if (isRedirectError(error)) {
+    throw error;
+  }
+  // handle actual errors
+}
+```
+
+## Clerk Config
+
+Clerk configuration (sign-in URLs, secret keys, session-invalid paths) lives in `src/config/clerk.ts`. Never hardcode Clerk URLs or secrets in feature code.
+
+## proxy.ts (Middleware)
+
+Each frontend project has a `src/proxy.ts` that configures Clerk middleware:
+
+- Defines public routes (sign-in, webhooks, static assets)
+- Protects all other routes via `auth.protect()` in production
+- Redirects unauthenticated users to sign-in in non-production environments
+- Sets up request headers (e.g., `x-pathname`) for downstream use
+
+When modifying `proxy.ts`, keep the public routes list minimal and do not add routes that should be authenticated.

@@ -17,12 +17,6 @@ module.exports = {
     },
 
     extend: {
-      screens: {
-        xs: { raw: '(min-width: 450px)' },
-        '2xl': { raw: '(min-width: 1440px)' },
-        '3xl': { raw: '(min-width: 2000px)' },
-        'sm-height': { raw: '(max-height: 1080px)' },
-      },
       colors: {
         tremor: {
           brand: {
@@ -180,7 +174,6 @@ module.exports = {
     require('tailwindcss-animate'),
     require('@headlessui/tailwindcss'),
     require('@tailwindcss/forms'),
-    require('tailwindcss-3d'),
     function ({ addVariant }) {
       addVariant('child', '& > *');
       addVariant('child-hover', '& > *:hover');

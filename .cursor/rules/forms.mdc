@@ -1,0 +1,171 @@
+---
+description: "Form structure and validation standards for update forms"
+alwaysApply: true
+---
+
+# Form Structure Rules
+
+## Form Components
+
+When using `<FormProvider>`, always use the available RHF components from `@/components/*/form/RHF*` instead of creating custom form field implementations.
+
+Examples of available RHF components:
+
+- `RHFTextField` for text inputs
+- `RHFSelectV2` for select dropdowns  
+- `RHFNumberField` for numeric inputs
+- `RHFRichTextEditor` for rich text editing
+- And other RHF* components
+
+These components are pre-configured to work with the FormProvider context and provide consistent validation and styling.
+
+## Update Forms
+
+Whenever there is a form on a page, you must follow this structure and rules.
+
+### Update form: Structure Requirements
+
+1. **Component Location**: Component must be placed in the local `_components` folder  
+2. **Component Name**: Must be named `UpdateForm`  
+3. **File Organization**: Schema, form type, and submit logic must live in the same `index.tsx`  
+4. **Server Action**: Server actions must live in a separate `update-[context].ts` file  
+5. **Form Responsibility**: `UpdateForm` must only contain  
+   - schema definition  
+   - form type definition  
+   - default values  
+   - submit logic that calls the update action  
+   - the `FormProvider` wrapper  
+   - `children`  
+
+   All field rendering must be delegated to separate field components  
+6. **Field Components**: Fields must be grouped into separate components based on logical responsibility, for example  
+   - `GeneralFieldsCard`  
+   - `AvailabilityFieldsCard`  
+   - `CalendarFieldsCard`  
+   - `LocationFieldsCard`  
+
+   These components are responsible for layout and field bindings only and they consume the form context from `FormProvider`.
+   They must be placed in the _components folder
+
+### Update forms: Implementation Template
+
+```tsx
+'use client';
+
+import { FormProvider } from '@/providers/FormProvider';
+import { updateSettings } from './update-settings';
+import { z } from 'zod';
+
+export const schema = z.object({
+  exampleProperty: z.string({ required_error: 'Vælg en XYZ' }),
+});
+
+type FormProps = z.infer<typeof schema>;
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export const UpdateForm = ({ children }: Props) => {
+  const onSubmit = async (data: FormProps) => {
+    await updateSettings({
+      exampleProperty: data.exampleProperty,
+    });
+  };
+
+  return (
+    <FormProvider<FormProps>
+      defaultValues={{
+        exampleProperty: undefined,
+      }}
+      validationSchema={schema}
+      onSubmit={onSubmit}
+      onSubmitSuccessMessage='Indstillingerne blev gemt.'
+    >
+      {children}
+    </FormProvider>
+  );
+};
+
+Usage:
+<UpdateForm>
+ <GeneralFieldsCard />
+ <CalendarFieldsCard>
+</UpdateForm>
+```
+
+## Create Forms
+
+Whenever you build a create form on a page, you must follow this structure and these rules.
+
+### Create forms: Structure Requirements
+
+1. **Component Location**: Component must be placed in the local `_components` folder  
+2. **Component Name**: Must be named `CreateForm`  
+3. **File Organization**: Schema, form type and submit logic must live in the same `index.tsx`  
+4. **Server Action**: Server actions must live in a separate `create-[context].ts` file  
+5. **Form Responsibility**: `CreateForm` must only contain  
+   - schema definition  
+   - form type definition  
+   - default values  
+   - submit logic that calls the create action  
+   - the `FormProvider` wrapper  
+   - `children`  
+
+   All field rendering must be delegated to separate field components  
+6. **Field Components**: Fields must be grouped into separate components based on logical responsibility, for example  
+   - `GeneralFieldsCard`  
+   - `AvailabilityFieldsCard`  
+   - `CalendarFieldsCard`  
+   - `LocationFieldsCard`  
+
+   These components are responsible for layout and field bindings only and they consume the form context from `FormProvider`  
+
+---
+
+### Create forms: Implementation Template
+
+```tsx
+'use client';
+
+import { FormProvider } from '@/providers/FormProvider';
+import { updateSettings } from './update-settings';
+import { z } from 'zod';
+
+export const schema = z.object({
+  exampleProperty: z.string({ required_error: 'Vælg en XYZ' }),
+});
+
+type FormProps = z.infer<typeof schema>;
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export const CreateForm = ({ children }: Props) => {
+  const onSubmit = async (data: FormProps) => {
+    await updateSettings({
+      exampleProperty: data.exampleProperty,
+    });
+  };
+
+  return (
+    <FormProvider<FormProps>
+      defaultValues={{
+        exampleProperty: undefined,
+      }}
+      validationSchema={schema}
+      onSubmit={onSubmit}
+      onSubmitSuccessMessage='Indstillingerne blev gemt.'
+    >
+      {children}
+    </FormProvider>
+  );
+};
+
+Usage:
+<CreateForm>
+ <GeneralFieldsCard />
+ <CalendarFieldsCard>
+</CreateForm>
+```

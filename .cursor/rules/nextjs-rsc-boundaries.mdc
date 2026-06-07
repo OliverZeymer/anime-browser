@@ -1,0 +1,74 @@
+---
+description: "React Server Component vs Client Component boundaries and rules"
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# RSC Boundaries
+
+## Server Components (default)
+
+All components are Server Components by default. They can:
+
+- Be `async` and `await` data directly
+- Access databases, file system, and server-only secrets
+- Import server-only modules
+
+They cannot:
+
+- Use React hooks (`useState`, `useEffect`, etc.)
+- Use event handlers (`onClick`, `onChange`, etc.)
+- Access browser APIs (`window`, `document`, `localStorage`)
+
+## Client Components
+
+Add `'use client'` at the top of the file. They can:
+
+- Use React hooks and event handlers
+- Access browser APIs
+- Use interactive features
+
+They cannot:
+
+- Be `async` (no `async function` component)
+- Import server-only modules directly
+
+## Serializable Boundary
+
+Only serializable data can cross the server-to-client boundary:
+
+- Strings, numbers, booleans, null, undefined, arrays, plain objects, Date (serialized), Map/Set (serialized)
+- **Not allowed**: functions, class instances, Symbols, circular references
+
+**Exception**: Server Actions (functions with `'use server'`) can be passed from Server to Client Components.
+
+```tsx
+// Good: serializable props
+<ClientComponent name={user.name} count={items.length} />
+
+// Bad: function prop from server to client (unless it's a server action)
+<ClientComponent onSave={localFunction} />
+
+// Good: server action prop
+<ClientComponent onSave={serverActionFromServices} />
+```
+
+## Placement Strategy
+
+Push `'use client'` as deep as possible in the component tree. Only the leaf components that need interactivity should be Client Components:
+
+```
+page.tsx (Server) -- fetches data
+  Layout (Server) -- structure
+    DataDisplay (Server) -- renders static content
+    InteractiveForm (Client) -- needs hooks/events
+      SubmitButton (Client) -- inherited from parent boundary
+```
+
+Once a file has `'use client'`, everything it imports also becomes client code. Keep the boundary narrow.
+
+## Common Mistakes
+
+- Adding `'use client'` to a page or layout because one child needs interactivity. Instead, extract the interactive part into a separate Client Component.
+- Trying to `async` a Client Component. If you need data, fetch in a parent Server Component and pass via props.
+- Importing a server-only module (e.g., `@/libs/db`) in a Client Component. Move the data access to a Server Action or parent Server Component.

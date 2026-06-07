@@ -1,0 +1,8 @@
+export const JIKAN_CONFIG = {
+  BASE_URL: 'https://api.jikan.moe/v4/',
+  CACHE_TTL_MS: 60 * 60 * 1000,
+  MIN_REQUEST_INTERVAL_MS: 550,
+  REQUEST_TIMEOUT_MS: 15_000,
+  MAX_RETRIES: 2,
+  RATE_LIMIT_RETRY_MS: 2_000,
+};

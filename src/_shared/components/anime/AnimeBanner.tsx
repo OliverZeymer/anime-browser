@@ -1,0 +1,41 @@
+'use client';
+
+import { AuthContext } from '@/providers/AuthContext';
+
+import { useContext } from 'react';
+import AddToListButton from '../buttons/AddToListButton';
+import Link from 'next/link';
+import Image from 'next/image';
+import type { Anime } from '@/types/jikan';
+
+type Props = {
+  anime: Anime;
+};
+
+export default function AnimeBanner({ anime }: Props) {
+  const { auth } = useContext(AuthContext);
+  return (
+    <div className='relative flex flex-col items-center gap-3 md:gap-6 justify-center md:h-72 xl:h-96 mt-16 lg:mt-0'>
+      <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-neutral-700 to-transparent' style={{ mixBlendMode: 'multiply' }} />
+      {anime?.images?.webp?.large_image_url ? (
+        <Image
+          src={anime.images.webp.large_image_url}
+          alt={anime?.title_english || ''}
+          fill
+          sizes='100vw'
+          className='absolute inset-0 -z-10 blur-md object-cover w-full opacity-25 md:opacity-100 md:h-72 xl:h-96 select-none'
+          priority
+        />
+      ) : null}
+      <Link href={`/anime/${anime.mal_id}`} className={`z-10 flex flex-col items-center justify-center gap-3 ${auth ? 'mt-6 md:mt-12 lg:mt-[120px]' : 'mt-6 md:mt-12 lg:mt-[88]'}`}>
+        <h1 className='text-xl text-center sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white'>{anime?.title_english ? anime?.title_english : anime?.title}</h1>
+        <h2 className='text-lg text-center md:text-xl lg:text-2xl text-white z-10'>{anime?.title_japanese}</h2>
+      </Link>
+      {auth && (
+        <div className='flex justify-center items-center z-10'>
+          <AddToListButton userId={auth?._id} anime={anime} />
+        </div>
+      )}
+    </div>
+  );
+}

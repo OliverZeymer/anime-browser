@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+  "ignoreDependencies": ["autoprefixer", "postcss", "tailwindcss", "@tailwindcss/forms", "tailwindcss-3d", "eslint-config-next", "ky", "@headlessui/tailwindcss"],
+  "ignoreExportsUsedInFile": true,
+  "duplicates": {
+    "minOccurrences": 3
+  },
+  "boundaries": {
+    "zones": [
+      { "name": "app", "patterns": ["src/app/**"] },
+      { "name": "shared", "patterns": ["src/_shared/**"] },
+      { "name": "config", "patterns": ["src/config/**"] }
+    ],
+    "rules": [
+      { "from": "app", "allow": ["shared", "config"] },
+      { "from": "shared", "allow": ["config"] },
+      { "from": "config", "allow": [] }
+    ]
+  },
+  "rules": {
+    "unused-files": "error",
+    "unused-exports": "warn",
+    "circular-dependencies": "error",
+    "boundary-violations": "error"
+  },
+  "ignoreExports": [
+    { "file": "src/_shared/libs/anime-list/manage-anime-list.ts", "exports": ["*"] },
+    { "file": "src/_shared/utils/addAnimeToList.ts", "exports": ["*"] },
+    { "file": "src/_shared/utils/createUser.ts", "exports": ["*"] },
+    { "file": "src/_shared/libs/auth/create-user.ts", "exports": ["*"] },
+    { "file": "src/_shared/utils/removeAnimeFromList.ts", "exports": ["*"] }
+  ]
+}

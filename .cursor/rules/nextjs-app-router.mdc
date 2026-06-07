@@ -1,0 +1,75 @@
+---
+description: "Next.js App Router structure, route ownership, and file organization"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Next.js App Router
+
+## Route Ownership
+
+Each route segment owns its UI, server logic, and types:
+
+```
+segment/
+  _components/     # UI only -- no DB, no server-only secrets
+  _services/       # 'use server', DB queries, mutations
+  _types/          # Route-local type definitions
+  page.tsx
+  loading.tsx
+  error.tsx
+```
+
+## _components = UI Only
+
+- React components and presentation logic.
+- No direct database access or server-only secrets.
+- Receive data via props or call server actions from `_services`.
+
+## _services = Server Logic
+
+- Files are single-purpose: `fetch-instructor.ts`, `update-settings.ts`, `create-enrollment.ts`.
+- Prefer `'use server'` exports for mutations called from client components.
+- Always include `createChildLogger({ trace: '' })` in each server action.
+
+## Nested Routes
+
+Child segments define their own `_components`/`_services`/`_types` when they have distinct ownership. Do not import a sibling route's private `_components` -- promote shared code to a parent `_shared` or `src/_shared` instead.
+
+## Three Sharing Levels
+
+1. **Route-local** (`_components/`, `_services/`, `_types/`) -- only used by this route.
+2. **Feature-level** (parent segment's `_shared/`) -- shared across children of that feature.
+3. **Global** (`src/_shared/`) -- used across the entire project.
+
+## Promotion Rule
+
+Start local. Move up only when reuse is real:
+
+```
+route/_components -> feature/_shared -> src/_shared/components
+route/_services   -> feature/_shared -> src/_shared/libs
+```
+
+Never default new code to global `src/_shared`.
+
+## Banned Roots
+
+Do not create or reintroduce directories that duplicate `src/_shared`:
+
+- `src/components/` (use `src/_shared/components/`)
+- `src/lib/` (use `src/_shared/libs/`)
+- `src/utils/` (use `src/_shared/utils/`)
+- `src/types/` (use `src/_shared/types/`)
+
+## Route Groups
+
+Use `(groupName)` folders for layout organization without affecting the URL. Common patterns:
+
+```
+src/app/
+  (default-layout)/    # Routes sharing a default layout
+  (auth)/              # Auth-related routes
+  (onboarding)/        # Onboarding flow
+  api/                 # API routes
+```

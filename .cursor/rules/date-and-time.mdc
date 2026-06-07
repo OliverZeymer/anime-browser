@@ -1,0 +1,10 @@
+---
+description: "Date and time handling standards"
+alwaysApply: true
+---
+
+# Date and Time Rules
+
+## Date Management
+
+Always use dayjs for date management throughout the application.

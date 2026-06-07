@@ -1,0 +1,157 @@
+---
+description: "Server-side performance: caching, serialization, parallel composition (HIGH impact)"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Server-Side Performance
+
+## React.cache() for Per-Request Deduplication
+
+Wrap expensive server-side functions with `React.cache()` so multiple components calling the same function in one request only execute it once:
+
+```ts
+import { cache } from 'react';
+
+export const getCurrentUser = cache(async () => {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return null;
+  }
+  return await db.user.findUnique({ where: { id: session.user.id } });
+});
+```
+
+Use primitive arguments (not inline objects) — `cache()` uses `Object.is` for equality:
+
+```ts
+// Bad: inline object = cache miss every time
+const getUser = cache(async (params: { uid: number }) => { ... });
+
+// Good: primitive arg = proper cache hits
+const getUser = cache(async (uid: number) => { ... });
+```
+
+Use `React.cache()` for: DB queries, auth checks, heavy computations, file system operations. Next.js already deduplicates `fetch()` calls automatically.
+
+## Minimize Serialization at RSC Boundaries
+
+Only pass the fields a Client Component actually uses. RSC→client serialization embeds all props in the HTML:
+
+```tsx
+// Bad: serializes all 50 user fields
+const user = await fetchUser();
+return <Profile user={user} />;
+
+// Good: serializes only what's needed
+const user = await fetchUser();
+return <Profile name={user.name} avatarUrl={user.avatarUrl} />;
+```
+
+Avoid transforming arrays server-side when the client needs the original too (`.toSorted()`, `.filter()`, `.map()` create new references that get serialized separately):
+
+```tsx
+// Bad: sends both arrays
+<ClientList users={users} activeUsers={users.filter((u) => u.active)} />
+
+// Good: filter in client
+<ClientList users={users} />
+```
+
+## Parallel Data Fetching via Component Composition
+
+Sibling async Server Components fetch in parallel. Restructure sequential fetches into independent components:
+
+```tsx
+// Bad: sidebar waits for header fetch to finish
+async function Page() {
+  const header = await fetchHeader();
+  return (
+    <div>
+      <div>{header}</div>
+      <Sidebar />
+    </div>
+  );
+}
+
+// Good: both fetch simultaneously
+async function Header() {
+  const data = await fetchHeader();
+  return <div>{data}</div>;
+}
+
+async function Sidebar() {
+  const items = await fetchSidebarItems();
+  return <nav>{items.map(renderItem)}</nav>;
+}
+
+function Page() {
+  return (
+    <div>
+      <Header />
+      <Sidebar />
+    </div>
+  );
+}
+```
+
+## Avoid Shared Module State for Request Data
+
+Module-level mutable variables leak data between concurrent requests in RSC/SSR. Keep request data local to the render tree:
+
+```ts
+// Bad: race condition between concurrent requests
+let currentUser: User | null = null;
+
+export default async function Page() {
+  currentUser = await auth();
+  return <Dashboard />;
+}
+
+// Good: pass as props
+export default async function Page() {
+  const user = await auth();
+  return <Dashboard user={user} />;
+}
+```
+
+Safe exceptions: immutable config/constants, intentional shared caches with proper keys.
+
+## Use after() for Non-Blocking Side Effects
+
+Use Next.js `after()` to schedule work after the response is sent (logging, analytics, cache invalidation):
+
+```ts
+import { after } from 'next/server';
+
+export async function POST(request: Request) {
+  await updateDatabase(request);
+
+  after(async () => {
+    await logUserAction({ userAgent: request.headers.get('user-agent') });
+  });
+
+  return Response.json({ status: 'success' });
+}
+```
+
+## Hoist Static I/O to Module Level
+
+Static assets (fonts, logos, config) that don't change per-request should be fetched once at module level, not inside every request handler:
+
+```ts
+// Bad: reads file on every request
+export async function GET() {
+  const template = await fs.readFile('./template.html', 'utf-8');
+  return new Response(template);
+}
+
+// Good: reads once when module loads
+const template = fs.readFileSync('./template.html', 'utf-8');
+
+export async function GET() {
+  return new Response(template);
+}
+```
+
+Source: Vercel React Best Practices

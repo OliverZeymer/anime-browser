@@ -1,0 +1,53 @@
+---
+description: "Instructs AI to use bundled Next.js documentation instead of training data"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Next.js Documentation
+
+## Always Check Bundled Docs First
+
+Before writing or modifying Next.js code, check the bundled documentation at `node_modules/next/dist/docs/`. Your training data is outdated for Next.js 16 APIs.
+
+The bundled docs are the **source of truth** for:
+
+- Routing and file conventions
+- Data fetching patterns
+- Caching and revalidation
+- Server Actions
+- Error handling
+- Middleware/Proxy (`proxy.ts` in v16+)
+- Configuration options
+
+## APIs Not in Training Data
+
+These Next.js 16 APIs may not be in your training data. Always verify usage against bundled docs:
+
+- `'use cache'` directive and `cacheLife()` / `cacheTag()` / `updateTag()`
+- `connection()` for dynamic rendering
+- `forbidden()` and `unauthorized()` for auth errors
+- `proxy.ts` (new in v16, runs alongside or replaces `middleware.ts`)
+- Async `cookies()`, `headers()`, `params`, `searchParams`
+- `after()` for post-response work
+- `unstable_rethrow()` for navigation errors in catch blocks
+
+## Doc Structure
+
+```
+node_modules/next/dist/docs/
+  01-app/
+    01-getting-started/    # Installation, project structure, routing, data fetching
+    02-guides/             # Auth, forms, caching, testing, self-hosting, AI agents
+    03-api-reference/      # Directives, components, file conventions, functions, config
+  02-pages/                # Pages Router (legacy)
+  03-architecture/         # Compiler, fast refresh, accessibility
+```
+
+## How to Use
+
+When you need to verify a Next.js API or pattern:
+
+1. Navigate to the relevant section under `node_modules/next/dist/docs/01-app/`
+2. Read the specific `.md` file for that topic
+3. Follow the documented pattern, not what training data suggests

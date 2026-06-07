@@ -1,0 +1,140 @@
+---
+description: "Next.js error handling: error boundaries, navigation API gotchas, redirects"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Next.js Error Handling
+
+## Error Boundaries
+
+### error.tsx
+
+Catches errors in a route segment. Must be a Client Component:
+
+```tsx
+'use client';
+
+export const ErrorPage = ({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) => {
+  return (
+    <div>
+      <h2>Something went wrong</h2>
+      <button onClick={() => reset()}>Try again</button>
+    </div>
+  );
+};
+
+export default ErrorPage;
+```
+
+### global-error.tsx
+
+Catches errors in the root layout. Must include `<html>` and `<body>`:
+
+```tsx
+'use client';
+
+export const GlobalError = ({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) => {
+  return (
+    <html>
+      <body>
+        <h2>Something went wrong</h2>
+        <button onClick={() => reset()}>Try again</button>
+      </body>
+    </html>
+  );
+};
+
+export default GlobalError;
+```
+
+## Navigation APIs and try-catch
+
+`redirect()`, `notFound()`, `forbidden()`, and `unauthorized()` throw special errors that Next.js handles internally. Never wrap them in try-catch:
+
+```tsx
+// Bad: redirect throw is caught, navigation fails
+async function createPost(formData: FormData) {
+  try {
+    const post = await db.post.create({ ... });
+    redirect(`/posts/${post.id}`);
+  } catch (error) {
+    return { error: 'Failed' };
+  }
+}
+
+// Good: navigation API outside try-catch
+async function createPost(formData: FormData) {
+  let post;
+  try {
+    post = await db.post.create({ ... });
+  } catch (error) {
+    return { error: 'Failed' };
+  }
+  redirect(`/posts/${post.id}`);
+}
+```
+
+If you must have a navigation API inside a catch block, use `unstable_rethrow`:
+
+```tsx
+import { unstable_rethrow } from 'next/navigation';
+
+async function action() {
+  try {
+    // ...
+    redirect('/success');
+  } catch (error) {
+    unstable_rethrow(error);
+    return { error: 'Something went wrong' };
+  }
+}
+```
+
+## Not Found
+
+Use `notFound()` from `next/navigation` to trigger the closest `not-found.tsx`:
+
+```tsx
+import { notFound } from 'next/navigation';
+
+export const InstructorPage = async ({ params }: Props) => {
+  const { slug } = await params;
+  const instructor = await fetchInstructor(slug);
+
+  if (!instructor) {
+    notFound();
+  }
+
+  return <InstructorProfile data={instructor} />;
+};
+
+export default InstructorPage;
+```
+
+## Error Hierarchy
+
+Errors bubble up to the nearest `error.tsx` boundary:
+
+```
+app/
+  error.tsx              # Catches errors from all children
+  instructors/
+    error.tsx            # Catches errors in /instructors/*
+    [slug]/
+      error.tsx          # Catches errors in /instructors/[slug]
+      page.tsx
+  layout.tsx             # Errors here go to global-error.tsx
+```

@@ -1,0 +1,40 @@
+---
+description: "TypeScript conventions and best practices"
+alwaysApply: true
+---
+
+# TypeScript
+
+## Strict Mode
+
+All projects use strict TypeScript. Do not add `@ts-ignore` or `@ts-expect-error` without a clear justification comment.
+
+## Imports
+
+- Prefer `import type { X }` for type-only symbols to keep runtime imports minimal.
+- Do not use `import * as X` namespace imports. Use named imports: `import { useState, useEffect } from 'react'`.
+- Do not use default imports from application code. Use named imports to match the named export.
+
+## Types Over Enums
+
+- Do not define TypeScript enums. Use Prisma enums from `@prisma/client` where applicable, or `as const` objects for local constants.
+- Prefer `type` over `interface` unless you need declaration merging.
+
+## No `any`
+
+- Never use `any`. Use `unknown` and narrow with type guards, or define a proper type.
+- If third-party code forces `any`, isolate it behind a typed wrapper.
+
+## Naming
+
+- Use descriptive variable names with auxiliary verbs: `isLoading`, `hasError`, `canSubmit`, `shouldRender`.
+- Functions: `handleSubmit`, `onSuccess`, `formatDate`, `fetchInstructor`.
+- Types/interfaces: PascalCase (`InstructorProfile`, `FormProps`).
+- Files: camelCase for utilities (`formatCurrency.ts`), PascalCase for components (`InstructorCard.tsx`).
+
+## Patterns
+
+- Write functional, declarative code. Avoid classes.
+- Prefer iteration and modularization over duplication.
+- Use early returns to reduce nesting.
+- Prefer `const` over `let`. Never use `var`.

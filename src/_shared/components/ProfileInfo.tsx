@@ -1,0 +1,82 @@
+'use client';
+import { useContext, useState } from 'react';
+import { AuthContext } from '@/providers/AuthContext';
+import { isAuthUser } from '@/types/auth';
+import DiscordIcon from './icons/DiscordIcon';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+import ProfilePictureForm from '@/components/ProfilePictureUploader';
+import EditProfileForm from '@/components/EditProfileForm';
+import { Edit, User } from 'lucide-react';
+
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { useSearchParams } from 'next/navigation';
+import PrimaryCard from './PrimaryCard';
+import Image from 'next/image';
+import type { AuthUser } from '@/types/auth';
+
+type Props = {
+  data: AuthUser;
+  id: string;
+};
+
+export default function ProfileInfo({ data, id }: Props) {
+  const searchParams = useSearchParams();
+  
+  const { auth } = useContext(AuthContext);
+  const isMyProfile = isAuthUser(auth) && auth._id === id;
+  const [showEditModal, setShowEditModal] = useState(false);
+  const editParam = searchParams.get('edit');
+  const isEditDialogOpen = showEditModal || (editParam === 'true' && isMyProfile);
+  return (
+    <PrimaryCard className='flex relative items-center w-fit mx-auto gap-4 justify-center'>
+      {isMyProfile ? (
+        <>
+          <Dialog open={isEditDialogOpen} onOpenChange={setShowEditModal}>
+            <DialogTrigger className='absolute top-4 right-4 text-2xl hover:brightness-75 transition-colors cursor-pointer'>
+              <Edit size={16} />
+            </DialogTrigger>
+            <DialogContent className='bg-black'>
+              <EditProfileForm data={{ user: data }} />
+            </DialogContent>
+          </Dialog>
+          <ProfilePictureForm />
+        </>
+      ) : data?.profilePicture ? (
+        <Image
+          src={data.profilePicture}
+          alt={data?.username + ' profile avatar'}
+          width={96}
+          height={96}
+          className='rounded-full w-24 h-24 object-cover'
+          unoptimized={typeof data.profilePicture === 'string' && data.profilePicture.startsWith('data:')}
+        />
+      ) : (
+        <div className='border-2 rounded-full'>
+          <User width={80} height={80} className='aspect-square p-4 cursor-pointer border-none object-cover' />
+        </div>
+      )}
+      <div>
+        <h1 className=''>{data.username}</h1>
+
+        <p>{data?.email}</p>
+
+        {data?.discord && (
+          <TooltipProvider delayDuration={0}>
+            <Tooltip>
+              <TooltipTrigger>
+                <div className='flex gap-2 items-center'>
+                  <DiscordIcon className='w-5 h-5' />
+                  <p>{data?.discord}</p>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Discord Profile</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
+      </div>
+    </PrimaryCard>
+  );
+}

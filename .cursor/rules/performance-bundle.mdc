@@ -1,0 +1,110 @@
+---
+description: "Bundle size optimization: defer, preload, conditional loading (CRITICAL impact)"
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# Bundle Size Optimization
+
+## Defer Non-Critical Third-Party Libraries
+
+Analytics, error tracking, and logging don't block user interaction. Load them after hydration:
+
+```tsx
+import dynamic from 'next/dynamic';
+
+const Analytics = dynamic(
+  () => import('@vercel/analytics/react').then((m) => m.Analytics),
+  { ssr: false }
+);
+
+export const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <html>
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
+```
+
+Candidates: Sentry `ErrorBoundary`, analytics scripts, chat widgets, cookie consent banners.
+
+## Conditional Module Loading
+
+Load heavy data or modules only when a feature is activated, not at import time:
+
+```tsx
+useEffect(() => {
+  if (enabled && !data && typeof window !== 'undefined') {
+    import('./heavy-animation-data.js')
+      .then((mod) => setData(mod.frames))
+      .catch(() => setEnabled(false));
+  }
+}, [enabled, data, setEnabled]);
+```
+
+The `typeof window !== 'undefined'` check prevents the module from being included in the SSR bundle.
+
+## Preload on User Intent
+
+Preload heavy bundles on hover/focus before the user clicks, eliminating perceived latency:
+
+```tsx
+const preload = () => {
+  if (typeof window !== 'undefined') {
+    void import('./monaco-editor');
+  }
+};
+
+<button onMouseEnter={preload} onFocus={preload} onClick={openEditor}>
+  Open Editor
+</button>
+```
+
+## Use Ternary for Conditional Rendering
+
+Prefer ternary over `&&` for conditional rendering to avoid accidentally rendering `0` or `""`:
+
+```tsx
+// Bad: renders "0" when count is 0
+{count && <Badge count={count} />}
+
+// Good: renders nothing when count is 0
+{count > 0 ? <Badge count={count} /> : null}
+```
+
+## Hoist Static JSX Outside Components
+
+JSX that never changes doesn't need to be recreated on every render:
+
+```tsx
+// Bad: re-created every render
+export const Layout = ({ children }: Props) => {
+  const footer = <footer>© 2026 Lumant</footer>;
+  return (
+    <div>
+      {children}
+      {footer}
+    </div>
+  );
+};
+
+// Good: created once at module level
+const footer = <footer>© 2026 Lumant</footer>;
+
+export const Layout = ({ children }: Props) => {
+  return (
+    <div>
+      {children}
+      {footer}
+    </div>
+  );
+};
+```
+
+Source: Vercel React Best Practices

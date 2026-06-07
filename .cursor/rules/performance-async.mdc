@@ -1,0 +1,120 @@
+---
+description: "Async waterfall elimination patterns (CRITICAL performance impact)"
+globs: "**/src/**"
+alwaysApply: false
+---
+
+# Async Performance: Eliminating Waterfalls
+
+Waterfalls are the #1 performance killer. Each sequential `await` adds full network latency. These patterns yield the largest gains.
+
+## Defer Await Until Needed
+
+Move `await` into the branch where the result is actually used. Avoid blocking code paths that don't need the data:
+
+```ts
+// Bad: blocks both branches
+async function handleRequest(userId: string, skip: boolean) {
+  const userData = await fetchUserData(userId);
+  if (skip) {
+    return { skipped: true };
+  }
+  return processUserData(userData);
+}
+
+// Good: only awaits when needed
+async function handleRequest(userId: string, skip: boolean) {
+  if (skip) {
+    return { skipped: true };
+  }
+  const userData = await fetchUserData(userId);
+  return processUserData(userData);
+}
+```
+
+## Check Cheap Conditions Before Async Calls
+
+When a branch needs both an async flag and a cheap sync condition, evaluate the cheap condition first:
+
+```ts
+// Bad: always pays for the async call
+const flag = await getFeatureFlag();
+if (flag && user.isAdmin) { ... }
+
+// Good: skip the async call when cheap check fails
+if (user.isAdmin) {
+  const flag = await getFeatureFlag();
+  if (flag) { ... }
+}
+```
+
+## Start Promises Early, Await Late
+
+In Route Handlers and Server Actions, start independent operations immediately:
+
+```ts
+// Bad: sequential — config waits for auth
+export async function GET(request: Request) {
+  const session = await auth();
+  const config = await fetchConfig();
+  const data = await fetchData(session.user.id);
+  return Response.json({ data, config });
+}
+
+// Good: auth and config start simultaneously
+export async function GET(request: Request) {
+  const sessionPromise = auth();
+  const configPromise = fetchConfig();
+  const session = await sessionPromise;
+  const [config, data] = await Promise.all([
+    configPromise,
+    fetchData(session.user.id),
+  ]);
+  return Response.json({ data, config });
+}
+```
+
+## Chain Nested Fetches Per Item
+
+When fetching nested data in parallel, chain dependent fetches within each item so a slow item doesn't block the rest:
+
+```ts
+// Bad: a single slow chat blocks all author fetches
+const chats = await Promise.all(chatIds.map((id) => getChat(id)));
+const authors = await Promise.all(chats.map((chat) => getUser(chat.author)));
+
+// Good: each item chains independently
+const authors = await Promise.all(
+  chatIds.map((id) => getChat(id).then((chat) => getUser(chat.author)))
+);
+```
+
+## Strategic Suspense Boundaries
+
+Use Suspense to show wrapper UI immediately while slow data streams in:
+
+```tsx
+function Page() {
+  return (
+    <div>
+      <Header />
+      <Suspense fallback={<Skeleton />}>
+        <SlowDataSection />
+      </Suspense>
+      <Footer />
+    </div>
+  );
+}
+
+async function SlowDataSection() {
+  const data = await fetchData();
+  return <DataDisplay data={data} />;
+}
+```
+
+When NOT to use Suspense:
+- SEO-critical content above the fold
+- Data needed for layout decisions (causes layout shift)
+- Small/fast queries where Suspense overhead isn't worth it
+
+Source: Vercel React Best Practices

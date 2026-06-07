@@ -1,0 +1,59 @@
+---
+description: "React hooks best practices and common pitfalls"
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Hooks
+
+## Custom Hooks
+
+Extract reusable stateful logic into custom hooks. Always prefix with `use` (e.g., `useInstructorData`, `useDebounce`). Place shared hooks in `src/_shared/hooks/`; route-local hooks stay in the route's folder.
+
+## Rules of Hooks
+
+- Never call hooks inside conditions, loops, or nested functions.
+- Always call hooks at the top level of the component or custom hook.
+
+## useEffect Discipline
+
+- Do not use `useEffect` to derive state. Compute derived values directly in the render body.
+- Do not use `useEffect` to respond to events. Move that logic to the event handler itself.
+- Keep `useEffect` dependencies honest. Never suppress the dependency lint rule.
+- Always clean up subscriptions, timers, and listeners in the `useEffect` return function.
+
+```tsx
+// Bad: effect for derived state
+useEffect(() => {
+  setFilteredItems(items.filter((i) => i.active));
+}, [items]);
+
+// Good: compute in render
+const filteredItems = items.filter((i) => i.active);
+```
+
+```tsx
+// Bad: effect to respond to an event
+useEffect(() => {
+  if (submitted) {
+    sendAnalytics();
+  }
+}, [submitted]);
+
+// Good: call in the event handler
+const handleSubmit = () => {
+  submitForm();
+  sendAnalytics();
+};
+```
+
+## useState
+
+- Use descriptive initial values. Avoid `useState(undefined)` when a more specific default exists.
+- For complex state objects, prefer multiple `useState` calls over one large state object, unless the values always change together.
+
+## useCallback and useMemo
+
+- Use `useCallback` when passing functions to child components that rely on referential equality (e.g., `React.memo` children).
+- Use `useMemo` for expensive computations, not for simple values.
+- Do not wrap everything in `useCallback`/`useMemo` preemptively. Optimize only when there is a measurable performance issue.

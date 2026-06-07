@@ -1,0 +1,84 @@
+---
+description: "Next.js bundling: server packages, transpilation, dynamic imports"
+globs: "**/next.config.*"
+alwaysApply: false
+---
+
+# Next.js Bundling
+
+## Server-Incompatible Packages
+
+Some packages use browser APIs (`window`, `document`, `localStorage`) and fail in Server Components.
+
+### Dynamic import with SSR disabled
+
+```tsx
+import dynamic from 'next/dynamic';
+
+const RichTextEditor = dynamic(() => import('./RichTextEditor'), {
+  ssr: false,
+});
+```
+
+### Client Component wrapper
+
+Wrap browser-only usage in a Client Component:
+
+```tsx
+// RichTextWrapper.tsx
+'use client';
+
+import { RichTextEditor } from 'some-editor-lib';
+
+export const RichTextWrapper = (props: Props) => {
+  return <RichTextEditor {...props} />;
+};
+```
+
+## Server External Packages
+
+For packages with native bindings or bundling issues:
+
+```js
+// next.config.js
+module.exports = {
+  serverExternalPackages: ['sharp', 'bcrypt'],
+};
+```
+
+## Transpile Packages
+
+For ESM/CJS compatibility issues with shared packages:
+
+```js
+// next.config.js
+module.exports = {
+  transpilePackages: ['@lumantdk/components', '@lumantdk/theme', '@lumantdk/utils'],
+};
+```
+
+## CSS Imports
+
+Import CSS files directly. Never use `<link>` tags:
+
+```tsx
+// Bad
+<link rel="stylesheet" href="/styles.css" />
+
+// Good
+import './styles.css';
+import styles from './Button.module.css';
+```
+
+## Polyfills
+
+Next.js includes 50+ common polyfills automatically (`Promise`, `fetch`, `Array.from`, `Object.assign`, `Map`, `Set`, etc.). Do not add redundant polyfill scripts.
+
+## Common Problematic Packages
+
+| Package | Issue | Solution |
+|---------|-------|----------|
+| `sharp` | Native bindings | `serverExternalPackages: ['sharp']` |
+| `react-quill` / TipTap | Uses `document` | `dynamic(() => import('...'), { ssr: false })` |
+| `mapbox-gl` | Uses `window` | `dynamic(() => import('...'), { ssr: false })` |
+| `monaco-editor` | Uses `window` | `dynamic(() => import('...'), { ssr: false })` |

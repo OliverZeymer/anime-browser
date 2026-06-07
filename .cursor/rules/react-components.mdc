@@ -1,0 +1,69 @@
+---
+description: "React component conventions and structure"
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Components
+
+## One Component Per File
+
+Each `.tsx` file must contain exactly one React component. Helpers, constants, and types used only by that component may live in the same file, but a second exported component must go in its own file.
+
+## Named Exports Only
+
+Always use named arrow function exports:
+
+```tsx
+export const InstructorCard = ({ name }: Props) => {
+  return <div>{name}</div>;
+};
+```
+
+Never use `export default` except in Next.js reserved files (`page.tsx`, `layout.tsx`, `loading.tsx`, `not-found.tsx`, `error.tsx`, `template.tsx`, `default.tsx`). In those files, define a named export first, then re-export:
+
+```tsx
+export const HomePage = () => {
+  return <div>Home</div>;
+};
+
+export default HomePage;
+```
+
+## Functional Components Only
+
+Do not use class components. All components must be functional.
+
+## Props
+
+Define a `Props` type above the component. Use it directly in the function signature:
+
+```tsx
+type Props = {
+  name: string;
+  isActive: boolean;
+};
+
+export const InstructorCard = ({ name, isActive }: Props) => {
+  return <div>{name}</div>;
+};
+```
+
+If the component accepts `children`, include it explicitly in the Props type.
+
+## Component Size
+
+Keep components small and single-purpose. When a component exceeds ~150 lines, extract sub-components into separate files in the same `_components/` folder.
+
+## Composition Over Prop Drilling
+
+Prefer passing components as children or render props over passing data through many layers of props. Use React context sparingly and only for truly global state (theme, auth, locale).
+
+## File Structure Within a Component File
+
+Order content as:
+1. Imports
+2. Types
+3. Constants
+4. The exported component
+5. Helper functions (if small and only used by this component)

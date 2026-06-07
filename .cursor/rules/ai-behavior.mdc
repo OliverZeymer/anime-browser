@@ -1,0 +1,32 @@
+---
+description: "Defines scope boundaries and expected AI behavior for Cursor"
+alwaysApply: true
+---
+
+# AI Behavior
+
+## Scope
+
+- Stay within the scope of the requested change. Do not refactor, rename, or reorganize unrelated code.
+- If a change requires touching files outside the immediate scope, explain why before proceeding.
+- Do not introduce new dependencies without asking first.
+- Do not remove existing functionality unless explicitly asked.
+
+## Responses
+
+- Be direct and concise. Do not repeat the question or provide unnecessary preamble.
+- When proposing code, show only the relevant changes -- not the entire file unless the full context is needed.
+- If multiple approaches exist, briefly state the trade-offs and recommend one.
+
+## Code Changes
+
+- Preserve existing code style and patterns in the file being edited. Match indentation, naming conventions, and import style of the surrounding code.
+- When unsure about a convention, check existing code in the same directory first before inventing a pattern.
+- Do not add comments that simply describe what the code does. Only comment when intent is non-obvious or a trade-off needs explanation.
+- Do not wrap changes in unnecessary try-catch, null checks, or abstractions unless the existing codebase follows that pattern.
+
+## Edits, Refactors, Fixes
+
+- **Edits**: Apply the requested change precisely. Do not bundle unrelated improvements.
+- **Refactors**: Maintain identical behavior. If the refactor changes behavior, flag it explicitly.
+- **Fixes**: Identify the root cause. Do not apply bandaid fixes that mask the underlying problem.

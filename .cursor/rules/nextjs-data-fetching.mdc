@@ -1,0 +1,121 @@
+---
+description: "Next.js data fetching patterns: RSC reads, server actions, avoiding waterfalls"
+globs: "**/src/app/**"
+alwaysApply: false
+---
+
+# Next.js Data Fetching
+
+## Decision Tree
+
+- **Reading data from a Server Component?** Fetch directly (no API layer needed).
+- **Mutation from UI (create, update, delete)?** Use a Server Action in `_services/`.
+- **External API for webhooks or third-party consumers?** Use a Route Handler (`route.ts`).
+
+## Server Components for Reads
+
+Fetch data directly in Server Components. No API round-trip needed:
+
+```tsx
+export const InstructorPage = async ({ params }: Props) => {
+  const { slug } = await params;
+  const instructor = await fetchInstructor(slug);
+
+  if (!instructor) {
+    notFound();
+  }
+
+  return <InstructorProfile data={instructor} />;
+};
+
+export default InstructorPage;
+```
+
+## Server Actions for Mutations
+
+Place mutations in `_services/` files with `'use server'`:
+
+```ts
+'use server';
+
+import { createChildLogger } from '@/libs/logger';
+
+export const updateInstructor = async (data: UpdateInstructorInput) => {
+  const logger = createChildLogger({ trace: 'updateInstructor' });
+  // mutation logic
+};
+```
+
+## Avoid Data Waterfalls
+
+### Parallel fetching with Promise.all
+
+```tsx
+const [instructor, courses, reviews] = await Promise.all([
+  fetchInstructor(id),
+  fetchCourses(id),
+  fetchReviews(id),
+]);
+```
+
+### Streaming with Suspense
+
+```tsx
+import { Suspense } from 'react';
+
+export const InstructorPage = async () => {
+  return (
+    <div>
+      <Suspense fallback={<ProfileSkeleton />}>
+        <InstructorProfile />
+      </Suspense>
+      <Suspense fallback={<CoursesSkeleton />}>
+        <CourseList />
+      </Suspense>
+    </div>
+  );
+};
+
+export default InstructorPage;
+```
+
+## Pass Server Data via Props
+
+Pass data from Server Components to Client Components via props. Do not re-fetch on the client what the server already has:
+
+```tsx
+// page.tsx (Server Component)
+const settings = await fetchSettings();
+return <SettingsForm defaultValues={settings} />;
+```
+
+## Route Handlers
+
+Use Route Handlers (`route.ts`) only when you need:
+
+- External API access (webhooks from Stripe, third-party integrations)
+- HTTP caching semantics (GET endpoints)
+- REST API for external consumers
+- Cron-triggered endpoints (e.g., Vercel Cron)
+
+Do not use Route Handlers for internal data fetching or UI mutations.
+
+### API Handler Pattern (backend services)
+
+API-only projects (payments-service, email-service) wrap Route Handlers with an `apiHandler` utility from `@/libs/api`:
+
+```ts
+import { apiHandler } from '@/libs/api';
+
+export const POST = apiHandler(async (req) => {
+  // apiHandler initializes logger, handles errors, returns proper status codes
+});
+```
+
+For Stripe webhooks, validate the signature before processing:
+
+```ts
+const body = await req.text();
+const signature = req.headers.get('stripe-signature');
+const event = stripe.webhooks.constructEvent(body, signature, STRIPE_CONFIG.WEBHOOK_SECRET);
+```

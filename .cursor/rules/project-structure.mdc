@@ -1,0 +1,68 @@
+---
+description: "Project structure and file organization rules"
+alwaysApply: true
+---
+
+# Project Structure Rules
+
+## File Scoping Decision
+
+Before creating any new file, determine its scope:
+
+1. **Used in one route only** -- place in that route's local folder (`_services/`, `_components/`, `_types/`).
+2. **Used across multiple routes within a feature** -- place in a parent `_shared/` folder for that feature subtree.
+3. **Used across the whole project** -- place in `src/_shared/` (e.g., `src/_shared/utils/`, `src/_shared/libs/`, `src/_shared/components/`).
+
+Always start at the smallest scope. Promote upward only when reuse is real and tested.
+
+## Local Files
+
+Non-reusable types are placed inside the `_types` local folder.
+Server actions used for fetching data on the page are placed inside `_services`.
+Prefer single-purpose files in `_services`: `fetch-X.ts`, `update-Y.ts`, `create-Z.ts`.
+
+Each component can have its own local files.
+A component that needs multiple files, for example `CommentsComponent`, can include files named:
+
+- fetch-data.ts
+- types.ts
+- index.tsx
+
+A component that does not need more files can simply be a single file such as `ComponentWithoutMoreFiles.tsx`.
+
+Folder structure example:
+
+```
+page.tsx
+_components
+  ComponentWithMoreFiles
+    fetch-data.ts
+    types.ts
+    index.tsx
+  ComponentWithoutMoreFiles.tsx
+_services
+  fetch-instructor.ts
+  update-instructor.ts
+_types
+  instructor.ts
+```
+
+## Reusable Files
+
+Reusable files are placed in `src/_shared/` under the appropriate subfolder:
+
+- `src/_shared/components/` -- shared UI components, imported via `@/components/Module`
+- `src/_shared/libs/` -- shared libraries (auth, db, logger, etc.), imported via `@/libs/Module`
+- `src/_shared/utils/` -- shared utility functions, imported via `@/utils/Module`
+- `src/_shared/hooks/` -- shared React hooks, imported via `@/hooks/Module`
+- `src/_shared/types/` -- shared type definitions, imported via `@/types/Module`
+- `src/_shared/providers/` -- shared context providers, imported via `@/providers/Module`
+
+## Banned Roots
+
+Do not create top-level directories that duplicate `src/_shared/`:
+
+- `src/components/` (use `src/_shared/components/`)
+- `src/lib/` (use `src/_shared/libs/`)
+- `src/utils/` (use `src/_shared/utils/`)
+- `src/types/` (use `src/_shared/types/`)

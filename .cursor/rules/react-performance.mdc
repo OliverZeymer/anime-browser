@@ -1,0 +1,148 @@
+---
+description: "React performance patterns to avoid common pitfalls"
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Performance
+
+## Derive State in Render
+
+Compute derived values directly in the render body instead of syncing with `useEffect` + `setState`:
+
+```tsx
+// Bad: unnecessary effect and extra render
+const [fullName, setFullName] = useState('');
+useEffect(() => {
+  setFullName(`${firstName} ${lastName}`);
+}, [firstName, lastName]);
+
+// Good: derive in render
+const fullName = `${firstName} ${lastName}`;
+```
+
+## No Inline Component Definitions
+
+Never define a component inside another component's body. This creates a new component identity on every render, causing remounts, lost state, and broken animations:
+
+```tsx
+// Bad: Avatar remounts every render
+export const UserCard = ({ user }: Props) => {
+  const Avatar = () => <img src={user.avatar} />;
+  return <Avatar />;
+};
+
+// Good: separate component
+const Avatar = ({ src }: { src: string }) => <img src={src} />;
+
+export const UserCard = ({ user }: Props) => {
+  return <Avatar src={user.avatar} />;
+};
+```
+
+## Minimize 'use client' Surface
+
+Push `'use client'` as deep as possible in the component tree. Only the leaf components that need interactivity should be client components. Keep data-fetching and layout in Server Components.
+
+## Avoid Unstable References
+
+Do not pass inline objects or arrow functions as props in JSX when they cause re-renders:
+
+```tsx
+// Bad: new object every render
+<Box sx={{ mt: 2 }} />
+
+// Acceptable for MUI sx (memoized internally), but avoid for custom props:
+// Bad: new function every render triggers child re-render
+<Button onClick={() => handleDelete(id)} />
+
+// Good: stable callback
+const onDelete = useCallback(() => handleDelete(id), [id]);
+<Button onClick={onDelete} />
+```
+
+Note: MUI's `sx` prop is internally memoized, so inline `sx` objects are acceptable.
+
+## Prefer Server Data via Props
+
+Pass data from Server Components to Client Components via props rather than fetching on the client:
+
+```tsx
+// Good: server fetches, client renders
+// page.tsx (Server Component)
+const data = await fetchInstructor(id);
+return <InstructorProfile data={data} />;
+
+// InstructorProfile.tsx (Client Component)
+'use client';
+export const InstructorProfile = ({ data }: Props) => {
+  // render with server-provided data
+};
+```
+
+## Use startTransition for Non-Urgent Updates
+
+Wrap non-urgent state updates in `startTransition` to keep the UI responsive:
+
+```tsx
+import { startTransition } from 'react';
+
+const handleSearch = (query: string) => {
+  startTransition(() => {
+    setSearchResults(filterResults(query));
+  });
+};
+```
+
+## Use useDeferredValue for Expensive Renders
+
+Keep inputs responsive while expensive child renders catch up:
+
+```tsx
+const [query, setQuery] = useState('');
+const deferredQuery = useDeferredValue(query);
+
+return (
+  <>
+    <input value={query} onChange={(e) => setQuery(e.target.value)} />
+    <ExpensiveList query={deferredQuery} />
+  </>
+);
+```
+
+## Use Functional setState for Stable Callbacks
+
+When the new state depends on the previous state, use functional form to avoid stale closures and unnecessary deps:
+
+```tsx
+// Bad: callback depends on count, changes every render
+const increment = useCallback(() => setCount(count + 1), [count]);
+
+// Good: stable callback, no dependency on count
+const increment = useCallback(() => setCount((prev) => prev + 1), []);
+```
+
+## Lazy State Initialization
+
+Pass a function to `useState` when the initial value is expensive to compute:
+
+```tsx
+// Bad: runs expensive computation on every render
+const [state, setState] = useState(expensiveComputation());
+
+// Good: runs once
+const [state, setState] = useState(() => expensiveComputation());
+```
+
+## Hoist Default Non-Primitive Props
+
+Inline default objects/arrays create new references on every render, breaking `React.memo`:
+
+```tsx
+// Bad: new array every render defeats memo
+<MemoizedList items={items ?? []} />
+
+// Good: stable default reference
+const EMPTY_ITEMS: Item[] = [];
+<MemoizedList items={items ?? EMPTY_ITEMS} />
+```

@@ -1,0 +1,86 @@
+---
+description: "Code style standards for consistent code formatting"
+alwaysApply: true
+---
+
+# Code Style
+
+## General
+
+- Don't ever use Barrel files
+
+## One Component Per File
+
+Each `.tsx` file must contain exactly one React component. Do not define multiple components in the same file.
+
+Helpers, constants, and types used only by that component may live in the same file, but a second exported component must go in its own file.
+
+## Named Exports Only
+
+Never use `export default`. Always use named exports so the import must match the original name.
+
+Do not write:
+
+```ts
+export default function MyComponent() {}
+```
+
+Write:
+
+```ts
+export const MyComponent = () => {
+  // code
+};
+```
+
+**Exception:** Next.js reserved files (`page.tsx`, `layout.tsx`, `loading.tsx`, `not-found.tsx`, `error.tsx`, `template.tsx`, `default.tsx`, `route.ts`) require a default export. In those files, define a named export first, then re-export as default:
+
+```tsx
+export const HomePage = () => {
+  return <div>Home</div>;
+};
+
+export default HomePage;
+```
+
+## Components Exporting
+
+Always export functions and components using named arrow function export:
+
+```ts
+export const FunctionName = () => {
+  // code
+};
+```
+
+## Brackets
+
+Always wrap conditional logic return statements in brackets.
+
+Do not write:
+
+```ts
+if (true) return value;
+```
+
+Write:
+
+```ts
+if (true) {
+  return value;
+}
+```
+
+## Icon Usage
+
+Icons from libraries should not be imported directly.
+Use `<IconifyIcon>` with mdi icons for all icon rendering.
+
+## File Scoping
+
+Files (utils, services, tests, components) must be placed at the correct scope level:
+
+- **Route-local**: If a file is only used within a single route or component, place it in the local `_services/`, `_components/`, or `_types/` folder of that directory.
+- **Shared across project**: If a file is reused across multiple routes or features, place it in `src/_shared/` (e.g., `src/_shared/utils/`, `src/_shared/libs/`, `src/_shared/components/`).
+
+Never start a file in the global shared folder. Start local, promote upward only when reuse is real.
